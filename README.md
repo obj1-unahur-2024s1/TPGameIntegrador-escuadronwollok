@@ -2,9 +2,12 @@
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Matias Torres
+- Erika
+- Juani
+- Pablo Facelli
+- Lautaro Pardo
+- Marcos
 
 ## Capturas
 
@@ -17,6 +20,6 @@
 
 ## Otros
 
-- Curso/Facultad
-- Versión de wollok
+- Objetos 1 comisión 2/Unahur
+- Versión de wollok: Wollok Programming Language and IDE Version 3.0.0
 - Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
