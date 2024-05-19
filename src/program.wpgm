@@ -13,12 +13,12 @@ program maze {
 	game.addVisualCharacter(player)
 	game.start()
 	
-	/*
+	
 	keyboard.up().onPressDo({player.moverArriba()})
 	keyboard.right().onPressDo({player.moverDerecha()})
 	keyboard.down().onPressDo({player.moverAbajo()})
 	keyboard.left().onPressDo({player.moverIzquierda()})
-	 */
+	 
 }
 
 
