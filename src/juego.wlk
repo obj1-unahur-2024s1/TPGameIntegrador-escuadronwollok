@@ -16,3 +16,4 @@ object tablero{
 	
 	//todo objeto debe tener por lo menos position. Image si necesitamos que se vea
 }
+
