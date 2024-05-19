@@ -1,0 +1,19 @@
+import wollok.game.*
+import juego.*
+
+program maze {
+	game.title("Maze")
+	game.width(20)
+	game.height(14)
+	game.cellSize(50)
+	
+	game.boardGround("Maze/maze_bg.jpeg")
+	game.addVisualCharacter(player)
+	game.start()
+	
+	keyboard.up().onPressDo({player.moverArriba()})
+	keyboard.right().onPressDo({player.moverDerecha()})
+	keyboard.down().onPressDo({player.moverAbajo()})
+	keyboard.left().onPressDo({player.moverIzquierda()})
+}
+
