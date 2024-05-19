@@ -7,13 +7,16 @@ program maze {
 	game.height(14)
 	game.cellSize(50)
 	
-	game.boardGround("Maze/maze_bg.jpeg")
+//	game.addVisual(tablero) // de esta forma respeta el tamaño original del archivo,
+//  la desventaj es que no se ajusta a la pantalla como si lo hace en background
+	game.boardGround("maze/maze_bg.png")
 	game.addVisualCharacter(player)
 	game.start()
 	
+	/*
 	keyboard.up().onPressDo({player.moverArriba()})
 	keyboard.right().onPressDo({player.moverDerecha()})
 	keyboard.down().onPressDo({player.moverAbajo()})
 	keyboard.left().onPressDo({player.moverIzquierda()})
+	 */
 }
-
