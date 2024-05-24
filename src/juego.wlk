@@ -1,5 +1,5 @@
 import wollok.game.*
-
+import personajes.*
 
 object juego{
 	method iniciar(){
@@ -29,25 +29,7 @@ object juego{
 		}
 }
 
-object player {
-	var position = game.center()
-	var puntos 0
-	var vidas = 3
 
-	method position(){
-		return position
-		
-
-	}
-
-	method image() = "pepita.png"
-	
-	method moverArriba() = position.up(1)
-	method moverDerecha() = position.right(1)
-	method moverAbajo() = position.down(1)
-	method moverIzquierda() = position.left(1)
-
-}
 
 object tablero{
 	method position() = game.center()
@@ -57,14 +39,7 @@ object tablero{
 	//todo objeto debe tener por lo menos position. Image si necesitamos que se vea
 }
 
-class BadGuy{
-	method colisionPlayer(){//sacar vida}
-	}
-	method spawnBadGuy(){
-		game.addVisual(self)
-	}
-	method movimiento(){}
-}
+
 
 class Items{
 	//aca podemos poner armas, monedas, power ups
