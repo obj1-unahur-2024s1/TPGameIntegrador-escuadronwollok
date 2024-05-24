@@ -10,11 +10,13 @@ object juego{
 			self.spawnBadGuys()
 			self.spawnPowerUps()
 	}
-	method spawnBadGuys(){}
+	method spawnMinotaur(){}
 		//crear metodo para spawnear trampas, minotauro
 		//en el video de Mario lo hace recurrentemente
 		//https://www.youtube.com/watch?v=gAkqZ19bpaM
 		}
+		
+	method spawnTrap(){}
 	
 	method spawnPowerUps(){
 		//crear metodo para spawnear armas, monedas, vidas
@@ -23,10 +25,16 @@ object juego{
 		game.schedule(500,{self.spawnMoneda(100)})
 		}
 		method spawnMoneda(valor){
+			const pos = self.posicionAleatoria()
 			const moneda = new Moneda(valor = valor)
 			game.addVisual(moneda)
 			moneda.animarse()
 		}
+		method posicionAleatoria(){
+			game.at(
+				0.randomUpTo(game.width()),
+				0.randomUpto(game.height())
+			)
 }
 
 
@@ -37,6 +45,7 @@ object tablero{
 	method image() = "maze/maze_bg.png"
 	
 	//todo objeto debe tener por lo menos position. Image si necesitamos que se vea
+	//Las paredes invisibles del pacman no usan image
 }
 
 
@@ -48,11 +57,15 @@ class Items{
 }
 
 class Moneda{
+	var image = "moneda.png"
 	var = valor
+	const position //son fijas
 	method colisionPlayer(){
 		//sumas puntos
 	method animarse(){
 		}
+	method image() = image
+	method position() =
 	}
 }
 
