@@ -28,11 +28,18 @@ object player {
 	method moverIzquierda() = position.left(1)
 	
 	method perderVida(){
-		vidas -= 1
+		vidas = vidas -1
 		//aca en el pacman tira la linea de abajo porque pierde la vida y spawnea en el centro
 		//position = pacman.origin()
 		//Nosotros podriamos hacer lo mismo, pero tener dos metodos, uno que sea onCollide/whenCollideDo
 		//que pierda un corazon y uno que cuando se quede sin corazones haga lo del pacman
+		self.resetPosition()
+		minotaur.resetPosition()
+		//habria que poner un spawnTraps() y spawnItems()
+		if(self.juegoTerminado()){
+			game.stop()
+		}
+		
 	}
 		
 	method juegoTerminado() = vidas == 0
@@ -41,14 +48,36 @@ object player {
 }
 
 object minotaur{
-	var position = null
-	method colisionPlayer(){//sacar vida}
+	var posicionPrevia = position    //esta la vamos a usar al chocar con paredes
+	var property position = null
+	method chocarCon(){//sacar vida si es rival, parar si es pared
 	}
 	method spawnMinotaur(){
-		position = juego.game.center()
+		position = game.at(3,3)
 		game.addVisual(self)
 	}
-	method movimiento(){}
+	method movimiento(){ //este esta 1:14:00 de aca https://www.youtube.com/watch?v=uJYTFKQQlqs
+		game.onTick(1.randomUpTo(5) * 1000, "movimiento",{
+			self.acercarseA(player)
+		})
+//aca el video dice rival.acercarseA, yo use self, "movimiento" esta porque el onTick lleva un nombre
+	}
+	
+	method acercarseA(player){ //lo explica 1:20:12 aca https://www.youtube.com/watch?v=uJYTFKQQlqs
+		const otraPosicion = player.position()
+		var newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
+		position = game.at(newX)
+		posicionPrevia = position
+	}
+	
+	method chocarCon(otro){
+		self.resetPosicionPrevia()
+	}
+	
+	method resetPosicionPrevia(){position = posicionPrevia} //esto es para que al chocar con una pared
+	//o contra nuestro personaje, no se encime, sino que queden un al lado del otro
+	//me parece que player necesita un metodo igual para no superponerse con nada
+	
 	
 	method position() = position
 	
@@ -59,7 +88,7 @@ object minotaur{
 
 class Trap{var position = null
 	const numero
-	/*al crear una instancia de una clase que tiene un atribun no inicializado
+	/*al crear una instancia de una clase que tiene un atributo no inicializado
 	estoy obligado a pasar el valor del atributo y eso se logra con las lineas
 	game.addVisual(new Trampa(numero = 1))
 	game.addVisual(new Trampa(numero = 2))
@@ -78,7 +107,7 @@ class Trap{var position = null
 	}
 
 	
-	method colisionPlayer(){//sacar vida}
+	method chocarCon(){//sacar corazon/escudo, la trampa es estatica solo puede chocar con nosotros}
 	}
 	method spawnTrap(){
 		position = null
@@ -88,9 +117,9 @@ class Trap{var position = null
 	
 	method position() = position
 	
-	method image() = "trap.png"
+	method image() = "trap" + numero.toString() ".png"
 	//por ahora probamos sin animar para animar tenemos que hacer lo de abajo
-	//	method image() = "badguy" + numero.toSrting() + ".png"}
-	// en este caso que la trampa es aleatoria deberiamos tener una imagen que corresponda
+	//method image() = "badguy" + numero.toSrting() + ".png"}
+	//en este caso que la trampa es aleatoria deberiamos tener una imagen que corresponda
 	//con cada trampa y su respectiva animacion
 

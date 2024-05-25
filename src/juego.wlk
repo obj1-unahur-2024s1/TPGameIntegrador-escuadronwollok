@@ -5,7 +5,7 @@ object juego{
 	method iniciar(){
 			game.addVisualCharacter(player)
 			
-			game.onCollideDo(player,{algo =>algo.colisionPlayer()})
+			game.onCollideDo(player,{algo =>algo.chocarCon()})
 			
 			self.spawnBadGuys()
 			self.spawnPowerUps()
@@ -52,7 +52,7 @@ object tablero{
 
 class Items{
 	//aca podemos poner armas, monedas, power ups
-	method colisionPlayer(){//sumar vida, puntos, dar poder
+	method chocarCon(){//sumar vida, puntos, dar poder... los powerups cofres son estaticos solo podemos chocarlo nosotros
 	}
 }
 
@@ -60,8 +60,8 @@ class Moneda{
 	var image = "moneda.png"
 	var = valor
 	const position //son fijas
-	method colisionPlayer(){
-		//sumas puntos
+	method chocarCon(){
+		//sumas puntos solo puede colisionar con player
 	method animarse(){
 		}
 	method image() = image
