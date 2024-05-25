@@ -1,0 +1,36 @@
+import wollok.game.*
+import juego.*
+import personajes.*
+
+program maze {
+	game.title("Maze")
+	game.width(20)
+	game.height(14)
+	game.cellSize(50)
+	
+//	game.addVisual(tablero) // de esta forma respeta el tamaño original del archivo,
+//  la desventaja es que no se ajusta a la pantalla como si lo hace en background
+	game.boardGround("maze/maze_bg.png")
+	game.addVisualCharacter(player)
+	game.start()
+	
+	
+	//trampas: en el video Obj1 UNAHUR clase 01 10 22 hace esto de abajo para los fantasmas
+	//pasa que tiene 4 fantasmas iguales que solo cambia el color
+	//creo que nosotros podriamos poner trampa random y que pueda tocar fuego, pinche o serpiente.
+	//lo que dice en el video es que de esta forma crea una instancia de la clase Rival.
+	//cada instancia la crea al pasarla como argumento de addVisual.
+	//minuto 41 acá = https://www.youtube.com/watch?v=uJYTFKQQlqs
+	
+	game.addVisual(new Trap(numero = 1))
+	game.addVisual(new Trap(numero = 2))
+	
+	
+	keyboard.up().onPressDo({player.moverArriba()})
+	keyboard.right().onPressDo({player.moverDerecha()})
+	keyboard.down().onPressDo({player.moverAbajo()})
+	keyboard.left().onPressDo({player.moverIzquierda()})
+	 
+}
+
+
