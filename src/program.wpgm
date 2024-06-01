@@ -3,16 +3,11 @@ import juego.*
 import personajes.*
 
 program maze {
-	game.title("Maze of Crete")
-	game.width(20)
-	game.height(14)
-	game.cellSize(50)
-	juego.spawnearParedes()
-	juego.configurarTeclas()
+
+	juego.iniciar()
 //	game.addVisual(tablero) // de esta forma respeta el tamaño original del archivo,
 //  la desventaja es que no se ajusta a la pantalla como si lo hace en background
-	game.boardGround("casilleroJuego.jpg")
-	game.addVisualCharacter(player)
+	
 	game.start()
 	
 	

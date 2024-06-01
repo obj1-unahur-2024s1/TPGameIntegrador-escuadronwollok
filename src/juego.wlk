@@ -15,12 +15,22 @@ class Pared {
 object juego {
 	
 	method iniciar() {
+			
+			game.title("Maze of Crete")
+			game.width(20)
+			game.height(14)
+			game.cellSize(50)
+			
 			game.addVisualCharacter(player)
 			game.onCollideDo(player,{algo => algo.chocarCon()})
-			//self.spawnBadGuys()
-			//self.spawnPowerUps()
+
 			self.decidirTablero()
+			game.boardGround("casilleroJuego.jpg")
 			self.configurarTeclas()
+			
+			//self.spawnEnemigos()
+			//self.spawnPowerUps()
+			self.spawnearMonedas()
 	}
 	
 	method decidirTablero() {
@@ -92,17 +102,21 @@ object juego {
 //		//https://www.youtube.com/watch?v=gAkqZ19bpaM
 //		game.schedule(500,{self.spawnMoneda(100)})
 		}
-		method spawnMoneda(valor){
+	method spawnearMonedas(){
+		game.schedule(500, {self.spawnMoneda(100)})
+	}
+	
+	method spawnMoneda(valor){
 			const pos = self.posicionAleatoria()
 			const moneda = new Moneda(position = pos, valor = valor)
 			game.addVisual(moneda)
 			moneda.animarse()
 		}
 		
-		method posicionAleatoria() =
+	method posicionAleatoria() =
 			game.at(
 				0.randomUpTo(game.width()),
-				0.randomUpto(game.height())
+				0.randomUpTo(game.height())
 			)
 	}
 
@@ -125,17 +139,25 @@ object tablero{
 //}
 
 class Moneda {
-	var image = "moneda.png"
+	const image = "./items/moneda.png"
 	var valor
 	const position//son fijas
-	method chocarCon(){}
-		//sumas puntos solo puede colisionar con player
-//	method animarse(){
-//		}
-	method image() = image
-	method position() = position
-		}
+	
+	method chocarCon(){
+		player.aumentar(valor)
+		game.say(player, "Tengo " + player.puntaje().toString() + " monedas")
+		game.removeVisual(self)
+		juego.spawnMoneda(valor * 2)
 	}
+	
+		//sumas puntos solo puede colisionar con player
+	method animarse(){}
+	
+	method image() = image
+	
+	method position() = position
+	
+}
 
 
 

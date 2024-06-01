@@ -18,7 +18,13 @@ object player {
 	method image() = "pepita.png"
 	//por ahora probamos sin animar para animar tenemos que hacer lo de abajo
 	//	method image() = "player" + numero.toSrting() + ".png"
+
+	method puntaje() = puntos
 	
+	method aumentar(valor){
+		puntos = valor
+	}
+
 	// PARA CUANDO CHOCA CON UN MURO, REGRESA
 	method regresar() {
 		if (self.ultimoMovimiento() == "arriba") {
@@ -146,4 +152,4 @@ object player {
 //	//method image() = "badguy" + numero.toSrting() + ".png"}
 //	//en este caso que la trampa es aleatoria deberiamos tener una imagen que corresponda
 //	//con cada trampa y su respectiva animacion
-
+}
