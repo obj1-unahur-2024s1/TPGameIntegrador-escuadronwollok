@@ -3,7 +3,7 @@ import juego.*
 import personajes.*
 
 program maze {
-	game.title("Maze")
+	game.title("Maze of Crete")
 	game.width(20)
 	game.height(14)
 	game.cellSize(50)

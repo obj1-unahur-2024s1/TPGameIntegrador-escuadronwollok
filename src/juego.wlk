@@ -83,29 +83,28 @@ object juego {
 		//crear metodo para spawnear trampas, minotauro
 		//en el video de Mario lo hace recurrentemente
 		//https://www.youtube.com/watch?v=gAkqZ19bpaM
-		}
 		
 	//method spawnTrap(){}
 	
-//	method spawnPowerUps(){
+	method spawnPowerUps(){
 //		//crear metodo para spawnear armas, monedas, vidas
 //		//en el video de Mario lo hace recurrentemente
 //		//https://www.youtube.com/watch?v=gAkqZ19bpaM
 //		game.schedule(500,{self.spawnMoneda(100)})
-//		}
-//		method spawnMoneda(valor){
-//			const pos = self.posicionAleatoria()
-//			const moneda = new Moneda(valor = valor)
-//			game.addVisual(moneda)
-//			moneda.animarse()
-//		}
-//		method posicionAleatoria(){
-//			game.at(
-//				0.randomUpTo(game.width()),
-//				0.randomUpto(game.height())
-//			)
-//}
-
+		}
+		method spawnMoneda(valor){
+			const pos = self.posicionAleatoria()
+			const moneda = new Moneda(position = pos, valor = valor)
+			game.addVisual(moneda)
+			moneda.animarse()
+		}
+		
+		method posicionAleatoria() =
+			game.at(
+				0.randomUpTo(game.width()),
+				0.randomUpto(game.height())
+			)
+	}
 
 
 object tablero{
@@ -125,18 +124,18 @@ object tablero{
 //	}
 //}
 
-//class Moneda{
-//	var image = "moneda.png"
-//	var = valor
-//	const position //son fijas
-//	method chocarCon(){
-//		//sumas puntos solo puede colisionar con player
+class Moneda {
+	var image = "moneda.png"
+	var valor
+	const position//son fijas
+	method chocarCon(){}
+		//sumas puntos solo puede colisionar con player
 //	method animarse(){
 //		}
-//	method image() = image
-//	method position() =
-//	}
-//}
+	method image() = image
+	method position() = position
+		}
+	}
 
 
 
