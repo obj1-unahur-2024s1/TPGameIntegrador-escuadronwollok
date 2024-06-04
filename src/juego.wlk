@@ -33,6 +33,14 @@ object juego {
 			self.spawnearMonedas()
 	}
 	
+	method finalizar(){
+		game.stop()
+		game.clear()
+		game.addVisual("gameOver.png")
+		
+		
+	}
+	
 	method decidirTablero() {
 		// UNA FORMA DE IMPLEMENTAR DISTINTOS TIPOS DE TABLEROS QUE SE CARGAN AL INICIO. FALTA IMPLEMENTAR
 		// POR AHORA SE UTILIZA UN UNICO TABLERO
@@ -144,7 +152,7 @@ class Moneda {
 	const position//son fijas
 	
 	method chocarCon(){
-		player.aumentar(valor)
+		player.aumentarPuntos(valor)
 		game.say(player, "Tengo " + player.puntaje().toString() + " monedas")
 		game.removeVisual(self)
 		juego.spawnMoneda(valor * 2)
@@ -161,5 +169,27 @@ class Moneda {
 
 
 
-
+object vida { 
+	var property vidasActuales = 3
+	var position = new Position(y = 55 , x =80)
+	
+	method image(){
+		if (vidasActuales == 3){
+			return "fondo/vida3.png"
+		}else if (vidasActuales ==2 ){
+			return "fondo/vida2.png"
+		}else if (vidasActuales ==1){
+			return "fondo/vida1.png"
+		}else{
+			return "fondo/sin vida.png"
+		}
+	}
+	
+	method perderVida(){
+		vidasActuales = 0.max(vidasActuales-1)
+	}
+	method ganarVida(){
+		vidasActuales = 3.min(vidasActuales+1)
+	}
+}
 

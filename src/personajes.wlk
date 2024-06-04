@@ -6,8 +6,7 @@ object player {
 	var property position = game.origin()
 	var property ultimoMovimiento = "arriba"
 	var puntos = 0
-	var vidas = 3
-	var corazones = 3
+	var vidas =3
 	
 /*	method position(nueva){
 		position = nueva
@@ -20,10 +19,56 @@ object player {
 	//	method image() = "player" + numero.toSrting() + ".png"
 
 	method puntaje() = puntos
+	method vidasRestantes() = vidas
 	
-	method aumentar(valor){
-		puntos = valor
+	method aumentarPuntos(valor){
+		puntos += valor
 	}
+	method perderPuntos(valor){
+		puntos = 0.max(puntos - valor)
+	}
+	
+	method perderVida(){
+		if (vida.vidasActuales()>1){
+			vida.perderVida()
+			//agregar sonido new Sonido(sound = "").reproducir()
+			self.resetPosition()
+			minotaur.resetPosition()
+		}
+		else{
+			 juego.finalizar()
+			
+		}		
+	}
+	
+	method resetPosition(){
+		position = game.origin()
+	}
+	method chocarConTrampa() {
+	   self.perderPuntos(5)
+	   self.checkVidas()
+	  }
+
+	  method chocarConMinotauro() {
+	    self.perderPuntos(10)
+	    self.checkVidas()
+	  }
+	
+	  method checkVidas() {
+	    if (puntos == 0) {
+	      self.perderVida()
+	    }
+	  }
+	
+	  method ganarPuntos(valor) {
+	    self.aumentarPuntos(valor)
+	  }
+	
+	
+	
+	
+	
+	
 
 	// PARA CUANDO CHOCA CON UN MURO, REGRESA
 	method regresar() {
@@ -75,9 +120,17 @@ object player {
 	
 
 
+}
+
+object minotaur {
+	
+	method resetPosition(){}
+	
+	}
+	
+	
 
 
-//object minotaur{
 //	var posicionPrevia = position    //esta la vamos a usar al chocar con paredes
 //	var property position = null
 //	method chocarCon(){//sacar vida si es rival, parar si es pared
@@ -152,4 +205,6 @@ object player {
 //	//method image() = "badguy" + numero.toSrting() + ".png"}
 //	//en este caso que la trampa es aleatoria deberiamos tener una imagen que corresponda
 //	//con cada trampa y su respectiva animacion
-}
+
+
+
