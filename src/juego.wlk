@@ -15,18 +15,20 @@ class Pared {
 object juego {
 	
 	method iniciar() {
-			
 			game.title("Maze of Crete")
 			game.width(20)
 			game.height(14)
 			game.cellSize(50)
 			
 			game.addVisualCharacter(player)
+			
+			self.decidirTablero()
+			self.configurarTeclas()
+			game.boardGround("casilleroJuego.jpg")
+			
 			game.onCollideDo(player,{algo => algo.chocarCon()})
 
-			self.decidirTablero()
-			game.boardGround("casilleroJuego.jpg")
-			self.configurarTeclas()
+			
 			
 			//self.spawnEnemigos()
 			//self.spawnPowerUps()
@@ -113,12 +115,12 @@ object juego {
 			moneda.animarse()
 		}
 		
-	method posicionAleatoria() =
-			game.at(
+	method posicionAleatoria() = 
+		game.at(
 				0.randomUpTo(game.width()),
 				0.randomUpTo(game.height())
 			)
-	}
+}
 
 
 object tablero{
