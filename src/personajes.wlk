@@ -5,6 +5,7 @@ import juego.*
 object player {
 	var property position = game.origin()
 	var property ultimoMovimiento = "arriba"
+	//var property ultimaPosicion 
 	var puntos = 0
 	var vidas =3
 	
@@ -71,31 +72,38 @@ object player {
 	
 
 	// PARA CUANDO CHOCA CON UN MURO, REGRESA
+	 
 	method regresar() {
-		if (self.ultimoMovimiento() == "arriba") {
-			position.down(1)
-		} else if (self.ultimoMovimiento() == "abajo") {
-			position.up(1)
-		} else if (self.ultimoMovimiento() == "izquierda") {
-			position.right(1)
+		//position = ultimaPosicion
+	
+		if (ultimoMovimiento == "arriba") {
+			position = position.down(1)
+		} else if (ultimoMovimiento == "abajo") {
+			position = position.up(1)
+		} else if (ultimoMovimiento == "izquierda") {
+			position = position.right(1)
 		} else {
-			position.left(1)
+			position = position.left(1)
 		}
 	}
 	
 	method bajar() {
+		//ultimaPosicion = position.up(1)
 		ultimoMovimiento = "abajo"
 	}
 	
 	method subir() {
+		//ultimaPosicion = position.down(1)
 		ultimoMovimiento = "arriba"
 	}
 	
 	method izquierda() {
+		//ultimaPosicion = position.right(1)
 		ultimoMovimiento = "izquierda"
 	}
 	
 	method derecha() {
+		//ultimaPosicion = position.left(1)
 		ultimoMovimiento = "derecha"
 	}
 	
