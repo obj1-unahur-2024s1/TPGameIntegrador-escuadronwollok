@@ -134,8 +134,12 @@ object player {
 }
 
 object minotaur {
-	var property position
-	method resetPosition(){}
+	var property position = game.center().down(1)
+	var property posicionAnterior
+	method image() = "medusa.png"
+	method resetPosition(){
+		position = posicionAnterior
+	}
 	method atacar(){
 		game.onTick(1.randomUpTo(5)*1000,"movimiento",{
 			 self.acercarseA(player)
@@ -146,6 +150,7 @@ object minotaur {
 		const otraPosicion = player.position()
 		var newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
 		var newY = position.y() + if (otraPosicion.y() > position.y()) 1 else -1
+		posicionAnterior = position
 		position = game.at(newX,newY)
 		
 	}
@@ -192,15 +197,13 @@ object minotaur {
 //}
 class Trap {
 	const numero
-	const traps = [new Trap(numero = 1), new Trap(numero = 2), new Trap(numero=3)]
-	method image() = "trap" + numero.toString() + "png"
-	//method position =
-	method hacerDanio(){
-		traps.forEach {trap => game.whenCollideDo(trap,{player => player.chocarConTrap()})
-	}
+	method image() = "trap" + numero.toString() + ".png"
+	method position() = game.center()
+	
+	method hacerDanio(){}
 	
 }
-}
+
 //class Trap{var position = null
 //	const numero
 //	/*al crear una instancia de una clase que tiene un atributo no inicializado

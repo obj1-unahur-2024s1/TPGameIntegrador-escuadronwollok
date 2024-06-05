@@ -23,9 +23,9 @@ object juego {
 			game.addVisualCharacter(player)
 		
 			//agregando Traps
-			game.addVisual(new Trap(numero = 1))
-            game.addVisual(new Trap(numero = 2))
-			
+			//game.addVisual(new Trap(numero = 1))
+            //game.addVisual(new Trap(numero = 2))
+			game.addVisual(minotaur)
 			self.decidirTablero()
 			self.configurarTeclas()
 			game.boardGround("casilleroJuego.jpg")
