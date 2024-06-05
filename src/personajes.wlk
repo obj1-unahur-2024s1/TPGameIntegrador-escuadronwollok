@@ -47,6 +47,9 @@ object player {
 		position = game.origin()
 	}
 	
+	method chocarCon(cosa){
+		if (cosa == minotaur) { self.perderVida() }
+	}
 	method chocarConTrap() {
 	   self.regresar()
 	   self.perderPuntos(5)
@@ -133,26 +136,35 @@ object player {
 
 }
 
-object minotaur {
+class Minotaur {
 	var property position
-	method resetPosition(){}
-	method atacar(){
-		game.onTick(1.randomUpTo(5)*1000,"movimiento",{
-			 self.acercarseA(player)
-		})
-		game.whenCollideDo(self,{player => player.chocarConMinotaur()})
+	var property posicionAnterior = position
+	method image() = "minotaur.png"
+	method regresar(){
+		position = posicionAnterior
 	}
+	method resetPosition() {position = game.at(10,11)}
 	method acercarseA(player){
 		const otraPosicion = player.position()
+<<<<<<< HEAD
 		var newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
 		var newY = position.y() + if (otraPosicion.y() > position.y()) 1 else -1
 		//evitamos que se posicione fuera del tablero
 		newX =newX.max(0).min(game.width()-1)
 		nexY = newY.max(0).min(game.height()-1)
 		position = game.at(newX,newY)
+=======
+		const  newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
+		//const  newY = position.y() + if (otraPosicion.y() > position.y()) 1 else -1
+		posicionAnterior = position
+		position = game.at(newX,position.y())
+	}
+	
+	method chocarCon(personaje){
+>>>>>>> a1b76b41decc02de0910926ae7dfc3a130785564
 		
 	}
-	}
+}
 	
 	
 
@@ -195,15 +207,13 @@ object minotaur {
 //}
 class Trap {
 	const numero
-	const traps = [new Trap(numero = 1), new Trap(numero = 2), new Trap(numero=3)]
-	method image() = "trap" + numero.toString() + "png"
-	//method position =
-	method hacerDanio(){
-		traps.forEach {trap => game.whenCollideDo(trap,{player => player.chocarConTrap()})
-	}
+	method image() = "trap" + numero.toString() + ".png"
+	method position() = game.center()
+	
+	method hacerDanio(){}
 	
 }
-}
+
 //class Trap{var position = null
 //	const numero
 //	/*al crear una instancia de una clase que tiene un atributo no inicializado
