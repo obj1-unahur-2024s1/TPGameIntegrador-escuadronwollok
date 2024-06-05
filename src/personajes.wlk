@@ -146,6 +146,9 @@ object minotaur {
 		const otraPosicion = player.position()
 		var newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
 		var newY = position.y() + if (otraPosicion.y() > position.y()) 1 else -1
+		//evitamos que se posicione fuera del tablero
+		newX =newX.max(0).min(game.width()-1)
+		nexY = newY.max(0).min(game.height()-1)
 		position = game.at(newX,newY)
 		
 	}
