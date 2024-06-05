@@ -5,12 +5,12 @@ class Pared {
 	const property position
 	method image() = "pepita.png"
 	
-	method chocarCon() {
-		player.regresar()
-		game.say(player, "choque algo")
+	method chocarCon(personaje) {
+		personaje.regresar()
+		//game.say(player, "choque algo")
 	}
 }
-
+const minotaur1 =new Minotaur(position = game.at(10,11))
 
 object juego {
 	
@@ -25,13 +25,15 @@ object juego {
 			//agregando Traps
 			//game.addVisual(new Trap(numero = 1))
             //game.addVisual(new Trap(numero = 2))
-			game.addVisual(minotaur)
+			game.addVisual(minotaur1)
 			self.decidirTablero()
 			self.configurarTeclas()
 			game.boardGround("casilleroJuego.jpg")
 			
-			game.onCollideDo(player,{algo => algo.chocarCon()})
-
+			game.onCollideDo(player,{algo => algo.chocarCon(player)})
+			game.onTick(500,"movimiento",{
+			minotaur1.acercarseA(player)})
+			game.onCollideDo(minotaur1,{player => player.chocarCon(minotaur1)})
 			
 			
 			//self.spawnEnemigos()
@@ -181,11 +183,11 @@ object vida {
 	
 	method image(){
 		if (vidasActuales == 3){
-			return "fondo/vida3.png"
+			return "items/manzana.png"
 		}else if (vidasActuales ==2 ){
-			return "fondo/vida2.png"
+			return "items/llave.png"
 		}else if (vidasActuales ==1){
-			return "fondo/vida1.png"
+			return "items/cofre.png"
 		}else{
 			return "fondo/sin vida.png"
 		}

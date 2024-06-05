@@ -47,6 +47,9 @@ object player {
 		position = game.origin()
 	}
 	
+	method chocarCon(cosa){
+		if (cosa == minotaur) { self.perderVida() }
+	}
 	method chocarConTrap() {
 	   self.regresar()
 	   self.perderPuntos(5)
@@ -133,28 +136,26 @@ object player {
 
 }
 
-object minotaur {
-	var property position = game.center().down(1)
-	var property posicionAnterior
-	method image() = "medusa.png"
-	method resetPosition(){
+class Minotaur {
+	var property position
+	var property posicionAnterior = position
+	method image() = "minotaur.png"
+	method regresar(){
 		position = posicionAnterior
 	}
-	method atacar(){
-		game.onTick(1.randomUpTo(5)*1000,"movimiento",{
-			 self.acercarseA(player)
-		})
-		game.whenCollideDo(self,{player => player.chocarConMinotaur()})
-	}
+	method resetPosition() {position = game.at(10,11)}
 	method acercarseA(player){
 		const otraPosicion = player.position()
-		var newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
-		var newY = position.y() + if (otraPosicion.y() > position.y()) 1 else -1
+		const  newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
+		//const  newY = position.y() + if (otraPosicion.y() > position.y()) 1 else -1
 		posicionAnterior = position
-		position = game.at(newX,newY)
+		position = game.at(newX,position.y())
+	}
+	
+	method chocarCon(personaje){
 		
 	}
-	}
+}
 	
 	
 
