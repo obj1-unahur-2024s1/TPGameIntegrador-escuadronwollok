@@ -7,78 +7,44 @@ object player {
 	var property ultimoMovimiento = "arriba"
 	//var property ultimaPosicion 
 	var puntos = 0
-	var vidas =3
 	
-/*	method position(nueva){
-		position = nueva
-	}
-	Este metodo lo usa en el de Mario
- */
-
 	method image() = "pepita.png"
 	//por ahora probamos sin animar para animar tenemos que hacer lo de abajo
 	//	method image() = "player" + numero.toSrting() + ".png"
-
-
 	method puntaje() = puntos
-	method vidasRestantes() = vidas
-	
 	method aumentarPuntos(valor){
 		puntos += valor
 	}
 	method perderPuntos(valor){
 		puntos = 0.max(puntos - valor)
 	}
-	
 	method perderVida(){
 		if (vida.vidasActuales()>1){
 			vida.perderVida()
 			//agregar sonido new Sonido(sound = "").reproducir()
 			self.resetPosition()
-			minotaur.resetPosition()
 		}
 		else{
 			 juego.finalizar()
 			//agregar sonido new Sonido(sound = "").reproducir()
-		}		
+		}
 	}
-	
 	method resetPosition(){
 		position = game.origin()
 	}
-	
 	method chocarCon(cosa){
-		if (cosa == minotaur) { self.perderVida() }
+		self.perderVida()
 	}
 	method chocarConTrap() {
-	   self.regresar()
-	   self.perderPuntos(5)
-	   self.checkVidas()
-	  }
-
-	 method chocarConMinotaur() {
-	    self.perderVida()
-	    
-	  }
-	
-	  method checkVidas() {
-	    if (puntos == 0) {
+		self.regresar()
+		self.perderPuntos(5)
+		self.checkVidas()
+	}
+	method checkVidas() {
+		if (puntos == 0) {
 	      self.perderVida()
 	    }
-	  }
-	
-	  method ganarPuntos(valor) {
-	    self.aumentarPuntos(valor)
-	  }
-	
-	
-	
-	
-	
-	
-
-	// PARA CUANDO CHOCA CON UN MURO, REGRESA
-	 
+	}
 	method regresar() {
 		//position = ultimaPosicion
 	
@@ -92,7 +58,6 @@ object player {
 			position = position.left(1)
 		}
 	}
-	
 	method bajar() {
 		//ultimaPosicion = position.up(1)
 		ultimoMovimiento = "abajo"
@@ -127,7 +92,7 @@ object player {
 //		}
 //}		
 
-		
+
 //	method juegoTerminado() = vidas == 0 {
 //		
 //	}
@@ -137,23 +102,22 @@ object player {
 }
 
 class Minotaur {
-	var property position
+	var property posInicial
+	var property position = posInicial
 	var property posicionAnterior = position
 	method image() = "minotaur.png"
 	method regresar(){
 		position = posicionAnterior
 	}
-	method resetPosition() {position = game.at(10,11)}
+	method resetPosition() {position = posInicial}
 	method acercarseA(player){
 		const otraPosicion = player.position()
-<<<<<<< HEAD
-		var newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
-		var newY = position.y() + if (otraPosicion.y() > position.y()) 1 else -1
+		//var newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
+		//var newY = position.y() + if (otraPosicion.y() > position.y()) 1 else -1
 		//evitamos que se posicione fuera del tablero
-		newX =newX.max(0).min(game.width()-1)
-		nexY = newY.max(0).min(game.height()-1)
-		position = game.at(newX,newY)
-=======
+		//newX = newX.max(0).min(game.width()-1)
+		//nexY = newY.max(0).min(game.height()-1)
+		//position = game.at(newX,newY)
 		const  newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
 		//const  newY = position.y() + if (otraPosicion.y() > position.y()) 1 else -1
 		posicionAnterior = position
@@ -161,7 +125,6 @@ class Minotaur {
 	}
 	
 	method chocarCon(personaje){
->>>>>>> a1b76b41decc02de0910926ae7dfc3a130785564
 		
 	}
 }

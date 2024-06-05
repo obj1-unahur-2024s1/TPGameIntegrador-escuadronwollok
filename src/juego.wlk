@@ -3,50 +3,54 @@ import personajes.*
 
 class Pared {
 	const property position
-	method image() = "pepita.png"
 	
 	method chocarCon(personaje) {
 		personaje.regresar()
 		//game.say(player, "choque algo")
 	}
 }
-const minotaur1 =new Minotaur(position = game.at(10,11))
 
 object juego {
 	
 	method iniciar() {
-			game.title("Maze of Crete")
-			game.width(20)
-			game.height(14)
-			game.cellSize(50)
-			
-			game.addVisualCharacter(player)
+		game.title("Maze of Crete")
+		game.width(20)
+		game.height(14)
+		game.cellSize(50)
 		
-			//agregando Traps
-			//game.addVisual(new Trap(numero = 1))
-            //game.addVisual(new Trap(numero = 2))
-			game.addVisual(minotaur1)
-			self.decidirTablero()
-			self.configurarTeclas()
-			game.boardGround("casilleroJuego.jpg")
-			
-			game.onCollideDo(player,{algo => algo.chocarCon(player)})
-			game.onTick(500,"movimiento",{
-			minotaur1.acercarseA(player)})
-			game.onCollideDo(minotaur1,{player => player.chocarCon(minotaur1)})
-			
-			
-			//self.spawnEnemigos()
-			//self.spawnPowerUps()
-			self.spawnearMonedas()
+		game.addVisualCharacter(player)
+		game.addVisual(vida)
+		
+		const enemigos = #{new Minotaur(posInicial = game.at(10,11)), new Minotaur(posInicial = game.at(12,2))}
+		enemigos.forEach({enemigo =>
+			game.addVisual(enemigo)
+			game.onTick(1.randomUpTo(5) * 300,"movimiento",{
+				enemigo.acercarseA(player)
+			})
+			game.onCollideDo(enemigo,{algo => algo.chocarCon(enemigo)})
+		})
+		
+		self.spawnearMonedas()
+		//agregando Traps
+		//game.addVisual(new Trap(numero = 1))
+        //game.addVisual(new Trap(numero = 2))
+		self.decidirTablero()
+		self.configurarTeclas()
+		game.boardGround("casilleroJuego.jpg")
+		game.onCollideDo(player,{algo => algo.chocarCon(player)})
+		
+		
+		
+		
+		//self.spawnEnemigos()
+		//self.spawnPowerUps()
+		
 	}
 	
 	method finalizar(){
 		game.stop()
 		game.clear()
 		game.addVisual("gameOver.png")
-		
-		
 	}
 	
 	method decidirTablero() {
@@ -61,6 +65,9 @@ object juego {
 //			self.spawnearParedes3()
 //		}
 		self.spawnearParedes()
+	}
+	method spawnearMinotaur() {
+		
 	}
 	
 	method spawnearParedes() {
@@ -87,14 +94,10 @@ object juego {
 			}
 		})
 	}
-	
 	method agregarParedEn(x, y) {
 		const pared = new Pared(position = game.at(x,y))
 		game.addVisual(pared)
 	}
-	
-	method spawnMinotaur(){}
-	
 	method configurarTeclas() {
 		keyboard.up().onPressDo({player.subir()})
 		keyboard.down().onPressDo({player.bajar()})
@@ -127,71 +130,62 @@ object juego {
 			const moneda = new Moneda(position = pos, valor = valor)
 			game.addVisual(moneda)
 			moneda.animarse()
-		}
-		
+	}
+	
 	method posicionAleatoria() = 
 		game.at(
 				0.randomUpTo(game.width()),
 				0.randomUpTo(game.height())
-			)
+				)
 }
 
 
 object tablero{
 	method position() = game.center()
-
 	method image() = "maze/maze_bg.png"
-	
 	//todo objeto debe tener por lo menos position. Image si necesitamos que se vea
 	//Las paredes invisibles del pacman no usan image
 }
 
 
 
-//class Items{
+class Items{
+	
+	method chocarCon(){}
+	method chocarCon(cosa){}
 	//aca podemos poner armas, monedas, power ups
 //	method chocarCon(){//sumar vida, puntos, dar poder... los powerups cofres son estaticos solo podemos chocarlo nosotros
 //	}
-//}
+}
 
-class Moneda {
+class Moneda inherits Items {
 	const image = "./items/moneda.png"
 	var valor
-	const position//son fijas
-	
-	method chocarCon(){
-		player.aumentarPuntos(valor)
-		game.say(player, "Tengo " + player.puntaje().toString() + " monedas")
-		game.removeVisual(self)
-		juego.spawnMoneda(valor * 2)
+	const position
+	override method chocarCon(cosa){
+		if (cosa == player) {
+			player.aumentarPuntos(valor)
+			game.say(player, "Tengo " + player.puntaje().toString() + " monedas")
+			game.removeVisual(self)
+			juego.spawnMoneda(valor)}
 	}
-	
-		//sumas puntos solo puede colisionar con player
 	method animarse(){}
 	
 	method image() = image
 	
 	method position() = position
-	
 }
 
 
 
-object vida { 
+object vida inherits Items { 
 	var property vidasActuales = 3
-	var position = new Position(y = 55 , x =80)
 	
-	method image(){
-		if (vidasActuales == 3){
-			return "items/manzana.png"
-		}else if (vidasActuales ==2 ){
-			return "items/llave.png"
-		}else if (vidasActuales ==1){
-			return "items/cofre.png"
-		}else{
-			return "fondo/sin vida.png"
-		}
-	}
+//	falta agregarle un texto/número al lado de la imagen, que indique la cantidad de vidas que quedan
+//	y ponerle una imagen de corazón o algo parecido
+
+	method position() = game.at(0,game.height()-1)
+	method image() = "items/manzana.png"
 	
 	method perderVida(){
 		vidasActuales = 0.max(vidasActuales-1)
