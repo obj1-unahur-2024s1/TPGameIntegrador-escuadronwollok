@@ -1,8 +1,6 @@
 import wollok.game.*
 import personajes.*
 
-
-
 class Pared {
 	const property position
 	
@@ -11,7 +9,6 @@ class Pared {
 		//game.say(player, "choque algo")
 	}
 }
-
 
 object juego {
 	
@@ -48,28 +45,6 @@ object juego {
 		//self.spawnEnemigos()
 		//self.spawnPowerUps()
 		
-
-			//agregando Traps
-			//game.addVisual(new Trap(numero = 1))
-            //game.addVisual(new Trap(numero = 2))
-			//game.addVisual(minotaur1)
-			//self.decidirTablero()
-			//self.configurarTeclas()
-			//game.boardGround("casilleroJuego.jpg")
-			//game.onCollideDo(player,{algo => algo.chocarCon(player)})
-			
-			//const minotaurs = [new Minotaur(position = game.at(10,11)) , new Minotaur (position = game.at(15,2))]
-			//minotaurs.forEach{
-			//	minotaur => game.addVisual(minotaur)
-				          //  game.onCollideDo(minotaur,{player => player.chocarCon(minotaur)})
-		                  //  game.onTick(500,"movimiento",{ minotaur.acercarseA(player)})
-			                
-			/}
-			//self.spawnEnemigos()
-			//self.spawnPowerUps()
-			//self.spawnearMonedas()
-=======
-
 	}
 	
 	method finalizar(){
@@ -174,19 +149,6 @@ object tablero{
 
 
 
- 
-class Moneda {
-	const image = "./items/moneda.png"
-	var valor
-	const position//son fijas
-	
-	method chocarCon(player){
-		player.aumentarPuntos(valor)
-		game.say(player, "Tengo " + player.puntaje().toString() + " monedas")
-		game.removeVisual(self)
-		juego.spawnMoneda(valor * 2)
-=======
-
 class Items{
 	
 	method chocarCon(){}
@@ -206,7 +168,6 @@ class Moneda inherits Items {
 			game.say(player, "Tengo " + player.puntaje().toString() + " monedas")
 			game.removeVisual(self)
 			juego.spawnMoneda(valor)}
->>>>>>> 914721b6c2e10c71944b51bd9d8b6a26469c3812
 	}
 	method animarse(){}
 	
@@ -215,25 +176,10 @@ class Moneda inherits Items {
 	method position() = position
 }
 
-class Trap {
-	const numero
-	method image() = "trap" + numero.toString() + ".png"
-	method position() = game.center()
-	
-	method  chocaCon(){
-		player.regresar()
-	   	player.perderPuntos(5)
-	  	player.checkVidas()
-	}
-	
-}
+
 
 object vida inherits Items { 
 	var property vidasActuales = 3
-<<<<<<< HEAD
-	const position = game.at (10,13)
-=======
->>>>>>> 914721b6c2e10c71944b51bd9d8b6a26469c3812
 	
 //	falta agregarle un texto/número al lado de la imagen, que indique la cantidad de vidas que quedan
 //	y ponerle una imagen de corazón o algo parecido
@@ -248,4 +194,3 @@ object vida inherits Items {
 		vidasActuales = 3.min(vidasActuales+1)
 	}
 }
-

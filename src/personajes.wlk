@@ -7,24 +7,11 @@ object player {
 	var property ultimoMovimiento = "arriba"
 	//var property ultimaPosicion 
 	var puntos = 0
-<<<<<<< HEAD
-	const vidas =3
-=======
->>>>>>> 914721b6c2e10c71944b51bd9d8b6a26469c3812
 	
 	method image() = "pepita.png"
 	//por ahora probamos sin animar para animar tenemos que hacer lo de abajo
 	//	method image() = "player" + numero.toSrting() + ".png"
 	method puntaje() = puntos
-<<<<<<< HEAD
-	method chocarCon(minotaur){
-		 self.perderVida()
-	}
-	
-	method vidasRestantes() = vidas
-	
-=======
->>>>>>> 914721b6c2e10c71944b51bd9d8b6a26469c3812
 	method aumentarPuntos(valor){
 		puntos += valor
 	}
@@ -35,11 +22,7 @@ object player {
 		if (vida.vidasActuales()>1){
 			vida.perderVida()
 			//agregar sonido new Sonido(sound = "").reproducir()
-<<<<<<< HEAD
-			self.resetPosition()	
-=======
 			self.resetPosition()
->>>>>>> 914721b6c2e10c71944b51bd9d8b6a26469c3812
 		}
 		else{
 			 juego.finalizar()
@@ -49,23 +32,6 @@ object player {
 	method resetPosition(){
 		position = game.origin()
 	}
-<<<<<<< HEAD
-	
-	
-	  method checkVidas() {
-	    if (puntos == 0) {
-	      self.perderVida()
-	    }
-	  }
-	
-	  method ganarPuntos(valor) {
-	    self.aumentarPuntos(valor)
-	  }
-	
-
-	// PARA CUANDO CHOCA CON UN MURO, REGRESA
-	 
-=======
 	method chocarCon(cosa){
 		self.perderVida()
 	}
@@ -79,7 +45,6 @@ object player {
 	      self.perderVida()
 	    }
 	}
->>>>>>> 914721b6c2e10c71944b51bd9d8b6a26469c3812
 	method regresar() {
 		//position = ultimaPosicion
 	
@@ -112,14 +77,6 @@ object player {
 		//ultimaPosicion = position.left(1)
 		ultimoMovimiento = "derecha"
 	}
-<<<<<<< HEAD
-
-}
-
- class Minotaur {
- 	
-	var property position
-=======
 	
 //	method perderVida(){
 //		vidas = vidas -1
@@ -148,10 +105,6 @@ class Minotaur {
 	var property posInicial
 	var property position = posInicial
 	var property posicionAnterior = position
-	//const minotaurs = []
-	//const minotaur1 =new Minotaur(position = game.at(10,11))
-	//const minotaur2 =new Minotaur(position = game.at(10,11))
-	
 	method image() = "minotaur.png"
 	method regresar(){
 		position = posicionAnterior
@@ -159,11 +112,90 @@ class Minotaur {
 	method resetPosition() {position = posInicial}
 	method acercarseA(player){
 		const otraPosicion = player.position()
-
+		//var newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
+		//var newY = position.y() + if (otraPosicion.y() > position.y()) 1 else -1
+		//evitamos que se posicione fuera del tablero
+		//newX = newX.max(0).min(game.width()-1)
+		//nexY = newY.max(0).min(game.height()-1)
+		//position = game.at(newX,newY)
+		const  newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
+		//const  newY = position.y() + if (otraPosicion.y() > position.y()) 1 else -1
+		posicionAnterior = position
+		position = game.at(newX,position.y())
+	}
+	
+	method chocarCon(personaje){
+		
+	}
+}
 	
 	
 
+//	var posicionPrevia = position    //esta la vamos a usar al chocar con paredes
+//	var property position = null
+//	method chocarCon(){//sacar vida si es rival, parar si es pared
+//	}
+//	method spawnMinotaur(){
+//		position = game.at(3,3)
+//		game.addVisual(self)
+//	}
+//	method movimiento(){ //este esta 1:14:00 de aca https://www.youtube.com/watch?v=uJYTFKQQlqs
+//		game.onTick(1.randomUpTo(5) * 1000, "movimiento",{
+//			self.acercarseA(player)
+//		})
+//aca el video dice rival.acercarseA, yo use self, "movimiento" esta porque el onTick lleva un nombre
+//	}
+	
+//	method acercarseA(player){ //lo explica 1:20:12 aca https://www.youtube.com/watch?v=uJYTFKQQlqs
+//		const otraPosicion = player.position()
+//		var newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
+//		position = game.at(newX)
+//		posicionPrevia = position
+//	}
+	
+//	method chocarCon(otro){
+//		self.resetPosicionPrevia()
+//	}
+	
+//	method resetPosicionPrevia(){position = posicionPrevia} //esto es para que al chocar con una pared
+//	//o contra nuestro personaje, no se encime, sino que queden un al lado del otro
+//	//me parece que player necesita un metodo igual para no superponerse con nada
+	
+	
+//	method position() = position
+	
+//	method image() = "minotaur.png"
+//	//por ahora probamos sin animar para animar tenemos que hacer lo de abajo
+//	//	method image() = "minotaur" + numero.toSrting() + ".png"
+//}
+class Trap {
+	const numero
+	method image() = "trap" + numero.toString() + ".png"
+	method position() = game.center()
+	
+	method hacerDanio(){}
+	
+}
 
+//class Trap{var position = null
+//	const numero
+//	/*al crear una instancia de una clase que tiene un atributo no inicializado
+//	estoy obligado a pasar el valor del atributo y eso se logra con las lineas
+//	game.addVisual(new Trampa(numero = 1))
+//	game.addVisual(new Trampa(numero = 2))
+//	Esto lo hace luego con una coleccion y forEach minuto 52: https://www.youtube.com/watch?v=uJYTFKQQlqs
+	
+//	Luego agrega
+//	 	if (personaje.juegoTerminado()){
+//		game.stop()
+		 
+//	Yo lo que haria es si el perosnaje se queda sin corazones perder vida, y que el personaje vea
+//	si se queda sin vidas que el juego sea game.stop()	 
+//	
+//	*/
+//	
+
+//	}
 
 	
 //	method chocarCon(){//sacar corazon/escudo, la trampa es estatica solo puede chocar con nosotros}
@@ -181,6 +213,3 @@ class Minotaur {
 //	//method image() = "badguy" + numero.toSrting() + ".png"}
 //	//en este caso que la trampa es aleatoria deberiamos tener una imagen que corresponda
 //	//con cada trampa y su respectiva animacion
-
-
-
