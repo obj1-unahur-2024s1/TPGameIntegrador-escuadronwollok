@@ -1,16 +1,6 @@
 import wollok.game.*
 import personajes.*
 
-class Pared {
-	const property position
-	method image() = "pepita.png"
-	
-	method chocarCon(personaje) {
-		personaje.regresar()
-		//game.say(player, "choque algo")
-	}
-}
-const minotaur1 =new Minotaur(position = game.at(10,11))
 
 object juego {
 	
@@ -25,17 +15,19 @@ object juego {
 			//agregando Traps
 			//game.addVisual(new Trap(numero = 1))
             //game.addVisual(new Trap(numero = 2))
-			game.addVisual(minotaur1)
+			//game.addVisual(minotaur1)
 			self.decidirTablero()
 			self.configurarTeclas()
 			game.boardGround("casilleroJuego.jpg")
-			
 			game.onCollideDo(player,{algo => algo.chocarCon(player)})
-			game.onTick(500,"movimiento",{
-			minotaur1.acercarseA(player)})
-			game.onCollideDo(minotaur1,{player => player.chocarCon(minotaur1)})
 			
-			
+			const minotaurs = [new Minotaur(position = game.at(10,11)) , new Minotaur (position = game.at(15,2))]
+			minotaurs.forEach{
+				minotaur => game.addVisual(minotaur)
+				            game.onCollideDo(minotaur,{player => player.chocarCon(minotaur)})
+		                    game.onTick(500,"movimiento",{ minotaur.acercarseA(player)})
+			                
+			}
 			//self.spawnEnemigos()
 			//self.spawnPowerUps()
 			self.spawnearMonedas()
@@ -147,19 +139,22 @@ object tablero{
 }
 
 
-
-//class Items{
-	//aca podemos poner armas, monedas, power ups
-//	method chocarCon(){//sumar vida, puntos, dar poder... los powerups cofres son estaticos solo podemos chocarlo nosotros
-//	}
-//}
-
+class Pared {
+	const property position
+	method image() = "pepita.png"
+	
+	method chocarCon(personaje) {
+		personaje.regresar()
+		//game.say(player, "choque algo")
+	}
+}
+ 
 class Moneda {
 	const image = "./items/moneda.png"
 	var valor
 	const position//son fijas
 	
-	method chocarCon(){
+	method chocarCon(player){
 		player.aumentarPuntos(valor)
 		game.say(player, "Tengo " + player.puntaje().toString() + " monedas")
 		game.removeVisual(self)
@@ -175,11 +170,22 @@ class Moneda {
 	
 }
 
-
+class Trap {
+	const numero
+	method image() = "trap" + numero.toString() + ".png"
+	method position() = game.center()
+	
+	method  chocaCon(){
+		player.regresar()
+	   	player.perderPuntos(5)
+	  	player.checkVidas()
+	}
+	
+}
 
 object vida { 
 	var property vidasActuales = 3
-	var position = new Position(y = 55 , x =80)
+	const position = game.at (10,13)
 	
 	method image(){
 		if (vidasActuales == 3){
