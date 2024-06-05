@@ -21,6 +21,9 @@ object juego {
 			game.cellSize(50)
 			
 			game.addVisualCharacter(player)
+			//agregando Traps
+			game.addVisual(new Trap(numero = 1))
+            game.addVisual(new Trap(numero = 2))
 			
 			self.decidirTablero()
 			self.configurarTeclas()

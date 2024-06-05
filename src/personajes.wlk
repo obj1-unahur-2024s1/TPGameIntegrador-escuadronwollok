@@ -19,6 +19,7 @@ object player {
 	//por ahora probamos sin animar para animar tenemos que hacer lo de abajo
 	//	method image() = "player" + numero.toSrting() + ".png"
 
+
 	method puntaje() = puntos
 	method vidasRestantes() = vidas
 	
@@ -38,21 +39,23 @@ object player {
 		}
 		else{
 			 juego.finalizar()
-			
+			//agregar sonido new Sonido(sound = "").reproducir()
 		}		
 	}
 	
 	method resetPosition(){
 		position = game.origin()
 	}
-	method chocarConTrampa() {
+	
+	method chocarConTrap() {
+	   self.regresar()
 	   self.perderPuntos(5)
 	   self.checkVidas()
 	  }
 
-	  method chocarConMinotauro() {
-	    self.perderPuntos(10)
-	    self.checkVidas()
+	 method chocarConMinotaur() {
+	    self.perderVida()
+	    
 	  }
 	
 	  method checkVidas() {
@@ -131,13 +134,24 @@ object player {
 }
 
 object minotaur {
-	
+	var property position
 	method resetPosition(){}
-	
+	method atacar(){
+		game.onTick(1.randomUpTo(5)*1000,"movimiento",{
+			 self.acercarseA(player)
+		})
+		game.whenCollideDo(self,{player => player.chocarConMinotaur()})
+	}
+	method acercarseA(player){
+		const otraPosicion = player.position()
+		var newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
+		var newY = position.y() + if (otraPosicion.y() > position.y()) 1 else -1
+		position = game.at(newX,newY)
+		
+	}
 	}
 	
 	
-
 
 //	var posicionPrevia = position    //esta la vamos a usar al chocar con paredes
 //	var property position = null
@@ -176,7 +190,17 @@ object minotaur {
 //	//por ahora probamos sin animar para animar tenemos que hacer lo de abajo
 //	//	method image() = "minotaur" + numero.toSrting() + ".png"
 //}
-
+class Trap {
+	const numero
+	const traps = [new Trap(numero = 1), new Trap(numero = 2), new Trap(numero=3)]
+	method image() = "trap" + numero.toString() + "png"
+	//method position =
+	method hacerDanio(){
+		traps.forEach {trap => game.whenCollideDo(trap,{player => player.chocarConTrap()})
+	}
+	
+}
+}
 //class Trap{var position = null
 //	const numero
 //	/*al crear una instancia de una clase que tiene un atributo no inicializado
