@@ -192,12 +192,8 @@ object minotaur {
 //}
 class Trap {
 	const numero
-	const traps = [new Trap(numero = 1), new Trap(numero = 2), new Trap(numero=3)]
-	method image() = "trap" + numero.toString() + "png"
-	//method position =
-	method hacerDanio(){
-		traps.forEach {trap => game.whenCollideDo(trap,{player => player.chocarConTrap()})
-	}
+	method image() = "trap" + numero.toString() + ".png"
+	method position() = game.center()
 	
 }
 }
