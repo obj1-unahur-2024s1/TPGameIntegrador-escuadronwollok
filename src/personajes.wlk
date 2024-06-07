@@ -1,5 +1,6 @@
 import wollok.game.*
 import juego.*
+import pantalla.*
 
 
 object player {
@@ -25,6 +26,7 @@ object player {
 			self.resetPosition()
 		}
 		else{
+			 game.addVisual(gameOver)
 			 juego.finalizar()
 			//agregar sonido new Sonido(sound = "").reproducir()
 		}

@@ -1,5 +1,6 @@
 import wollok.game.*
 import personajes.*
+import pantalla.*
 
 class Pared {
 	const property position
@@ -11,6 +12,8 @@ class Pared {
 }
 
 object juego {
+	
+	var iniciado = false
 	
 	method iniciar() {
 		game.title("Maze of Crete")
@@ -30,12 +33,14 @@ object juego {
 			game.onCollideDo(enemigo,{algo => algo.chocarCon(enemigo)})
 		})
 		
-		self.spawnearMonedas()
+		
 		//agregando Traps
 		//game.addVisual(new Trap(numero = 1))
         //game.addVisual(new Trap(numero = 2))
+        self.mostrarImagenesIniciales()
 		self.decidirTablero()
 		self.configurarTeclas()
+		self.spawnearMonedas()
 		game.boardGround("casilleroJuego.jpg")
 		game.onCollideDo(player,{algo => algo.chocarCon(player)})
 		
@@ -48,9 +53,21 @@ object juego {
 	}
 	
 	method finalizar(){
-		game.stop()
 		game.clear()
-		game.addVisual("gameOver.png")
+		game.addVisual(gameOver)
+		game.schedule(3000, {=>game.stop()})
+		
+
+	}
+	
+	method mostrarImagenesIniciales(){
+		titulo.addVisual()
+		keyboard.space().onPressDo({
+			if(!iniciado){
+				titulo.removeVisual();
+			   	iniciado = true
+		   	}
+	   	})						
 	}
 	
 	method decidirTablero() {
@@ -92,14 +109,12 @@ object juego {
 			if(vectorFila.get(x) > 0 ) {
 				self.agregarParedEn(x, posicionY)
 			}
-}
 			else {
 				self.agregarMonedaEn(x, posicionY)
 			}
 		})
 	}
-		})
-	}
+	
 	method agregarParedEn(x, y) {
 		const pared = new Pared(position = game.at(x,y))
 		game.addVisual(pared)
@@ -144,7 +159,6 @@ object juego {
 			const pos = self.posicionAleatoria()
 			const moneda = new Moneda(position = pos, valor = valor)
 			game.addVisual(moneda)
-			moneda.animarse()
 	}
 	
 	method posicionAleatoria() = 
@@ -166,6 +180,11 @@ object tablero{
 
 class Items{
 	
+	const property image
+	var property valor
+	var property position
+	
+	
 	method chocarCon(){}
 	method chocarCon(cosa){}
 	//aca podemos poner armas, monedas, power ups
@@ -173,10 +192,9 @@ class Items{
 //	}
 }
 
-class Moneda inherits Items {
-	const image = "./items/moneda.png"
-	var valor
-	const position
+class Moneda inherits Items (image ="./assets/items/moneda.png", 
+								valor = 100, position = game.at(0,0)){
+
 	override method chocarCon(cosa){
 		if (cosa == player) {
 			player.aumentarPuntos(valor)
@@ -184,23 +202,55 @@ class Moneda inherits Items {
 			game.removeVisual(self)
 			juego.spawnMoneda(valor)}
 	}
-	method animarse(){}
-	
-	method image() = image
-	
-	method position() = position
 }
 
+object medusa inherits Items (image ="./assets/items/medusa.png", 
+								valor = 300, position = game.at(0,0)){
+	
+	override method chocarCon(cosa){
+		if (cosa == player) {
+			
+		}
+	}
+}
 
+object llave inherits Items (image ="./assets/items/llave.png", 
+								valor = 500, position = game.at(0,0)){
+}
 
-object vida inherits Items { 
+object cofre inherits Items (image ="./assets/items/cofre.png", 
+								valor = 200, position = game.at(0,0)){
+	
+}
+
+object caliz inherits Items (image ="./assets/items/caliz.png", 
+								valor = 1000, position = game.at(0,0)){
+	
+	override method chocarCon(cosa){
+		if (cosa == player and vida.vidasActuales() < 3) {
+			vida.ganarVida()
+			game.removeVisual(self)
+		}
+		else {
+			player.aumentarPuntos(500)
+			game.removeVisual(self)
+		}
+	}
+	
+}
+
+object alas inherits Items (image ="./assets/items/moneda.png", 
+								valor = 100, position = game.at(0,0)){
+
+}
+
+object vida inherits Items (image ="./assets/items/vidas.png", 
+								valor = 0, position = game.at(0,game.height()-1)) { 
 	var property vidasActuales = 3
 	
 //	falta agregarle un texto/número al lado de la imagen, que indique la cantidad de vidas que quedan
 //	y ponerle una imagen de corazón o algo parecido
 
-	method position() = game.at(0,game.height()-1)
-	method image() = "items/manzana.png"
 	
 	method perderVida(){
 		vidasActuales = 0.max(vidasActuales-1)
