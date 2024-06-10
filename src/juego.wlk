@@ -248,8 +248,8 @@ object vida inherits Items (image ="./assets/items/vidas.png",
 								valor = 0, position = game.at(1,game.height()-1)) { 
 	var property vidasActuales = 3
 	  
-	  method text()= vidasActuales
-	  method positionText()= game.at(2,game.height() -1)
+	// method text()= vidasActuales
+	// method positionText()= game.at(2,game.height() -1)
 //	falta agregarle un texto/número al lado de la imagen, que indique la cantidad de vidas que quedan
 //	y ponerle una imagen de corazón o algo parecido
 
@@ -265,8 +265,8 @@ object vida inherits Items (image ="./assets/items/vidas.png",
 
 object score {
 	
-	method text()= "Score: " + player.puntaje()
-	method positionText()= game.at(3, game.height() -1)
+	//method text()= "Score: " + player.puntaje()
+	//method positionText()= game.at(3, game.height() -1)
 }
 
 /*

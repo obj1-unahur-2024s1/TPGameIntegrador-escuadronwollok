@@ -35,7 +35,7 @@ class Pantalla inherits Items{
  	
 }
 
-const titulo = new Pantalla(image = "./assets/fondos/titulo.png",
+const titulo = new Pantalla(image = "./assets/pantallas/titulo.png",
 						position = game.at(0, 0))
 
 
