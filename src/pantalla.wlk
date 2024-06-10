@@ -1,13 +1,12 @@
 import wollok.game.*
 import juego.*
 
-class Pantalla {
-	var image
-	var position
+class Pantalla inherits Items{
 	
- 	method image() = image
+	
+ 	override method image() = image
  	
- 	method position() = position
+ 	 override method position() = position
  	
  	method addVisual(){
 		if(!game.hasVisual(self)) {
@@ -36,7 +35,7 @@ class Pantalla {
  	
 }
 
-const titulo = new Pantalla(image = "./assets/pantallas/titulo.png",
+const titulo = new Pantalla(image = "./assets/fondos/titulo.png",
 						position = game.at(0, 0))
 
 
