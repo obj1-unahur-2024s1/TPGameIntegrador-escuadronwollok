@@ -18,13 +18,13 @@ object juego {
 	method iniciar() {
 		game.title("Maze of Crete")
 		game.width(60)
-		game.height(30)
+		game.height(38)
 		game.cellSize(20)
 		
 		game.addVisualCharacter(player)
 		game.addVisual(vida)
 		
-		const enemigos = #{new Minotaur(posInicial = game.at(10,11)), new Minotaur(posInicial = game.at(12,2))}
+		const enemigos = #{new Minotaur(posInicial = game.at(57,30)), new Minotaur(posInicial = game.at(56,0))}
 		enemigos.forEach({enemigo =>
 			game.addVisual(enemigo)
 			game.onTick(1.randomUpTo(5) * 300,"movimiento",{
@@ -245,14 +245,11 @@ object alas inherits Items (image ="./assets/items/moneda.png",
 }
 
 object vida inherits Items (image ="./assets/items/vidas.png", 
-								valor = 0, position = game.at(1,game.height()-1)) { 
+								valor = 0, position = game.at(48,game.height()-2)) { 
 	var property vidasActuales = 3
 	  
-	// method text()= vidasActuales
-	// method positionText()= game.at(2,game.height() -1)
-//	falta agregarle un texto/número al lado de la imagen, que indique la cantidad de vidas que quedan
-//	y ponerle una imagen de corazón o algo parecido
-
+	 method text()= "Vidas: " + vidasActuales
+	 method positionText()= game.at(56,game.height()-3)
 	
 	method perderVida(){
 		vidasActuales = 0.max(vidasActuales-1)
@@ -265,8 +262,8 @@ object vida inherits Items (image ="./assets/items/vidas.png",
 
 object score {
 	
-	//method text()= "Score: " + player.puntaje()
-	//method positionText()= game.at(3, game.height() -1)
+	method text()= "Score: " + player.puntaje()
+	method positionText()= game.at(40, game.height() -2)
 }
 
 /*
