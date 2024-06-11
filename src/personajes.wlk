@@ -80,25 +80,6 @@ object player {
 		ultimoMovimiento = "derecha"
 	}
 	
-//	method perderVida(){
-//		vidas = vidas -1
-//		//aca en el pacman tira la linea de abajo porque pierde la vida y spawnea en el centro
-//		//position = pacman.origin()
-//		//Nosotros podriamos hacer lo mismo, pero tener dos metodos, uno que sea onCollide/whenCollideDo
-//		//que pierda un corazon y uno que cuando se quede sin corazones haga lo del pacman
-//		self.resetPosition()
-//		minotaur.resetPosition()
-		//habria que poner un spawnTraps() y spawnItems()
-//		if(self.juegoTerminado()){
-//			game.stop()
-//		}
-//}		
-
-
-//	method juegoTerminado() = vidas == 0 {
-//		
-//	}
-	
 
 
 }
@@ -132,44 +113,6 @@ class Minotaur {
 }
 	
 	
-
-//	var posicionPrevia = position    //esta la vamos a usar al chocar con paredes
-//	var property position = null
-//	method chocarCon(){//sacar vida si es rival, parar si es pared
-//	}
-//	method spawnMinotaur(){
-//		position = game.at(3,3)
-//		game.addVisual(self)
-//	}
-//	method movimiento(){ //este esta 1:14:00 de aca https://www.youtube.com/watch?v=uJYTFKQQlqs
-//		game.onTick(1.randomUpTo(5) * 1000, "movimiento",{
-//			self.acercarseA(player)
-//		})
-//aca el video dice rival.acercarseA, yo use self, "movimiento" esta porque el onTick lleva un nombre
-//	}
-	
-//	method acercarseA(player){ //lo explica 1:20:12 aca https://www.youtube.com/watch?v=uJYTFKQQlqs
-//		const otraPosicion = player.position()
-//		var newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
-//		position = game.at(newX)
-//		posicionPrevia = position
-//	}
-	
-//	method chocarCon(otro){
-//		self.resetPosicionPrevia()
-//	}
-	
-//	method resetPosicionPrevia(){position = posicionPrevia} //esto es para que al chocar con una pared
-//	//o contra nuestro personaje, no se encime, sino que queden un al lado del otro
-//	//me parece que player necesita un metodo igual para no superponerse con nada
-	
-	
-//	method position() = position
-	
-//	method image() = "minotaur.png"
-//	//por ahora probamos sin animar para animar tenemos que hacer lo de abajo
-//	//	method image() = "minotaur" + numero.toSrting() + ".png"
-//}
 class Trap {
 	const numero
 	method image() = "trap" + numero.toString() + ".png"
