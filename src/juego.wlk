@@ -17,19 +17,16 @@ object juego {
 	
 	method iniciar() {
 		game.title("Maze of Crete")
-<<<<<<< HEAD
 		game.width(60)  // Triple 60 - Original 20
 		game.height(30) // Triple 42 - Original 14 - Para que me entre en el monitor 34
 		game.cellSize(20) //20 - 50 - Hay que hacer que los assets sean 60x60
-=======
-		game.width(60)
-		game.height(38)
-		game.cellSize(20)
->>>>>>> 169a57bb56279413518ec120c97d54bc9839e706
+
+
 		
 		game.addVisualCharacter(player)
 		game.addVisual(vida)
-		
+		game.addVisual(fuego)
+		game.addVisual(score)
 		const enemigos = #{new Minotaur(posInicial = game.at(57,30)), new Minotaur(posInicial = game.at(56,0))}
 		enemigos.forEach({enemigo =>
 			game.addVisual(enemigo)
@@ -186,7 +183,7 @@ object tablero{
 class Items{
 	
 	const property image
-	var property valor
+	var property valor=0
 	var property position
 	
 	
@@ -208,16 +205,18 @@ class Moneda inherits Items (image ="./assets/items/moneda.png",
 			//juego.spawnMoneda(valor)}
 	}
 }
-
-object medusa inherits Items (image ="./assets/items/medusa.png", 
+}
+object medusa inherits Items(image ="./assets/items/medusa.png", 
 								valor = 300, position = game.at(0,0)){
 	
 	override method chocarCon(cosa){
 		if (cosa == player) {
 			
-		}
-	}
+		 }
+
+	 }
 }
+
 
 object llave inherits Items (image ="./assets/items/llave.png", 
 								valor = 500, position = game.at(0,0)){
@@ -265,17 +264,16 @@ object vida inherits Items (image ="./assets/items/vidas.png",
 }
 
 
-object score {
+object score inherits Items(image= "./assets/items/score.png", position = game.at(40, game.height()-2)){
 	
-	method text()= "Score: " + player.puntaje()
-	method positionText()= game.at(40, game.height() -2)
+	method text()= player.puntaje().toString()
+	
 }
 
 
 
-
-class Trap  inherits Items (image ="./assets/traps/fuego.png", 
-								valor = 300, position = game.at(0,10)){
+object  fuego  inherits Items (image ="./assets/traps/fuego.png", 
+								valor = 300, position = game.at(38,-3)){
 	
 	override method chocarCon(cosa){
 		if (cosa == player) {
