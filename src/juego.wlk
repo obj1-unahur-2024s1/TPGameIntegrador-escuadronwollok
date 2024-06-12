@@ -22,8 +22,8 @@ object juego {
 		game.height(30) // Triple 42 - Original 14 - Para que me entre en el monitor 34
 		game.cellSize(20) //20 - 50 - Hay que hacer que los assets sean 60x60
 		
-		self.mostrarImagenesIniciales()
 		self.agregarVisuals()
+		self.mostrarImagenesIniciales()
 		laberinto.decidirTablero()
 		self.configurarTeclas()
 		self.spawnearMonedas()
@@ -67,7 +67,7 @@ object juego {
 	}
 	
 	method mostrarImagenesIniciales(){
-		titulo.addVisual()
+		game.addVisual(titulo)
 		keyboard.space().onPressDo({
 			if(!iniciado){
 				titulo.removeVisual();
@@ -142,8 +142,9 @@ class Items{
 
 	var property position
 	
-	
+	// Ver si hace falta borrar
 	method chocarCon(){}
+	
 	method chocarCon(cosa){}
 	//aca podemos poner armas, monedas, power ups
 //	method chocarCon(){//sumar vida, puntos, dar poder... los powerups cofres son estaticos solo podemos chocarlo nosotros
@@ -156,7 +157,11 @@ class Moneda inherits Items (image ="./assets/items/moneda20x20.png",
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
 			player.aumentarPuntos(valor * 100)
+<<<<<<< HEAD
 			game.say(player, "Tengo " + player.puntaje().toString() + " monedas")
+=======
+			game.say(player, "Tengo " + player.puntos().toString() + " monedas")
+>>>>>>> 402f24b091b16e96534aeb023596353b33f5ec2c
 			game.removeVisual(self)
 			juego.spawnMoneda(valor)}
 	}
@@ -223,6 +228,11 @@ object score inherits Items (image= "./assets/items/score.png" , position = game
 	
 	method text()= player.puntaje().toString()
 	
+<<<<<<< HEAD
+=======
+	method text()= "Score; " + player.puntos()//.toString()
+	method position()= game.at(60, game.height()-6)
+>>>>>>> 402f24b091b16e96534aeb023596353b33f5ec2c
 }
 
 
