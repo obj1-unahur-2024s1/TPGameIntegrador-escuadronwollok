@@ -28,6 +28,14 @@ object juego {
 		self.configurarTeclas()
 		self.spawnearMonedas()
 		game.onCollideDo(player,{algo => algo.chocarCon(player)})
+		const enemigos = #{new Minotaur(posInicial = game.at(53,21)), new Minotaur(posInicial = game.at(56,0))}
+		    enemigos.forEach({enemigo =>
+			game.addVisual(enemigo)
+			game.onTick(1.randomUpTo(2) * 300 ,"movimiento",{
+				enemigo.acercarseA(player)
+			})
+			game.onCollideDo(enemigo,{algo => algo.chocarCon(enemigo)})
+		})
 		}
 		
 	method agregarVisuals(){
@@ -37,14 +45,7 @@ object juego {
 		game.addVisual(vida)
 		game.addVisual(fuego)
 		game.addVisual(score)
-		const enemigos = #{new Minotaur(posInicial = game.at(53,21)), new Minotaur(posInicial = game.at(56,0))}
-		    enemigos.forEach({enemigo =>
-			game.addVisual(enemigo)
-			game.onTick(1.randomUpTo(2) * 300 ,"movimiento",{
-				enemigo.acercarseA(player)
-			})
-			game.onCollideDo(enemigo,{algo => algo.chocarCon(enemigo)})
-		})
+		
 		
 		}
 		
@@ -154,7 +155,7 @@ class Moneda inherits Items (image ="./assets/items/moneda20x20.png",
 
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
-			player.aumentarPuntos(valor)
+			player.aumentarPuntos(valor * 100)
 			game.say(player, "Tengo " + player.puntaje().toString() + " monedas")
 			game.removeVisual(self)
 			juego.spawnMoneda(valor)}
@@ -204,12 +205,11 @@ object alas inherits Items (image ="./assets/items/moneda.png",
 
 }
 
-object vida  { 
+object vida inherits Items (image= "./assets/items/vidas.png" , position = game.at(60,game.height()-3)) { 
+	
 	var property vidasActuales = 3
 	  
-	 method text()= "Vidas: " + vidasActuales.toString()
-	 method position()= game.at(62,game.height()-2)
-	
+	 method text()= vidasActuales.toString()
 	method perderVida(){
 		vidasActuales = 0.max(vidasActuales-1)
 	}
@@ -219,10 +219,10 @@ object vida  {
 }
 
 
-object score {
+object score inherits Items (image= "./assets/items/score.png" , position = game.at(60,game.height()-6)) {
 	
-	method text()= "Score; " + player.puntaje().toString()
-	method position()= game.at(60, game.height()-6)
+	method text()= player.puntaje().toString()
+	
 }
 
 
