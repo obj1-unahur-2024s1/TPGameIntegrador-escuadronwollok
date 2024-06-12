@@ -17,9 +17,9 @@ object juego {
 	
 	method iniciar() {
 		game.title("Maze of Crete")
-		game.width(20)
-		game.height(14)
-		game.cellSize(50)
+		game.width(60)  // Triple 60 - Original 20
+		game.height(30) // Triple 42 - Original 14 - Para que me entre en el monitor 34
+		game.cellSize(20) //20 - 50 - Hay que hacer que los assets sean 60x60
 		
 		game.addVisualCharacter(player)
 		game.addVisual(vida)
@@ -101,7 +101,7 @@ object juego {
 		self.dibujarLineaDeParedes(03, [0,0,0,1,0,1,1,1,0,1,1,1,1,1,1,0,1,0,1,0,1])
 		self.dibujarLineaDeParedes(02, [0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,1])
 		self.dibujarLineaDeParedes(01, [0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,0,1])
-		self.dibujarLineaDeParedes(00, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1])
+		self.dibujarLineaDeParedes(00, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1])
 	}
 	
 	method dibujarLineaDeParedes(posicionY, vectorFila) {
@@ -133,8 +133,6 @@ object juego {
 		keyboard.down().onPressDo({player.bajar()})
 		keyboard.left().onPressDo({player.izquierda()})
 		keyboard.right().onPressDo({player.derecha()})
-		keyboard.p().onPressDo({player.regresar()})
-		keyboard.enter().onPressDo({game.say(player, "toque enter")})
 	}
 	
 	
@@ -151,6 +149,7 @@ object juego {
 //		//https://www.youtube.com/watch?v=gAkqZ19bpaM
 //		game.schedule(500,{self.spawnMoneda(100)})
 		}
+		
 	method spawnearMonedas(){
 		game.schedule(500, {self.spawnMoneda(100)})
 	}
@@ -200,7 +199,7 @@ class Moneda inherits Items (image ="./assets/items/moneda.png",
 			player.aumentarPuntos(valor)
 			game.say(player, "Tengo " + player.puntaje().toString() + " monedas")
 			game.removeVisual(self)
-			juego.spawnMoneda(valor)}
+			//juego.spawnMoneda(valor)}
 	}
 }
 

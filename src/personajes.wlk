@@ -31,17 +31,21 @@ object player {
 			//agregar sonido new Sonido(sound = "").reproducir()
 		}
 	}
+	
 	method resetPosition(){
 		position = game.origin()
 	}
+	
 	method chocarCon(cosa){
 		self.perderVida()
 	}
+	
 	method chocarConTrap() {
 		self.regresar()
 		self.perderPuntos(5)
 		self.checkVidas()
 	}
+	
 	method checkVidas() {
 		if (puntos == 0) {
 	      self.perderVida()
@@ -111,8 +115,10 @@ class Minotaur {
 	method regresar(){
 		position = posicionAnterior
 	}
+	
 	method resetPosition() {position = posInicial}
-	method acercarseA(player){
+	
+	method acercarseA(player) {
 		const otraPosicion = player.position()
 		//var newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
 		//var newY = position.y() + if (otraPosicion.y() > position.y()) 1 else -1
