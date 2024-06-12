@@ -36,6 +36,23 @@ object juego {
 			})
 			game.onCollideDo(enemigo,{algo => algo.chocarCon(enemigo)})
 		})
+		const trampas = #{new Fuego(posInicial = game.at(13,20)),
+			              new Fuego(posInicial = game.at(49,20)) ,
+			              new Fuego(posInicial = game.at(4,7)), 
+			              new Fuego(posInicial = game.at(45,4))}
+			  trampas.forEach({trampa => game.addVisual(trampa)})
+			  
+		const trampas2 = #{new Pinchos(posInicial = game.at(19,25)),
+			              new Pinchos(posInicial = game.at(49,25)) ,
+			              new Pinchos(posInicial = game.at(16,4)), 
+			              new Pinchos(posInicial = game.at(34,4))}
+			  trampas2.forEach({trampa => game.addVisual(trampa)})
+		const trampas3 = #{new Serpiente(posInicial = game.at(1,15)),
+			              new Serpiente(posInicial = game.at(57,10)) ,
+			              new Serpiente(posInicial = game.at(4,28)),
+			              new Serpiente(posInicial = game.at(47,12)), 
+			              new Serpiente(posInicial = game.at(45,28))}
+			  trampas3.forEach({trampa => game.addVisual(trampa)})	  
 		}
 		
 	method agregarVisuals(){
@@ -43,7 +60,6 @@ object juego {
 		game.addVisual(inventario)
 		game.addVisualCharacter(player)
 		game.addVisual(vida)
-		game.addVisual(fuego)
 		game.addVisual(score)
 		
 		
@@ -157,11 +173,7 @@ class Moneda inherits Items (image ="./assets/items/moneda20x20.png",
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
 			player.aumentarPuntos(valor * 100)
-<<<<<<< HEAD
-			game.say(player, "Tengo " + player.puntaje().toString() + " monedas")
-=======
 			game.say(player, "Tengo " + player.puntos().toString() + " monedas")
->>>>>>> 402f24b091b16e96534aeb023596353b33f5ec2c
 			game.removeVisual(self)
 			juego.spawnMoneda(valor)}
 	}
@@ -226,33 +238,39 @@ object vida inherits Items (image= "./assets/items/vidas.png" , position = game.
 
 object score inherits Items (image= "./assets/items/score.png" , position = game.at(60,game.height()-6)) {
 	
-	method text()= player.puntaje().toString()
-	
-<<<<<<< HEAD
-=======
-	method text()= "Score; " + player.puntos()//.toString()
-	method position()= game.at(60, game.height()-6)
->>>>>>> 402f24b091b16e96534aeb023596353b33f5ec2c
+	method text()= player.puntos().toString()
+
+
 }
 
-
-
-object fuego  inherits Items (image ="./assets/traps/fuego.png", 
-								valor = 300, position = game.at(40,game.height()-1)){
+class Trap {
+	var property posInicial
+	var property position = posInicial
+	const valor = 300
 	
-	override method chocarCon(cosa){
-		if (cosa == player) {
-			player.perderPuntos(valor)
-			game.say(player, "perdi puntos")
-			
+	method chocarCon(cosa){
+		 if (cosa.equals(player)) {
+			 player.perderPuntos(valor)
+		     game.say(player, "perdi puntos")
 			}
-			
-	
 	}
+	method image()
+		
 	
 }
+class Fuego inherits Trap{ 
+	
+	override method  image() ="./assets/traps/fuego.png"
+									 	
+}
 
+class Pinchos inherits Trap{
+	override method  image() ="./assets/traps/pinchos.png"
+}
 
+class Serpiente inherits Trap{
+	override method  image() ="./assets/traps/serpiente.png"
+}
 
 
 
