@@ -1,6 +1,7 @@
 import wollok.game.*
 import juego.*
 import personajes.*
+import pantalla.*
 
 program maze {
 
