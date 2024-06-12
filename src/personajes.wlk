@@ -24,6 +24,7 @@ object player {
 			vida.perderVida()
 			//agregar sonido new Sonido(sound = "").reproducir()
 			self.resetPosition()
+			juego.enemigos().forEach({enemigo => enemigo.resetPosition()})
 		}
 		else{
 			 game.addVisual(gameOver)

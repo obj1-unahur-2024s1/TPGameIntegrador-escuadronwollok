@@ -14,6 +14,7 @@ class Pared {
 
 object juego {
 	
+	const property enemigos = #{new Minotaur(posInicial = game.at(30,21)), new Minotaur(posInicial = game.at(39,12))}
 	var iniciado = false
 	
 	method iniciar() {
@@ -22,15 +23,16 @@ object juego {
 		game.height(30) // Triple 42 - Original 14 - Para que me entre en el monitor 34
 		game.cellSize(20) //20 - 50 - Hay que hacer que los assets sean 60x60
 		// Hacer un metodo aparte para los visual de pantalla
+		
 		game.addVisual(tablero1)
 		game.addVisual(inventario)
 		game.addVisualCharacter(player)
 		game.addVisual(vida)
 		
-		const enemigos = #{new Minotaur(posInicial = game.at(57,30)), new Minotaur(posInicial = game.at(56,0))}
+		
 		enemigos.forEach({enemigo =>
 			game.addVisual(enemigo)
-			game.onTick(1.randomUpTo(5) * 300,"movimiento",{
+			game.onTick(1.randomUpTo(2) * 300 ,"movimiento",{
 				enemigo.acercarseA(player)
 			})
 			game.onCollideDo(enemigo,{algo => algo.chocarCon(enemigo)})
@@ -75,7 +77,7 @@ object juego {
 	
 
 	method agregarMonedaEn(x, y) {
-		var chance = 1.randomUpTo(100)
+		const chance = 1.randomUpTo(100)
 		if (chance > 90) {
 			const moneda = new Moneda(position = game.at(x,y), valor=1)
 			game.addVisual(moneda)			
@@ -149,23 +151,27 @@ class Moneda inherits Items (image ="./assets/items/moneda20x20.png",
 								valor = 100, position = game.at(0,0)){
 
 	override method chocarCon(cosa){
-		if (cosa == player) {
+		if (cosa.equals(player)) {
 			player.aumentarPuntos(valor)
 			game.say(player, "Tengo " + player.puntaje().toString() + " monedas")
 			game.removeVisual(self)
 			//juego.spawnMoneda(valor)}
 	}
+	
+}
 }
 
 object medusa inherits Items (image ="./assets/items/medusa.png", 
 								valor = 300, position = game.at(0,0)){
 	
 	override method chocarCon(cosa){
-		if (cosa == player) {
+		if (cosa.equals(player)) {
 			
 		}
 	}
 }
+
+
 
 object llave inherits Items (image ="./assets/items/llave.png", 
 								valor = 500, position = game.at(0,0)){
@@ -180,7 +186,7 @@ object caliz inherits Items (image ="./assets/items/caliz.png",
 								valor = 1000, position = game.at(0,0)){
 	
 	override method chocarCon(cosa){
-		if (cosa == player and vida.vidasActuales() < 3) {
+		if (cosa.equals(player) and vida.vidasActuales() < 3) {
 			vida.ganarVida()
 			game.removeVisual(self)
 		}
