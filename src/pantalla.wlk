@@ -33,6 +33,12 @@ class Pantalla inherits Items{
 	  	})
  	}
  	
+ 	//Agrego este metodo para cumplir polimorfismo,
+ 	//	 osino dice que pantalla no entiende chocar con player.
+ 	method chocarCon(personaje){
+		
+	}
+ 	
 }
 
 const titulo = new Pantalla(image = "./assets/pantallas/titulo.png",
