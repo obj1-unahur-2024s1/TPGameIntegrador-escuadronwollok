@@ -113,14 +113,6 @@ class Minotaur {
 }
 	
 	
-class Trap {
-	const numero
-	method image() = "trap" + numero.toString() + ".png"
-	method position() = game.center()
-	
-	method hacerDanio(){}
-	
-}
 
 //class Trap{var position = null
 //	const numero

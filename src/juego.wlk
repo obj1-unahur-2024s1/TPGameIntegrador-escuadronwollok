@@ -248,8 +248,8 @@ object vida inherits Items (image ="./assets/items/vidas.png",
 								valor = 0, position = game.at(48,game.height()-2)) { 
 	var property vidasActuales = 3
 	  
-	 method text()= "Vidas: " + vidasActuales
-	 method positionText()= game.at(56,game.height()-3)
+	 method text()= vidasActuales.toString()
+	 method positionText()= game.at(51,game.height()-2)
 	
 	method perderVida(){
 		vidasActuales = 0.max(vidasActuales-1)
@@ -264,6 +264,24 @@ object score {
 	
 	method text()= "Score: " + player.puntaje()
 	method positionText()= game.at(40, game.height() -2)
+}
+
+
+
+
+class Trap  inherits Items (image ="./assets/traps/fuego.png", 
+								valor = 300, position = game.at(0,10)){
+	
+	override method chocarCon(cosa){
+		if (cosa == player) {
+			player.perderPuntos(valor)
+			game.say(player, "perdi puntos")
+			
+			}
+			
+	
+	}
+	
 }
 
 /*
