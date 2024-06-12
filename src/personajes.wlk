@@ -7,18 +7,22 @@ object player {
 	var property position = game.origin()
 	var property ultimoMovimiento = "arriba"
 	//var property ultimaPosicion 
-	var puntos = 0
+	var property puntos = 0
 	
-	method image() = "pepita.png"
+	method image() {
+		return animacionPlayer.image()	
+	}
 	//por ahora probamos sin animar para animar tenemos que hacer lo de abajo
 	//	method image() = "player" + numero.toSrting() + ".png"
-	method puntaje() = puntos
+	
 	method aumentarPuntos(valor){
 		puntos += valor
 	}
+	
 	method perderPuntos(valor){
 		puntos = 0.max(puntos - valor)
 	}
+	
 	method perderVida(){
 		if (vida.vidasActuales()>1){
 			vida.perderVida()
@@ -68,26 +72,48 @@ object player {
 	method bajar() {
 		//ultimaPosicion = position.up(1)
 		ultimoMovimiento = "abajo"
+		animacionPlayer.direccion("sur")
+		animacionPlayer.siguienteFotograma()
 	}
 	
 	method subir() {
 		//ultimaPosicion = position.down(1)
 		ultimoMovimiento = "arriba"
+		animacionPlayer.direccion("norte")
+		animacionPlayer.siguienteFotograma()
 	}
 	
 	method izquierda() {
 		//ultimaPosicion = position.right(1)
 		ultimoMovimiento = "izquierda"
+		animacionPlayer.direccion("oeste")
+		animacionPlayer.siguienteFotograma()
 	}
 	
 	method derecha() {
 		//ultimaPosicion = position.left(1)
 		ultimoMovimiento = "derecha"
+		animacionPlayer.direccion("este")
+		animacionPlayer.siguienteFotograma()
 	}
-	
-
-
 }
+
+class Animaciones {
+	var property fotograma = 0
+	var property direccion = "este"
+	
+	method siguienteFotograma() {
+		fotograma = (fotograma + 1) % 3
+	}
+}
+
+object animacionPlayer inherits Animaciones{
+	
+	method image() {
+		return "./assets/jugador/" + direccion + "-" + fotograma.toString() + ".png"
+	}
+}
+	
 
 class Minotaur {
 	var property posInicial
