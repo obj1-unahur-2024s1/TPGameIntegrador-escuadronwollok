@@ -1,6 +1,7 @@
 import wollok.game.*
 import personajes.*
 import pantalla.*
+import laberintos.*
 
 class Pared {
 	const property position
@@ -13,24 +14,39 @@ class Pared {
 
 object juego {
 	
+	const property enemigos = #{new Minotaur(posInicial = game.at(30,21)), new Minotaur(posInicial = game.at(39,12))}
 	var iniciado = false
 	
 	method iniciar() {
 		game.title("Maze of Crete")
+<<<<<<< HEAD
 		game.width(60)  // Triple 60 - Original 20
 		game.height(30) // Triple 42 - Original 14 - Para que me entre en el monitor 34
 		game.cellSize(20) //20 - 50 - Hay que hacer que los assets sean 60x60
 
 
+=======
+		game.width(66)  // Triple 60 - Original 20
+		game.height(30) // Triple 42 - Original 14 - Para que me entre en el monitor 34
+		game.cellSize(20) //20 - 50 - Hay que hacer que los assets sean 60x60
+		// Hacer un metodo aparte para los visual de pantalla
+>>>>>>> 2d9763179962e5364a245631d17ecfe9247a39e8
 		
+		game.addVisual(tablero1)
+		game.addVisual(inventario)
 		game.addVisualCharacter(player)
 		game.addVisual(vida)
+<<<<<<< HEAD
 		game.addVisual(fuego)
 		game.addVisual(score)
 		const enemigos = #{new Minotaur(posInicial = game.at(57,30)), new Minotaur(posInicial = game.at(56,0))}
+=======
+		
+		
+>>>>>>> 2d9763179962e5364a245631d17ecfe9247a39e8
 		enemigos.forEach({enemigo =>
 			game.addVisual(enemigo)
-			game.onTick(1.randomUpTo(5) * 300,"movimiento",{
+			game.onTick(1.randomUpTo(2) * 300 ,"movimiento",{
 				enemigo.acercarseA(player)
 			})
 			game.onCollideDo(enemigo,{algo => algo.chocarCon(enemigo)})
@@ -41,10 +57,9 @@ object juego {
 		//game.addVisual(new Trap(numero = 1))
         //game.addVisual(new Trap(numero = 2))
         self.mostrarImagenesIniciales()
-		self.decidirTablero()
+		laberinto.decidirTablero()
 		self.configurarTeclas()
 		self.spawnearMonedas()
-		game.boardGround("casilleroJuego.jpg")
 		game.onCollideDo(player,{algo => algo.chocarCon(player)})
 		
 		
@@ -73,59 +88,11 @@ object juego {
 	   	})						
 	}
 	
-	method decidirTablero() {
-		// UNA FORMA DE IMPLEMENTAR DISTINTOS TIPOS DE TABLEROS QUE SE CARGAN AL INICIO. FALTA IMPLEMENTAR
-		// POR AHORA SE UTILIZA UN UNICO TABLERO
-//		var numeroTablero = (1..3).anyOne
-//		if numeroTablero == 1 {
-//			self.spawnearParedes1()
-//		} else if {
-//			self.spawnearParedes2()
-//		} else {
-//			self.spawnearParedes3()
-//		}
-		self.spawnearParedes()
-	}
-	method spawnearMinotaur() {
-		
-	}
 	
-	method spawnearParedes() {
-		self.dibujarLineaDeParedes(13, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1])
-		self.dibujarLineaDeParedes(12, [0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1])
-		self.dibujarLineaDeParedes(11, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1])
-		self.dibujarLineaDeParedes(10, [0,1,1,0,1,1,1,1,0,1,1,1,1,0,1,1,1,0,1,0,1])
-		self.dibujarLineaDeParedes(09, [0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1])
-		self.dibujarLineaDeParedes(08, [0,1,0,1,0,1,0,1,1,1,1,1,1,0,1,0,1,0,0,0,1])
-		self.dibujarLineaDeParedes(07, [0,1,0,1,0,1,0,1,0,0,0,0,1,0,1,0,0,0,1,1,1])
-		self.dibujarLineaDeParedes(06, [0,1,0,1,0,1,0,1,0,0,0,0,1,0,1,1,1,0,0,0,1])
-		self.dibujarLineaDeParedes(05, [0,0,0,1,0,1,0,1,0,0,0,0,1,0,1,0,1,0,1,0,1])
-		self.dibujarLineaDeParedes(04, [1,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,1,0,1])
-		self.dibujarLineaDeParedes(03, [0,0,0,1,0,1,1,1,0,1,1,1,1,1,1,0,1,0,1,0,1])
-		self.dibujarLineaDeParedes(02, [0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,1])
-		self.dibujarLineaDeParedes(01, [0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,0,1])
-		self.dibujarLineaDeParedes(00, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1])
-	}
-	
-	method dibujarLineaDeParedes(posicionY, vectorFila) {
-		(0..vectorFila.size()-1).forEach({x=> 
-			if(vectorFila.get(x) > 0 ) {
-				self.agregarParedEn(x, posicionY)
-			}
-			else {
-				self.agregarMonedaEn(x, posicionY)
-			}
-		})
-	}
-	
-	method agregarParedEn(x, y) {
-		const pared = new Pared(position = game.at(x,y))
-		game.addVisual(pared)
-	}
 
 	method agregarMonedaEn(x, y) {
-		var chance = 1.randomUpTo(100)
-		if (chance > 50) {
+		const chance = 1.randomUpTo(100)
+		if (chance > 90) {
 			const moneda = new Moneda(position = game.at(x,y), valor=1)
 			game.addVisual(moneda)			
 		}
@@ -183,7 +150,11 @@ object tablero{
 class Items{
 	
 	const property image
+<<<<<<< HEAD
 	var property valor=0
+=======
+	var property valor = 0
+>>>>>>> 2d9763179962e5364a245631d17ecfe9247a39e8
 	var property position
 	
 	
@@ -194,23 +165,25 @@ class Items{
 //	}
 }
 
-class Moneda inherits Items (image ="./assets/items/moneda.png", 
+class Moneda inherits Items (image ="./assets/items/moneda20x20.png", 
 								valor = 100, position = game.at(0,0)){
 
 	override method chocarCon(cosa){
-		if (cosa == player) {
+		if (cosa.equals(player)) {
 			player.aumentarPuntos(valor)
 			game.say(player, "Tengo " + player.puntaje().toString() + " monedas")
 			game.removeVisual(self)
 			//juego.spawnMoneda(valor)}
 	}
+	
+}
 }
 }
 object medusa inherits Items(image ="./assets/items/medusa.png", 
 								valor = 300, position = game.at(0,0)){
 	
 	override method chocarCon(cosa){
-		if (cosa == player) {
+		if (cosa.equals(player)) {
 			
 		 }
 
@@ -218,6 +191,10 @@ object medusa inherits Items(image ="./assets/items/medusa.png",
 }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2d9763179962e5364a245631d17ecfe9247a39e8
 object llave inherits Items (image ="./assets/items/llave.png", 
 								valor = 500, position = game.at(0,0)){
 }
@@ -231,7 +208,7 @@ object caliz inherits Items (image ="./assets/items/caliz.png",
 								valor = 1000, position = game.at(0,0)){
 	
 	override method chocarCon(cosa){
-		if (cosa == player and vida.vidasActuales() < 3) {
+		if (cosa.equals(player) and vida.vidasActuales() < 3) {
 			vida.ganarVida()
 			game.removeVisual(self)
 		}

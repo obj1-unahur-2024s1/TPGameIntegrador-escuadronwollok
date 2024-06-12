@@ -32,13 +32,6 @@ class Pantalla inherits Items{
 			accion.apply()
 	  	})
  	}
- 	
- 	//Agrego este metodo para cumplir polimorfismo,
- 	//	 osino dice que pantalla no entiende chocar con player.
- 	method chocarCon(personaje){
-		
-	}
- 	
 }
 
 const titulo = new Pantalla(image = "./assets/pantallas/titulo.png",
@@ -54,4 +47,8 @@ const winScreen = new Pantalla(image = "./assets/pantallas/techo.png",
 
 									
 const creditos = new Pantalla(image = "./assets/pantallas/creditos.png",
-									position = game.at(0,0))	
+									position = game.at(0,0))
+									
+const tablero1 = new Pantalla(image = "./assets/maze/tableroJuegoFinal1.png", position = game.origin())
+
+const inventario = new Pantalla(image = "./assets/pantallas/inventarioFinal.png", position = game.at(game.width()-6,0))
