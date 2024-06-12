@@ -14,37 +14,31 @@ class Pared {
 
 object juego {
 	
-	const property enemigos = #{new Minotaur(posInicial = game.at(30,21)), new Minotaur(posInicial = game.at(39,12))}
 	var iniciado = false
 	
 	method iniciar() {
 		game.title("Maze of Crete")
-<<<<<<< HEAD
-		game.width(60)  // Triple 60 - Original 20
-		game.height(30) // Triple 42 - Original 14 - Para que me entre en el monitor 34
-		game.cellSize(20) //20 - 50 - Hay que hacer que los assets sean 60x60
-
-
-=======
 		game.width(66)  // Triple 60 - Original 20
 		game.height(30) // Triple 42 - Original 14 - Para que me entre en el monitor 34
 		game.cellSize(20) //20 - 50 - Hay que hacer que los assets sean 60x60
-		// Hacer un metodo aparte para los visual de pantalla
->>>>>>> 2d9763179962e5364a245631d17ecfe9247a39e8
 		
+		self.mostrarImagenesIniciales()
+		self.agregarVisuals()
+		laberinto.decidirTablero()
+		self.configurarTeclas()
+		self.spawnearMonedas()
+		game.onCollideDo(player,{algo => algo.chocarCon(player)})
+		}
+		
+	method agregarVisuals(){
 		game.addVisual(tablero1)
 		game.addVisual(inventario)
 		game.addVisualCharacter(player)
 		game.addVisual(vida)
-<<<<<<< HEAD
 		game.addVisual(fuego)
 		game.addVisual(score)
-		const enemigos = #{new Minotaur(posInicial = game.at(57,30)), new Minotaur(posInicial = game.at(56,0))}
-=======
-		
-		
->>>>>>> 2d9763179962e5364a245631d17ecfe9247a39e8
-		enemigos.forEach({enemigo =>
+		const enemigos = #{new Minotaur(posInicial = game.at(53,21)), new Minotaur(posInicial = game.at(56,0))}
+		    enemigos.forEach({enemigo =>
 			game.addVisual(enemigo)
 			game.onTick(1.randomUpTo(2) * 300 ,"movimiento",{
 				enemigo.acercarseA(player)
@@ -52,23 +46,16 @@ object juego {
 			game.onCollideDo(enemigo,{algo => algo.chocarCon(enemigo)})
 		})
 		
+		}
 		
 		//agregando Traps
 		//game.addVisual(new Trap(numero = 1))
         //game.addVisual(new Trap(numero = 2))
-        self.mostrarImagenesIniciales()
-		laberinto.decidirTablero()
-		self.configurarTeclas()
-		self.spawnearMonedas()
-		game.onCollideDo(player,{algo => algo.chocarCon(player)})
-		
-		
-		
+
 		
 		//self.spawnEnemigos()
 		//self.spawnPowerUps()
 		
-	}
 	
 	method finalizar(){
 		game.clear()
@@ -150,11 +137,8 @@ object tablero{
 class Items{
 	
 	const property image
-<<<<<<< HEAD
 	var property valor=0
-=======
-	var property valor = 0
->>>>>>> 2d9763179962e5364a245631d17ecfe9247a39e8
+
 	var property position
 	
 	
@@ -166,19 +150,18 @@ class Items{
 }
 
 class Moneda inherits Items (image ="./assets/items/moneda20x20.png", 
-								valor = 100, position = game.at(0,0)){
+								valor = 200, position = game.at(0,0)){
 
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
 			player.aumentarPuntos(valor)
 			game.say(player, "Tengo " + player.puntaje().toString() + " monedas")
 			game.removeVisual(self)
-			//juego.spawnMoneda(valor)}
+			juego.spawnMoneda(valor)}
 	}
 	
 }
-}
-}
+
 object medusa inherits Items(image ="./assets/items/medusa.png", 
 								valor = 300, position = game.at(0,0)){
 	
@@ -191,10 +174,6 @@ object medusa inherits Items(image ="./assets/items/medusa.png",
 }
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 2d9763179962e5364a245631d17ecfe9247a39e8
 object llave inherits Items (image ="./assets/items/llave.png", 
 								valor = 500, position = game.at(0,0)){
 }
@@ -225,12 +204,11 @@ object alas inherits Items (image ="./assets/items/moneda.png",
 
 }
 
-object vida inherits Items (image ="./assets/items/vidas.png", 
-								valor = 0, position = game.at(48,game.height()-2)) { 
+object vida  { 
 	var property vidasActuales = 3
 	  
-	 method text()= vidasActuales.toString()
-	 method positionText()= game.at(51,game.height()-2)
+	 method text()= "Vidas: " + vidasActuales.toString()
+	 method position()= game.at(62,game.height()-2)
 	
 	method perderVida(){
 		vidasActuales = 0.max(vidasActuales-1)
@@ -241,16 +219,16 @@ object vida inherits Items (image ="./assets/items/vidas.png",
 }
 
 
-object score inherits Items(image= "./assets/items/score.png", position = game.at(40, game.height()-2)){
+object score {
 	
-	method text()= player.puntaje().toString()
-	
+	method text()= "Score; " + player.puntaje().toString()
+	method position()= game.at(60, game.height()-6)
 }
 
 
 
-object  fuego  inherits Items (image ="./assets/traps/fuego.png", 
-								valor = 300, position = game.at(38,-3)){
+object fuego  inherits Items (image ="./assets/traps/fuego.png", 
+								valor = 300, position = game.at(40,game.height()-1)){
 	
 	override method chocarCon(cosa){
 		if (cosa == player) {
@@ -263,6 +241,11 @@ object  fuego  inherits Items (image ="./assets/traps/fuego.png",
 	}
 	
 }
+
+
+
+
+
 
 /*
 self.dibujarLineaDeParedes(41, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1])
