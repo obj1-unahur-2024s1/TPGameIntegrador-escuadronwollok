@@ -1,5 +1,6 @@
 import wollok.game.*
 import juego.*
+import elementos.*
 
 class Pantalla inherits Items{
 	
@@ -42,7 +43,7 @@ const gameOver = new Pantalla(image ="./assets/pantallas/gameOver.png",
 									position = game.at(0, 0))
 									
 
-const winScreen = new Pantalla(image = "./assets/pantallas/techo.png", 
+const winScreen = new Pantalla(image = "./assets/pantallas/winScreen.png", 
 									position = game.at(0, 0))
 
 									

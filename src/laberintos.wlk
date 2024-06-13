@@ -2,6 +2,7 @@ import wollok.game.*
 import juego.*
 import pantalla.*
 import personajes.*
+import elementos.*
 
 object laberinto {
 	method decidirTablero() {

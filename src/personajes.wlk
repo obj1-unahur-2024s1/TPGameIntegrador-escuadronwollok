@@ -1,19 +1,34 @@
 import wollok.game.*
 import juego.*
 import pantalla.*
+import elementos.*
 
 
 object player {
+	const inventarioPlayer = []
 	var property position = game.origin()
 	var property ultimoMovimiento = "arriba"
 	//var property ultimaPosicion 
 	var property puntos = 0
+	var property invencible = false
 	
 	method image() {
 		return animacionPlayer.image()	
 	}
 	//por ahora probamos sin animar para animar tenemos que hacer lo de abajo
 	//	method image() = "player" + numero.toSrting() + ".png"
+	
+	
+	method agregarAlInventario(cosa){
+		inventarioPlayer.add(cosa)
+	}
+	
+	method quitarDelInventario(cosa){
+		inventarioPlayer.remove(cosa)
+	}
+	
+	method tieneLlave() =
+		inventarioPlayer.contains(llave)
 	
 	method aumentarPuntos(valor){
 		puntos += valor
@@ -24,7 +39,7 @@ object player {
 	}
 	
 	method perderVida(){
-		if (vida.vidasActuales()>1){
+		if (vida.vidasActuales()>=1){
 			vida.perderVida()
 			//agregar sonido new Sonido(sound = "").reproducir()
 			self.resetPosition()
@@ -119,6 +134,8 @@ class Minotaur {
 	var property posInicial
 	var property position = posInicial
 	var property posicionAnterior = position
+	var property petrificado = false
+	
 	method image() = "minotaur.png"
 	method regresar(){
 		position = posicionAnterior
@@ -140,10 +157,22 @@ class Minotaur {
 		position = game.at(newX,position.y())
 	}
 	
-	method chocarCon(personaje){
-		
-	}
+	method chocarCon(personaje){}
+
+	
+	method petrificarse() {
+		game.removeTickEvent("movimiento")
+		game.schedule(7000, { enemigos.forEach({enemigo =>
+			game.onTick(1.randomUpTo(2) * 200 ,"movimiento",{
+				enemigo.acercarseA(player)
+			})
+			})
+	})
 }
+
+}
+	
+ const enemigos = #{new Minotaur(posInicial = game.at(53,21)), new Minotaur(posInicial = game.at(56,0))}	
 	
 	
 
