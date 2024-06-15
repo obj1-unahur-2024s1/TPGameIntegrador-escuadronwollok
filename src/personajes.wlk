@@ -163,7 +163,7 @@ class Minotaur {
 	method petrificarse() {
 		game.removeTickEvent("movimiento")
 		game.schedule(7000, { enemigos.forEach({enemigo =>
-			game.onTick(1.randomUpTo(2) * 200 ,"movimiento",{
+			game.onTick(1.randomUpTo(2) * 400 ,"movimiento",{
 				enemigo.acercarseA(player)
 			})
 			})

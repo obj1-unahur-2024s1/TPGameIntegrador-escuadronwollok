@@ -37,7 +37,7 @@ class Moneda inherits Items (image ="./assets/items/moneda20x20.png",
 }
 
 object medusa inherits Items(image ="./assets/items/medusa.png", 
-								valor = 300, position = game.at(14,19)){
+								valor = 300, position = game.at(12,16)){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
@@ -52,7 +52,7 @@ object medusa inherits Items(image ="./assets/items/medusa.png",
 
 
 object llave inherits Items (image ="./assets/items/llave.png", 
-								valor = 500, position = game.at(50,0)){
+								valor = 500, position = game.at(57,0)){
 		
 		
 		
@@ -68,7 +68,7 @@ object llave inherits Items (image ="./assets/items/llave.png",
 }
 
 object cofre inherits Items (image ="./assets/items/cofre.png", 
-								valor = 2000, position = game.at(0,28)){
+								valor = 2000, position = game.at(0,27)){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player) and player.tieneLlave()) {
@@ -85,7 +85,7 @@ object cofre inherits Items (image ="./assets/items/cofre.png",
 }
 
 object caliz inherits Items (image ="./assets/items/caliz.png", 
-								valor = 1000, position = game.at(19,27)){
+								valor = 1000, position = game.at(15,27)){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player) and vida.vidasActuales() < 3) {
@@ -103,7 +103,7 @@ object caliz inherits Items (image ="./assets/items/caliz.png",
 // falta un if que pregunte si el personaje es invencible al chocar un enemigo y perder una vida
 
 object manzana inherits Items (image ="./assets/items/manzana.png", 
-								valor = 1500, position = game.at(29,27)){
+								valor = 1500, position = game.at(30,27)){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
@@ -119,7 +119,7 @@ object manzana inherits Items (image ="./assets/items/manzana.png",
 
 
 object alas inherits Items (image ="./assets/items/alas.png", 
-								valor = 100, position = game.at(0,28)){
+								valor = 100, position = game.at(0,26)){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
@@ -182,22 +182,22 @@ class Serpiente inherits Trap{
 	override method  image() ="./assets/traps/serpiente.png"
 }
 
-		const trampas = #{new Fuego(posInicial = game.at(13,20)),
-			              new Fuego(posInicial = game.at(49,20)) ,
-			              new Fuego(posInicial = game.at(4,7)), 
+		const trampas = #{new Fuego(posInicial = game.at(12,20)),
+			              new Fuego(posInicial = game.at(48,20)) ,
+			              new Fuego(posInicial = game.at(4,6)), 
 			              new Fuego(posInicial = game.at(45,4))
 			              }
 			  
 			  
-		const trampas2 = #{new Pinchos(posInicial = game.at(19,25)),
-			              new Pinchos(posInicial = game.at(49,25)) ,
-			              new Pinchos(posInicial = game.at(16,4)), 
-			              new Pinchos(posInicial = game.at(34,4))}
+		const trampas2 = #{new Pinchos(posInicial = game.at(18,25)),
+			              new Pinchos(posInicial = game.at(48,25)) ,
+			              new Pinchos(posInicial = game.at(15,4)), 
+			              new Pinchos(posInicial = game.at(33,4))}
 			  
-		const trampas3 = #{new Serpiente(posInicial = game.at(1,15)),
+		const trampas3 = #{new Serpiente(posInicial = game.at(0,15)),
 			              new Serpiente(posInicial = game.at(57,10)) ,
-			              new Serpiente(posInicial = game.at(4,28)),
+			              new Serpiente(posInicial = game.at(4,27)),
 			              new Serpiente(posInicial = game.at(47,12)), 
-			              new Serpiente(posInicial = game.at(45,28))}
+			              new Serpiente(posInicial = game.at(45,27))}
 			  	  
 		

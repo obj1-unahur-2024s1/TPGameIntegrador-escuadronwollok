@@ -24,7 +24,7 @@ object juego {
 		game.cellSize(20) //20 - 50 - Hay que hacer que los assets sean 60x60
 		
 		self.agregarVisuals()
-		self.mostrarImagenesIniciales()
+		
 		laberinto.decidirTablero()
 		self.configurarTeclas()
 		self.spawnearMonedas()
@@ -41,6 +41,7 @@ object juego {
 		trampas.forEach({trampa => game.addVisual(trampa)})
 		trampas2.forEach({trampa => game.addVisual(trampa)})
 		trampas3.forEach({trampa => game.addVisual(trampa)})  
+		self.mostrarImagenesIniciales()
 		}
 		
 	method agregarVisuals(){
@@ -73,7 +74,8 @@ object juego {
 	method ganar() {
 		game.clear()
 		game.addVisual(winScreen)
-		game.schedule(3000, {=>game.stop()})
+		game.schedule(3000, {=>game.addVisual(creditos)})
+		game.schedule(8000, {=>game.stop()})
 	}
 	
 	method mostrarImagenesIniciales(){
@@ -124,7 +126,7 @@ object juego {
 		}
 		
 	method spawnearMonedas(){
-		game.schedule(500, {self.spawnMoneda(100)})
+		game.schedule(10000, {self.spawnMoneda(100)})
 	}
 	
 	method spawnMoneda(valor){
