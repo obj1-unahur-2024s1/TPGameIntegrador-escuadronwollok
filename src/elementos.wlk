@@ -14,16 +14,12 @@ class Items{
 	// Ver si hace falta borrar
 	method chocarCon(){}
 	
-	method spawnear() =
-		game.addVisual(self)
+	method spawnear() { game.addVisual(self) }
 	
 	method chocarCon(cosa){}
-	//aca podemos poner armas, monedas, power ups
-//	method chocarCon(){//sumar vida, puntos, dar poder... los powerups cofres son estaticos solo podemos chocarlo nosotros
-//	}
 }
 
-class Moneda inherits Items (image ="./assets/items/moneda20x20.png", 
+class Moneda inherits Items (image ="./assets/items/moneda20x20.png",
 								valor = 200, position = game.at(0,0)){
 
 	override method chocarCon(cosa){
@@ -33,7 +29,6 @@ class Moneda inherits Items (image ="./assets/items/moneda20x20.png",
 			game.removeVisual(self)
 			juego.spawnMoneda(valor)}
 	}
-	
 }
 
 object medusa inherits Items(image ="./assets/items/medusa.png", 
@@ -44,7 +39,7 @@ object medusa inherits Items(image ="./assets/items/medusa.png",
 		player.aumentarPuntos(valor * 100)
 		game.say(player, "Activo la cabeza de Medusa")
 		game.removeVisual(self)
-		enemigos.forEach({enemigo => enemigo.petrificarse()})
+		juego.enemigos().forEach({enemigo => enemigo.petrificarse()})
 		}
 	}
 
@@ -53,15 +48,13 @@ object medusa inherits Items(image ="./assets/items/medusa.png",
 
 object llave inherits Items (image ="./assets/items/llave.png", 
 								valor = 500, position = game.at(57,0)){
-		
-		
-		
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
 			player.agregarAlInventario(self)
 			player.aumentarPuntos(valor)
 			game.say(player, "Añado la llave del cofre al inventario")
-			game.removeVisual(self)
+			position = game.at(60,(game.height() - 11))
+			//game.removeVisual(self)
 		 }
 
 	 }
@@ -76,11 +69,10 @@ object cofre inherits Items (image ="./assets/items/cofre.png",
 			game.say(player, "He abierto el cofre")
 			game.removeVisual(self)
 			alas.spawnear()
-			}
-		else {
+		} else {
 			game.say(self, "No posees la llave para abrir la cerradura")
 		}
-		 }
+		}
 	
 }
 
@@ -100,24 +92,18 @@ object caliz inherits Items (image ="./assets/items/caliz.png",
 	
 }
 
-// falta un if que pregunte si el personaje es invencible al chocar un enemigo y perder una vida
-
 object manzana inherits Items (image ="./assets/items/manzana.png", 
 								valor = 1500, position = game.at(30,27)){
-	
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
 			player.aumentarPuntos(valor)
 			game.say(player, "Activo invencibilidad")
 			player.invencible(true)
 			game.removeVisual(self)
-			game.schedule(800, {player.invencible(false)})
+			game.schedule(10000, {player.invencible(false)})
 		}
 	}
-	
 }
-
-
 object alas inherits Items (image ="./assets/items/alas.png", 
 								valor = 100, position = game.at(0,26)){
 	
@@ -156,22 +142,20 @@ object score inherits Items (image= "./assets/items/score.png" , position = game
 class Trap {
 	var property posInicial
 	var property position = posInicial
-	const valor = 300
+	var property valor = 300
 	
 	method chocarCon(cosa){
 		 if (cosa.equals(player)) {
 			 player.perderPuntos(valor)
 		     game.say(player, "perdi puntos")
-			}
+		}
 	}
 	method image()
-		
-	
 }
 class Fuego inherits Trap{ 
 	
 	override method  image() ="./assets/traps/fuego.png"
-									 	
+								 	
 }
 
 class Pinchos inherits Trap{

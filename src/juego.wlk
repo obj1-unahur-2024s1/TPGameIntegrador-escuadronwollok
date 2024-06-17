@@ -9,13 +9,12 @@ class Pared {
 	
 	method chocarCon(personaje) {
 		personaje.regresar()
-		//game.say(player, "choque algo")
 	}
 }
 
 object juego {
-	
 	var iniciado = false
+	const property enemigos = #{new Minotaur(posInicial = game.at(50,21)), new Minotaur(posInicial = game.at(45,0))}	
 	
 	method iniciar() {
 		game.title("Maze of Crete")
@@ -23,52 +22,51 @@ object juego {
 		game.height(30) // Triple 42 - Original 14 - Para que me entre en el monitor 34
 		game.cellSize(20) //20 - 50 - Hay que hacer que los assets sean 60x60
 		
+		
 		self.agregarVisuals()
+		
 		
 		laberinto.decidirTablero()
 		self.configurarTeclas()
-		self.spawnearMonedas()
+//		self.spawnearMonedas() esto me parece que está al pedo
 		self.spawnPowerUps()
 		game.onCollideDo(player,{algo => algo.chocarCon(player)})
+		self.spawnTraps()
+		self.spawnMinotauros()
 		
-		    enemigos.forEach({enemigo =>
+		
+		self.mostrarImagenesIniciales()
+	}
+	
+	
+	
+	method spawnMinotauros() {
+		enemigos.forEach({enemigo =>
 			game.addVisual(enemigo)
 			game.onTick(1.randomUpTo(2) * 300 ,"movimiento",{
-				enemigo.acercarseA(player)
+				enemigo.acercarseAPlayer()
 			})
 			game.onCollideDo(enemigo,{algo => algo.chocarCon(enemigo)})
 		})
+	}
+	method spawnTraps() {
 		trampas.forEach({trampa => game.addVisual(trampa)})
 		trampas2.forEach({trampa => game.addVisual(trampa)})
-		trampas3.forEach({trampa => game.addVisual(trampa)})  
-		self.mostrarImagenesIniciales()
-		}
-		
+		trampas3.forEach({trampa => game.addVisual(trampa)})
+	}
+	
 	method agregarVisuals(){
 		game.addVisual(tablero1)
 		game.addVisual(inventario)
 		game.addVisualCharacter(player)
 		game.addVisual(vida)
 		game.addVisual(score)
-		
-		
-		}
-		
-		//agregando Traps
-		//game.addVisual(new Trap(numero = 1))
-        //game.addVisual(new Trap(numero = 2))
-
-		
-		//self.spawnEnemigos()
-		//self.spawnPowerUps()
-		
+	}
 	
 	method finalizar(){
 		game.clear()
 		game.addVisual(gameOver)
 		game.schedule(3000, {=>game.stop()})
-		
-
 	}
 	
 	method ganar() {
@@ -85,19 +83,15 @@ object juego {
 				titulo.removeVisual();
 			   	iniciado = true
 		   	}
-	   	})						
+	   	})
 	}
-	
-	
-
 	method agregarMonedaEn(x, y) {
 		const chance = 1.randomUpTo(100)
 		if (chance > 90) {
 			const moneda = new Moneda(position = game.at(x,y), valor=1)
-			game.addVisual(moneda)			
+			game.addVisual(moneda)
 		}
 	}
-
 	method configurarTeclas() {
 		keyboard.up().onPressDo({player.subir()})
 		keyboard.down().onPressDo({player.bajar()})
@@ -105,26 +99,14 @@ object juego {
 		keyboard.right().onPressDo({player.derecha()})
 	}
 	
-	
-	
-		//crear metodo para spawnear trampas, minotauro
-		//en el video de Mario lo hace recurrentemente
-		//https://www.youtube.com/watch?v=gAkqZ19bpaM
-		
-	//method spawnTrap(){}
-	
 	method spawnPowerUps(){
-//		//crear metodo para spawnear armas, monedas, vidas
-//		//en el video de Mario lo hace recurrentemente
-//		//https://www.youtube.com/watch?v=gAkqZ19bpaM
-//		game.schedule(500,{self.spawnMoneda(100)})
 		medusa.spawnear()
 		caliz.spawnear()
 		manzana.spawnear()
 		llave.spawnear()
 		cofre.spawnear()
-		}
-		
+	}
+	
 	method spawnearMonedas(){
 		game.schedule(10000, {self.spawnMoneda(100)})
 	}
@@ -146,16 +128,7 @@ object juego {
 object tablero{
 	method position() = game.center()
 	method image() = "maze/maze_bg.png"
-	//todo objeto debe tener por lo menos position. Image si necesitamos que se vea
-	//Las paredes invisibles del pacman no usan image
 }
-
-
-
-
-
-
-
 
 /*
 self.dibujarLineaDeParedes(41, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1])
