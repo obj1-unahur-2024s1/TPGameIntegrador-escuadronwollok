@@ -7,10 +7,9 @@ import elementos.*
 program maze {
 
 	juego.iniciar()
-//	game.addVisual(tablero) // de esta forma respeta el tamaño original del archivo,
-//  la desventaja es que no se ajusta a la pantalla como si lo hace en background
 	
 	game.start()
+
 	
 	
 	
@@ -23,6 +22,7 @@ program maze {
 	
 //	game.addVisual(new Trap(numero = 1))
 //	game.addVisual(new Trap(numero = 2))
+
 }
 
 

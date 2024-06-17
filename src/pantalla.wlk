@@ -7,7 +7,7 @@ class Pantalla inherits Items{
 	
  	override method image() = image
  	
- 	 override method position() = position
+ 	override method position() = position
  	
  	method addVisual(){
 		if(!game.hasVisual(self)) {
