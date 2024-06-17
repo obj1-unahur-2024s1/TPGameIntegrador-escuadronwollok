@@ -13,6 +13,7 @@ program maze {
 	game.start()
 	
 	
+	
 	//trampas: en el video Obj1 UNAHUR clase 01 10 22 hace esto de abajo para los fantasmas
 	//pasa que tiene 4 fantasmas iguales que solo cambia el color
 	//creo que nosotros podriamos poner trampa random y que pueda tocar fuego, pinche o serpiente.

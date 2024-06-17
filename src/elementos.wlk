@@ -23,7 +23,7 @@ class Items{
 //	}
 }
 
-class Moneda inherits Items (image ="./assets/items/moneda20x20.png", 
+class Moneda inherits Items (image ="./assets/items/moneda.png", 
 								valor = 200, position = game.at(0,0)){
 
 	override method chocarCon(cosa){

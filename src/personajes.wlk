@@ -6,7 +6,7 @@ import elementos.*
 
 object player {
 	const inventarioPlayer = []
-	var property position = game.origin()
+	var property position = game.at(1,1)
 	var property ultimoMovimiento = "arriba"
 	//var property ultimaPosicion 
 	var property puntos = 0
