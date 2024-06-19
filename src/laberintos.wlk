@@ -53,7 +53,7 @@ object laberinto {
 		self.dibujarLineaDeParedes(04, [0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,0,0,0,0,0,0,1,1,n,n,n,n,n,1,0,1,1])
 		self.dibujarLineaDeParedes(03, [0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,0,1,1,0,1,1,n,n,n,n,n,1,0,1,1])
 		self.dibujarLineaDeParedes(02, [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1])
-		self.dibujarLineaDeParedes(01, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1])
+		self.dibujarLineaDeParedes(01, [0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1])
 		self.dibujarLineaDeParedes(00, [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
 	}
 	
@@ -64,6 +64,9 @@ object laberinto {
 			}
 			else if(vectorFila.get(x) == 0 ) {
 				juego.agregarMonedaEn(x, posicionY)
+			}
+			else if(vectorFila.get(x) == 2) {
+				game.addVisual(caliz)
 			}
 		})
 	}

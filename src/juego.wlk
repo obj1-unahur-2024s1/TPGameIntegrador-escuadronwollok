@@ -14,7 +14,7 @@ class Pared {
 
 object juego {
 	var iniciado = false
-	const property enemigos = #{new Minotaur(posInicial = game.at(50,21)), new Minotaur(posInicial = game.at(45,0))}	
+	const property enemigos = #{new Minotaur(posInicial = game.at(50,22)), new Minotaur(posInicial = game.at(45,1))}	
 	
 	method iniciar() {
 		game.title("Maze of Crete")

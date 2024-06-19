@@ -19,7 +19,7 @@ class Items{
 	method chocarCon(cosa){}
 }
 
-class Moneda inherits Items (image ="./assets/items/moneda20x20.png",
+class Moneda inherits Items (image ="./assets/items/moneda.png",
 
 								valor = 200, position = game.at(0,0)){
 
@@ -48,7 +48,7 @@ object medusa inherits Items(image ="./assets/items/medusa.png",
 
 
 object llave inherits Items (image ="./assets/items/llave.png", 
-								valor = 500, position = game.at(57,0)){
+								valor = 500, position = game.at(57,1)){
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
 			player.agregarAlInventario(self)
