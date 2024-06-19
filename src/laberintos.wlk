@@ -65,9 +65,9 @@ object laberinto {
 			else if(vectorFila.get(x) == 0 ) {
 				juego.agregarMonedaEn(x, posicionY)
 			}
-			else if(vectorFila.get(x) == 2) {
-				game.addVisual(caliz)
-			}
+//			else if(vectorFila.get(x) == 2) {
+//				game.addVisual(new Serpiente(position = ))
+//			}
 		})
 	}
 	
