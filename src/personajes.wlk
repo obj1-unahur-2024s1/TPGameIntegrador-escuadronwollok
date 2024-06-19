@@ -51,7 +51,7 @@ object player {
 	}
 	
 	method resetPosition(){
-		position = game.origin()
+		position = game.at(0,1)
 	}
 	
 	method chocarCon(cosa){}

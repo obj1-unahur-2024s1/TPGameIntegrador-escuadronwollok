@@ -142,6 +142,7 @@ object score inherits Items (image= "./assets/items/score.png" , position = game
 
 class Trap {
 	var property posInicial
+	var property image
 	var property position = posInicial
 	var property valor = 300
 	
@@ -151,20 +152,43 @@ class Trap {
 		     game.say(player, "perdi puntos")
 		}
 	}
-	method image()
 }
-class Fuego inherits Trap{ 
+class Fuego inherits Trap (image ="./assets/traps/fuego.png"){ 
 	
-	override method  image() ="./assets/traps/fuego.png"
 								 	
 }
 
-class Pinchos inherits Trap{
-	override method  image() ="./assets/traps/pinchos.png"
+class Pinchos inherits Trap (image = "./assets/traps/pinchos.png"){
+	var property estaActiva = true
+
+//	override method image() ="./assets/items/pinchos.png"
+		
+	override method chocarCon(cosa) {
+		if (cosa.equals(player) and estaActiva) {
+			player.perderVida()
+		}
+	}
+	
+	
+	method cambiarEstado() {
+		//self.image() = "./assets/traps/pinchosSubir.png" || Hacer una animacion para cuando los pinchos suben
+		//Por el momento, solo vuelve a aparecer la imagen
+		if (estaActiva) {
+			estaActiva = false
+		} else {
+			estaActiva = true
+		}
+	}
+	
+	//METODO DE PRUEBA
+	method decirEstado(persona) {
+		game.say(persona, "estoy activo?" + estaActiva.toString())
+	}
+	
 }
 
-class Serpiente inherits Trap{
-	override method  image() ="./assets/traps/serpiente.png"
+class Serpiente inherits Trap (image = "./assets/traps/serpiente.png"){
+	
 }
 
 		const trampas = #{new Fuego(posInicial = game.at(12,20)),

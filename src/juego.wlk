@@ -85,13 +85,34 @@ object juego {
 		   	}
 	   	})
 	}
-	method agregarMonedaEn(x, y) {
-		const chance = 1.randomUpTo(100)
-		if (chance > 90) {
-			const moneda = new Moneda(position = game.at(x,y), valor=1)
+	method agregarMonedaEn(x, y, chance) {
+		const valor = 1.randomUpTo(100)
+		//chance igual a 90
+		if (valor > chance) {
+			const moneda = new Moneda(position = game.at(x,y), valor=1, image = "./items/moneda.png")
 			game.addVisual(moneda)
 		}
 	}
+	
+	method agregarSerpienteEn(x, y, chance) {
+		const valor = 1.randomUpTo(100)
+		//chance igual a 50
+		if (valor > chance) {
+			const serpiente = new Serpiente(posInicial = game.at(x,y), image = "./assets/traps/serpiente.png")
+			game.addVisual(serpiente)	
+		}
+	}
+	
+	method agregarPinchoEn(x, y, chance) {
+		const valor = 1.randomUpTo(100)
+		//chance igual a 50
+		if (valor > chance) {
+			const pincho = new Pinchos(posInicial = game.at(x,y))
+			game.addVisual(pincho)	
+			game.onTick(5000, "togglearTrampa", {pincho.cambiarEstado(); pincho.decirEstado(pincho)})
+		}
+	}
+	
 	method configurarTeclas() {
 		keyboard.up().onPressDo({player.subir()})
 		keyboard.down().onPressDo({player.bajar()})
