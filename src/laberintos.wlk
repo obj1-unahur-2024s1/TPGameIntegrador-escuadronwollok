@@ -63,6 +63,8 @@ object laberinto {
 	}
 	
 	method dibujarLineaDeParedes(posicionY, vectorFila) {
+		
+		
 		(0..vectorFila.size()-1).forEach({x=> 
 			if(vectorFila.get(x) == 1 ) {
 				self.agregarParedEn(x, posicionY)
@@ -71,10 +73,12 @@ object laberinto {
 				juego.agregarMonedaEn(x, posicionY, 90)
 			}
 			else if(vectorFila.get(x) == 2) {
-				juego.agregarSerpienteEn(x, posicionY, 50)
+				var serpienteChance = if (juego.dificultadExtrema()) 30 else 50
+				juego.agregarSerpienteEn(x, posicionY, serpienteChance)
 			}
 			else if(vectorFila.get(x) == 4) {
-				juego.agregarPinchoEn(x, posicionY, 5)
+				var pinchoChance = if (juego.dificultadExtrema()) 10 else 5
+				juego.agregarPinchoEn(x, posicionY, pinchoChance)
 			}
 		})
 	}

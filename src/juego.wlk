@@ -28,7 +28,6 @@ object juego {
 		game.addVisualCharacter(player)
 		
 		
-		laberinto.decidirTablero()
 		self.configurarTeclas()
 //		self.spawnearMonedas() esto me parece que está al pedo
 		self.spawnPowerUps()
@@ -76,30 +75,28 @@ object juego {
 		game.schedule(8000, {=>game.stop()})
 	}
 	
+	method configurarVisuals() {
+		titulo.removeVisual()
+		iniciado = true
+		self.agregarVisuals()
+	}
+	
 	method mostrarImagenesIniciales(){
 		game.addVisual(titulo)
-//		keyboard.space().onPressDo({
-//			if(!iniciado){
-//				titulo.removeVisual();
-//			   	iniciado = true
-//		   	}
-//	   	})
+
 		keyboard.num1().onPressDo({
-			if(!iniciado){
-				titulo.removeVisual()
-				dificultadExtrema = false
-			   	iniciado = true
-			   	self.agregarVisuals()
-		   	}
-	   	})
+		if(!iniciado){
+			dificultadExtrema = false
+			self.configurarVisuals()}
+			laberinto.decidirTablero()
+		   	})
+	   	
 	   	keyboard.num2().onPressDo({
-			if(!iniciado){
-				titulo.removeVisual();
-				dificultadExtrema = true
-			   	iniciado = true
-			   	self.agregarVisuals()
-		   	}
-	   	})
+		if(!iniciado){
+			dificultadExtrema = true
+			self.configurarVisuals()}
+		   	laberinto.decidirTablero()
+	  	})
 	}
 	method agregarMonedaEn(x, y, chance) {
 		const valor = 1.randomUpTo(100)
