@@ -6,7 +6,7 @@ import elementos.*
 
 object player {
 	const inventarioPlayer = []
-	var property position = game.at(1,1)
+	var property position = game.at(0,1)
 	var property ultimoMovimiento = "arriba"
 	var property puntos = 0
 	var property invencible = false
@@ -38,7 +38,7 @@ object player {
 	}
 	
 	method perderVida(){
-		if (vida.vidasActuales()>=1){
+		if (vida.vidasActuales() > 1){
 			vida.perderVida()
 			//agregar sonido new Sonido(sound = "").reproducir()
 			self.resetPosition()
@@ -47,6 +47,13 @@ object player {
 			 game.addVisual(gameOver)
 			 juego.finalizar()
 			//agregar sonido new Sonido(sound = "").reproducir()
+		}
+	}
+	method comprarVida() {
+		const vidaCosto = if (juego.dificultadExtrema()) 10000 else 5000
+		if (puntos >= vidaCosto) {
+			vida.ganarVida()
+			puntos -= vidaCosto
 		}
 	}
 	

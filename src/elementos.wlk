@@ -25,7 +25,7 @@ class Moneda inherits Items (image ="./assets/items/moneda.png",
 
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
-			player.aumentarPuntos(valor * 100)
+			player.aumentarPuntos(valor)
 			game.say(player, "Tengo " + player.puntos().toString() + " monedas")
 			game.removeVisual(self)
 			juego.spawnMoneda(valor)}
@@ -33,11 +33,11 @@ class Moneda inherits Items (image ="./assets/items/moneda.png",
 }
 
 object medusa inherits Items(image ="./assets/items/medusa.png", 
-								valor = 300, position = game.at(12,16)){
+								valor = 1000, position = game.at(12,16)){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
-		player.aumentarPuntos(valor * 100)
+		player.aumentarPuntos(valor)
 		game.say(player, "Activo la cabeza de Medusa")
 		game.removeVisual(self)
 		juego.enemigos().forEach({enemigo => enemigo.petrificarse()})
@@ -48,7 +48,7 @@ object medusa inherits Items(image ="./assets/items/medusa.png",
 
 
 object llave inherits Items (image ="./assets/items/llave.png", 
-								valor = 500, position = game.at(57,1)){
+								valor = 1000, position = game.at(51,7)){
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
 			player.agregarAlInventario(self)
@@ -62,7 +62,7 @@ object llave inherits Items (image ="./assets/items/llave.png",
 }
 
 object cofre inherits Items (image ="./assets/items/cofre.png", 
-								valor = 2000, position = game.at(0,27)){
+								valor = 1000, position = game.at(0,27)){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player) and player.tieneLlave()) {
@@ -81,12 +81,12 @@ object caliz inherits Items (image ="./assets/items/caliz.png",
 								valor = 1000, position = game.at(15,27)){
 	
 	override method chocarCon(cosa){
-		if (cosa.equals(player) and vida.vidasActuales() < 3) {
+		if (cosa.equals(player) and vida.vidasActuales() < 5) {
 			vida.ganarVida()
 			game.removeVisual(self)
 		}
 		else {
-			player.aumentarPuntos(500)
+			player.aumentarPuntos(valor)
 			game.removeVisual(self)
 		}
 	}
@@ -94,7 +94,7 @@ object caliz inherits Items (image ="./assets/items/caliz.png",
 }
 
 object manzana inherits Items (image ="./assets/items/manzana.png", 
-								valor = 1500, position = game.at(30,27)){
+								valor = 2500, position = game.at(30,27)){
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
 			player.aumentarPuntos(valor)
@@ -106,7 +106,7 @@ object manzana inherits Items (image ="./assets/items/manzana.png",
 	}
 }
 object alas inherits Items (image ="./assets/items/alas.png", 
-								valor = 100, position = game.at(0,26)){
+								valor = 1000, position = if(juego.dificultadExtrema()) game.at(39,20) else cofre.position()){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
@@ -121,14 +121,14 @@ object alas inherits Items (image ="./assets/items/alas.png",
 
 object vida inherits Items (image= "./assets/items/vidas.png" , position = game.at(60,game.height()-3)) { 
 	
-	var property vidasActuales = 3
+	var property vidasActuales = if(juego.dificultadExtrema()) 1 else 3
 	  
 	 method text()= vidasActuales.toString()
 	method perderVida(){
 		vidasActuales = 0.max(vidasActuales-1)
 	}
 	method ganarVida(){
-		vidasActuales = 3.min(vidasActuales+1)
+		vidasActuales = 5.min(vidasActuales+1)
 	}
 }
 
@@ -168,8 +168,6 @@ class Pinchos inherits Trap (image = "./assets/traps/pinchos.png"){
 			player.perderVida()
 		}
 	}
-	
-	
 	method cambiarEstado() {
 		//self.image() = "./assets/traps/pinchosSubir.png" || Hacer una animacion para cuando los pinchos suben
 		//Por el momento, solo vuelve a aparecer la imagen

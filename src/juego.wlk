@@ -13,8 +13,9 @@ class Pared {
 }
 
 object juego {
+	var property dificultadExtrema
 	var iniciado = false
-	const property enemigos = #{new Minotaur(posInicial = game.at(50,22)), new Minotaur(posInicial = game.at(45,1))}	
+	const property enemigos = #{new Minotaur(posInicial = game.at(50,22)), new Minotaur(posInicial = game.at(45,7))}	
 	
 	method iniciar() {
 		game.title("Maze of Crete")
@@ -23,7 +24,8 @@ object juego {
 		game.cellSize(20) //20 - 50 - Hay que hacer que los assets sean 60x60
 		
 		
-		self.agregarVisuals()
+		game.addVisual(tablero1)
+		game.addVisualCharacter(player)
 		
 		
 		laberinto.decidirTablero()
@@ -31,8 +33,6 @@ object juego {
 //		self.spawnearMonedas() esto me parece que está al pedo
 		self.spawnPowerUps()
 		game.onCollideDo(player,{algo => algo.chocarCon(player)})
-		self.spawnTraps()
-		self.spawnMinotauros()
 		
 		
 		self.mostrarImagenesIniciales()
@@ -56,11 +56,11 @@ object juego {
 	}
 	
 	method agregarVisuals(){
-		game.addVisual(tablero1)
 		game.addVisual(inventario)
-		game.addVisualCharacter(player)
 		game.addVisual(vida)
 		game.addVisual(score)
+		self.spawnTraps()
+		self.spawnMinotauros()
 	}
 	
 	method finalizar(){
@@ -78,10 +78,26 @@ object juego {
 	
 	method mostrarImagenesIniciales(){
 		game.addVisual(titulo)
-		keyboard.space().onPressDo({
+//		keyboard.space().onPressDo({
+//			if(!iniciado){
+//				titulo.removeVisual();
+//			   	iniciado = true
+//		   	}
+//	   	})
+		keyboard.num1().onPressDo({
+			if(!iniciado){
+				titulo.removeVisual()
+				dificultadExtrema = false
+			   	iniciado = true
+			   	self.agregarVisuals()
+		   	}
+	   	})
+	   	keyboard.num2().onPressDo({
 			if(!iniciado){
 				titulo.removeVisual();
+				dificultadExtrema = true
 			   	iniciado = true
+			   	self.agregarVisuals()
 		   	}
 	   	})
 	}
@@ -89,7 +105,7 @@ object juego {
 		const valor = 1.randomUpTo(100)
 		//chance igual a 90
 		if (valor > chance) {
-			const moneda = new Moneda(position = game.at(x,y), valor=1, image = "./items/moneda.png")
+			const moneda = new Moneda(position = game.at(x,y), valor = 200, image = "./items/moneda.png")
 			game.addVisual(moneda)
 		}
 	}
