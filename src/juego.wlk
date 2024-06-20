@@ -57,7 +57,9 @@ object juego {
 	method agregarVisuals(){
 		game.addVisual(inventario)
 		game.addVisual(vida)
+		vida.addVisual()
 		game.addVisual(score)
+		score.addVisual()
 		self.spawnTraps()
 		self.spawnMinotauros()
 	}

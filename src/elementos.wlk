@@ -14,7 +14,10 @@ class Items{
 	// Ver si hace falta borrar
 	method chocarCon(){}
 	
-	method spawnear() { game.addVisual(self) }
+	method spawnear() {
+		if(!game.hasVisual(self)) {
+			game.addVisual(self)} 
+			}
 	
 	method chocarCon(cosa){}
 }
@@ -25,8 +28,8 @@ class Moneda inherits Items (image ="./assets/items/moneda.png",
 
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
-			player.aumentarPuntos(valor)
-			game.say(player, "Tengo " + player.puntos().toString() + " monedas")
+			score.aumentarPuntos(valor)
+			game.say(player, "Tengo " + score.puntaje().toString() + " monedas")
 			game.removeVisual(self)
 			juego.spawnMoneda(valor)}
 	}
@@ -37,7 +40,7 @@ object medusa inherits Items(image ="./assets/items/medusa.png",
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
-		player.aumentarPuntos(valor)
+		score.aumentarPuntos(valor)
 		game.say(player, "Activo la cabeza de Medusa")
 		game.removeVisual(self)
 		juego.enemigos().forEach({enemigo => enemigo.petrificarse()})
@@ -52,7 +55,7 @@ object llave inherits Items (image ="./assets/items/llave.png",
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
 			player.agregarAlInventario(self)
-			player.aumentarPuntos(valor)
+			score.aumentarPuntos(valor)
 			game.say(player, "Añado la llave del cofre al inventario")
 			position = game.at(60,(game.height() - 11))
 			//game.removeVisual(self)
@@ -66,7 +69,7 @@ object cofre inherits Items (image ="./assets/items/cofre.png",
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player) and player.tieneLlave()) {
-			player.aumentarPuntos(valor)
+			score.aumentarPuntos(valor)
 			game.say(player, "He abierto el cofre")
 			game.removeVisual(self)
 			alas.spawnear()
@@ -86,7 +89,7 @@ object caliz inherits Items (image ="./assets/items/caliz.png",
 			game.removeVisual(self)
 		}
 		else {
-			player.aumentarPuntos(valor)
+			score.aumentarPuntos(valor)
 			game.removeVisual(self)
 		}
 	}
@@ -97,7 +100,7 @@ object manzana inherits Items (image ="./assets/items/manzana.png",
 								valor = 2500, position = game.at(30,27)){
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
-			player.aumentarPuntos(valor)
+			score.aumentarPuntos(valor)
 			game.say(player, "Activo invencibilidad")
 			player.invencible(true)
 			game.removeVisual(self)
@@ -110,7 +113,7 @@ object alas inherits Items (image ="./assets/items/alas.png",
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
-			player.aumentarPuntos(valor)
+			score.aumentarPuntos(valor)
 			game.say(player, "¡Tengo las alas!")
 			game.removeVisual(self)
 			juego.ganar()
@@ -122,8 +125,12 @@ object alas inherits Items (image ="./assets/items/alas.png",
 object vida inherits Items (image= "./assets/items/vidas.png" , position = game.at(60,game.height()-3)) { 
 	
 	var property vidasActuales = if(juego.dificultadExtrema()) 1 else 3
-	  
-	 method text()= vidasActuales.toString()
+	var property nroVidas = new NroVidas(position = game.at(62,game.height()-3), image=self.image())
+	 
+	method addVisual(){
+		nroVidas.spawnear()
+	}
+	
 	method perderVida(){
 		vidasActuales = 0.max(vidasActuales-1)
 	}
@@ -133,12 +140,72 @@ object vida inherits Items (image= "./assets/items/vidas.png" , position = game.
 }
 
 
+class NroVidas inherits Items {
+	
+  
+	override method image(){
+		if (vida.vidasActuales() == 3){
+			return "./assets/score/3.png"
+		}else if (vida.vidasActuales() ==2 ){
+			return "./assets/score/2.png"
+		}else if (vida.vidasActuales() ==1){
+			return "./assets/score/1.png"
+		}else{
+			return "./assets/score/0.png"
+		}
+	} 
+}
+
+
 object score inherits Items (image= "./assets/items/score.png" , position = game.at(60,game.height()-6)) {
 	
-	method text()= player.puntos().toString()
+	var property puntaje = 0
+	const digitos = [
+		new Digito(position = game.at(60,game.height()-7), image=self.image()),
+		new Digito(position = game.at(61,game.height()-7), image=self.image()),
+		new Digito(position = game.at(62,game.height()-7), image=self.image()),
+		new Digito(position = game.at(63,game.height()-7), image=self.image()),
+		new Digito(position = game.at(64,game.height()-7), image=self.image())
+	]
+	
+	method addVisual() {
+		digitos.forEach({d => d.spawnear()})
+	}
+	
+	method puntaje(nuevoPuntaje) {
+		puntaje = nuevoPuntaje
+		var p = nuevoPuntaje
+		
+		(0..4).forEach({ i => 
+			const d = (p % 10).truncate(0)
+			digitos.get(i).numero(d)
+			p = (p / 10).truncate(0);
+		})
+		
+	}
+	
+	method aumentarPuntos(puntos) {
+		self.puntaje(puntaje + puntos)
+	}
+	
+		
+	method perderPuntos(valor){
+		 self.puntaje(0.max(puntaje - valor))
+	}
+	
+	method reset() {
+		puntaje = 0
+	}
 
 
 }
+
+class Digito inherits Items {
+	var property numero = 0
+	
+	override method image() = "./assets/score/" + numero + ".png" 
+}
+
 
 class Trap {
 	var property posInicial
@@ -148,7 +215,7 @@ class Trap {
 	
 	method chocarCon(cosa){
 		 if (cosa.equals(player)) {
-			 player.perderPuntos(valor)
+			 score.perderPuntos(valor)
 		     game.say(player, "perdi puntos")
 		}
 	}

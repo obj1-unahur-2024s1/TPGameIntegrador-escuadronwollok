@@ -8,7 +8,6 @@ object player {
 	const inventarioPlayer = []
 	var property position = game.at(0,1)
 	var property ultimoMovimiento = "arriba"
-	var property puntos = 0
 	var property invencible = false
 	
 	method image() {
@@ -28,14 +27,7 @@ object player {
 	
 	method tieneLlave() =
 		inventarioPlayer.contains(llave)
-	
-	method aumentarPuntos(valor){
-		puntos += valor
-	}
-	
-	method perderPuntos(valor){
-		puntos = 0.max(puntos - valor)
-	}
+
 	
 	method perderVida(){
 		if (vida.vidasActuales() > 1){
@@ -51,9 +43,9 @@ object player {
 	}
 	method comprarVida() {
 		const vidaCosto = if (juego.dificultadExtrema()) 10000 else 5000
-		if (puntos >= vidaCosto) {
+		if (score.puntaje() >= vidaCosto) {
 			vida.ganarVida()
-			puntos -= vidaCosto
+			score.perderPuntos(vidaCosto) 
 		}
 	}
 	
@@ -64,7 +56,7 @@ object player {
 	method chocarCon(cosa){}
 	
 	method checkVidas() {
-		if (puntos == 0) {
+		if (score.puntaje() == 0) {
 	      self.perderVida()
 	    }
 	}
