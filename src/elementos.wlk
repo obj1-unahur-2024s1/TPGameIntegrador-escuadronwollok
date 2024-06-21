@@ -122,6 +122,15 @@ object alas inherits Items (image ="./assets/items/alas.png",
 	}
 }
 
+object contadorSalud {
+	
+	method position() = game.at(60, game.height()-6)
+	method image() = "./assets/items/moneda.png"
+	
+	method text() = "Salud: " + player.salud().toString()
+	
+}
+
 object vida inherits Items (image= "./assets/items/vidas.png" , position = game.at(60,game.height()-3)) { 
 	
 	var property vidasActuales = if(juego.dificultadExtrema()) 1 else 3
@@ -157,15 +166,15 @@ class NroVidas inherits Items {
 }
 
 
-object score inherits Items (image= "./assets/items/score.png" , position = game.at(60,game.height()-6)) {
+object score inherits Items (image= "./assets/items/score.png" , position = game.at(60,game.height()-9)) {
 	
 	var property puntaje = 0
 	const digitos = [
-		new Digito(position = game.at(60,game.height()-7), image=self.image()),
-		new Digito(position = game.at(61,game.height()-7), image=self.image()),
-		new Digito(position = game.at(62,game.height()-7), image=self.image()),
-		new Digito(position = game.at(63,game.height()-7), image=self.image()),
-		new Digito(position = game.at(64,game.height()-7), image=self.image())
+		new Digito(position = game.at(60,game.height()-10), image=self.image()),
+		new Digito(position = game.at(61,game.height()-10), image=self.image()),
+		new Digito(position = game.at(62,game.height()-10), image=self.image()),
+		new Digito(position = game.at(63,game.height()-10), image=self.image()),
+		new Digito(position = game.at(64,game.height()-10), image=self.image())
 	]
 	
 	method addVisual() {
@@ -225,7 +234,8 @@ class Fuego inherits Trap (image ="./assets/traps/fuego.png"){
 								 	
 }
 
-class Pinchos inherits Trap (image = "./assets/traps/pinchos.png"){
+class Pinchos inherits Trap (image = "./assets/pincho/pinchos-5.png"){
+	
 	var property estaActiva = true
 
 //	override method image() ="./assets/items/pinchos.png"
@@ -235,13 +245,20 @@ class Pinchos inherits Trap (image = "./assets/traps/pinchos.png"){
 			player.perderVida()
 		}
 	}
+	
+	override method image() {
+		return animacionPincho.image()
+	}
+	
 	method cambiarEstado() {
 		//self.image() = "./assets/traps/pinchosSubir.png" || Hacer una animacion para cuando los pinchos suben
 		//Por el momento, solo vuelve a aparecer la imagen
 		if (estaActiva) {
 			estaActiva = false
+			animacionPincho.animacionActivar()
 		} else {
 			estaActiva = true
+			self.decirEstado(self)
 		}
 	}
 	
@@ -250,9 +267,44 @@ class Pinchos inherits Trap (image = "./assets/traps/pinchos.png"){
 		game.say(persona, "estoy activo?" + estaActiva.toString())
 	}
 	
+	
+}
+
+object animacionPincho inherits Animaciones{
+	
+	var property numeroRepeticion = 0
+	
+	
+	//METHOD DE PRUEBA - BORRAR
+	override method siguienteFotograma() {
+		fotograma = (fotograma + 1) % 7
+	}
+	
+	method image() {
+		return "./assets/pincho/pinchos-" + fotograma.toString() + ".png"
+	}
+	
+	//NO FUNCIONA LA ANIMACION - CORREGIR
+	method animacionActivar() {
+		game.onTick(500, "activarPinchos", {
+			if (numeroRepeticion < 7) {
+				fotograma = (fotograma + 1) % 7
+			}
+			numeroRepeticion += 1
+		})
+		game.removeTickEvent("activarPinchos")
+	}
+	
 }
 
 class Serpiente inherits Trap (image = "./assets/traps/serpiente.png"){
+	
+	override method chocarCon(cosa) {
+		if (cosa.equals(player)) {
+			player.perderSalud(1)
+			game.removeVisual(self)
+		}
+	}
 	
 }
 

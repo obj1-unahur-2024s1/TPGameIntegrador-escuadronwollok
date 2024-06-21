@@ -59,6 +59,7 @@ object juego {
 		game.addVisual(vida)
 		vida.addVisual()
 		game.addVisual(score)
+		game.addVisual(contadorSalud)
 		score.addVisual()
 		self.spawnTraps()
 		self.spawnMinotauros()
@@ -115,6 +116,8 @@ object juego {
 		if (valor > chance) {
 			const serpiente = new Serpiente(posInicial = game.at(x,y), image = "./assets/traps/serpiente.png")
 			game.addVisual(serpiente)	
+		} else {
+			self.agregarMonedaEn(x, y, chance)
 		}
 	}
 	
@@ -125,6 +128,8 @@ object juego {
 			const pincho = new Pinchos(posInicial = game.at(x,y))
 			game.addVisual(pincho)	
 			game.onTick(5000, "togglearTrampa", {pincho.cambiarEstado(); pincho.decirEstado(pincho)})
+		} else {
+			self.agregarMonedaEn(x, y, chance)
 		}
 	}
 	

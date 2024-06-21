@@ -7,8 +7,10 @@ import elementos.*
 object player {
 	const inventarioPlayer = []
 	var property position = game.at(0,1)
+	var property salud = 8
 	var property ultimoMovimiento = "arriba"
 	var property invencible = false
+	var property estaEnvenenado = false
 	
 	method image() {
 		return animacionPlayer.image()	
@@ -28,6 +30,13 @@ object player {
 	method tieneLlave() =
 		inventarioPlayer.contains(llave)
 
+	method perderSalud(valor) {
+		salud = salud - valor
+		if (salud <= 0) {
+			self.perderVida()
+			salud = 8
+		}
+	}
 	
 	method perderVida(){
 		if (vida.vidasActuales() > 1){
@@ -98,20 +107,24 @@ object player {
 }
 
 class Animaciones {
+	
 	var property fotograma = 0
-	var property direccion = "este"
 	
 	method siguienteFotograma() {
 		fotograma = (fotograma + 1) % 3
 	}
+	
 }
 
 object animacionPlayer inherits Animaciones{
+	
+	var property direccion = "este"
 	
 	method image() {
 		return "./assets/jugador/" + direccion + "-" + fotograma.toString() + ".png"
 	}
 }
+
 class Minotaur {
 	var property posInicial
 	var property position = posInicial

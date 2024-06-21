@@ -24,11 +24,7 @@ object laberinto {
 //	}
 	
 	method spawnearParedes() {
-		const n = "nada" 		//Las n serian en donde estan los muros de la imagen, pero en el codigo, los muros estarian alrededor de los de la imagen
-		const s = "serpiente" 	//Las s en la matriz tienen una chance de spawnear una serpiente
-		const f = "fuego" 		//Las f en la matriz tienen una chance de spawnear un fuego
-		const m = "minotauro"	//Las m en la matriz spawnean minotauros, dependiendo de la dificultad
-		const p = "pinchos"		//Las p en la matriz tienen una chance de spawnear pinchos
+		const n = "nada" 		//Las n serian en donde estan los muros de la imagen, pero en el codigo, los muros estarian alrededor de los de la image
 		
 		self.dibujarLineaDeParedes(29, [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
 		self.dibujarLineaDeParedes(28, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1])
@@ -56,9 +52,9 @@ object laberinto {
 		self.dibujarLineaDeParedes(06, [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,n,n,1,0,1,1])
 		self.dibujarLineaDeParedes(05, [0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,0,1,1,0,1,1,n,n,n,n,n,1,0,1,1])
 		self.dibujarLineaDeParedes(04, [0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,0,0,0,0,0,0,1,1,n,n,n,n,n,1,0,1,1])
-		self.dibujarLineaDeParedes(03, [4,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,0,1,1,0,1,1,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeParedes(03, [3,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,0,1,1,0,1,1,n,n,n,n,n,1,0,1,1])
 		self.dibujarLineaDeParedes(02, [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1])
-		self.dibujarLineaDeParedes(01, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1])
+		self.dibujarLineaDeParedes(01, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1])
 		self.dibujarLineaDeParedes(00, [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
 	}
 	
@@ -73,11 +69,11 @@ object laberinto {
 				juego.agregarMonedaEn(x, posicionY, 90)
 			}
 			else if(vectorFila.get(x) == 2) {
-				var serpienteChance = if (juego.dificultadExtrema()) 30 else 50
+				const serpienteChance = if (juego.dificultadExtrema()) 30 else 50
 				juego.agregarSerpienteEn(x, posicionY, serpienteChance)
 			}
-			else if(vectorFila.get(x) == 4) {
-				var pinchoChance = if (juego.dificultadExtrema()) 10 else 5
+			else if(vectorFila.get(x) == 3) {
+				const pinchoChance = if (juego.dificultadExtrema()) 10 else 5
 				juego.agregarPinchoEn(x, posicionY, pinchoChance)
 			}
 		})

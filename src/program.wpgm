@@ -10,19 +10,4 @@ program maze {
 	
 	game.start()
 
-	
-	
-	
-	//trampas: en el video Obj1 UNAHUR clase 01 10 22 hace esto de abajo para los fantasmas
-	//pasa que tiene 4 fantasmas iguales que solo cambia el color
-	//creo que nosotros podriamos poner trampa random y que pueda tocar fuego, pinche o serpiente.
-	//lo que dice en el video es que de esta forma crea una instancia de la clase Rival.
-	//cada instancia la crea al pasarla como argumento de addVisual.
-	//minuto 41 acá = https://www.youtube.com/watch?v=uJYTFKQQlqs
-	
-//	game.addVisual(new Trap(numero = 1))
-//	game.addVisual(new Trap(numero = 2))
-
 }
-
-
