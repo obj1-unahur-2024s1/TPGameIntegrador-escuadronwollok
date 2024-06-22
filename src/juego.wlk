@@ -32,8 +32,6 @@ object juego {
 //		self.spawnearMonedas() esto me parece que está al pedo
 		self.spawnPowerUps()
 		game.onCollideDo(player,{algo => algo.chocarCon(player)})
-		
-		
 		self.mostrarImagenesIniciales()
 	}
 	
@@ -50,7 +48,7 @@ object juego {
 	}
 	method spawnTraps() {
 		trampas.forEach({trampa => game.addVisual(trampa)})
-		trampas2.forEach({trampa => game.addVisual(trampa)})
+//		trampas2.forEach({trampa => game.addVisual(trampa)})
 		trampas3.forEach({trampa => game.addVisual(trampa)})
 	}
 	
@@ -126,8 +124,15 @@ object juego {
 		//chance igual a 50
 		if (valor > chance) {
 			const pincho = new Pinchos(posInicial = game.at(x,y))
-			game.addVisual(pincho)	
-			game.onTick(5000, "togglearTrampa", {pincho.cambiarEstado(); pincho.decirEstado(pincho)})
+			game.addVisual(pincho)
+			game.onTick(5000, "togglearTrampa", {pincho.cambiarEstado()})
+			const hitBoxPincho1 = new HitboxPincho(posInicial = game.at(x,y+1))
+			const hitBoxPincho2 = new HitboxPincho(posInicial = game.at(x,y+2))
+			game.addVisual(hitBoxPincho1)
+			game.addVisual(hitBoxPincho2)			
+			game.onTick(5000, "togglearHitboxTrampa", {	hitBoxPincho1.cambiarEstado();
+														hitBoxPincho2.cambiarEstado()
+			})
 		} else {
 			self.agregarMonedaEn(x, y, chance)
 		}

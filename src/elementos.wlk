@@ -236,9 +236,9 @@ class Fuego inherits Trap (image ="./assets/traps/fuego.png"){
 
 class Pinchos inherits Trap (image = "./assets/pincho/pinchos-5.png"){
 	
-	var property estaActiva = true
-
-//	override method image() ="./assets/items/pinchos.png"
+	var property estaActiva = false
+	
+	var property fotograma = 0
 		
 	override method chocarCon(cosa) {
 		if (cosa.equals(player) and estaActiva) {
@@ -247,52 +247,56 @@ class Pinchos inherits Trap (image = "./assets/pincho/pinchos-5.png"){
 	}
 	
 	override method image() {
-		return animacionPincho.image()
+		return "./assets/pincho/pinchos-" + fotograma.toString() + ".png"
 	}
 	
 	method cambiarEstado() {
-		//self.image() = "./assets/traps/pinchosSubir.png" || Hacer una animacion para cuando los pinchos suben
-		//Por el momento, solo vuelve a aparecer la imagen
-		if (estaActiva) {
+		
+		if (estaActiva) { 	//DESACTIVA
 			estaActiva = false
-			animacionPincho.animacionActivar()
-		} else {
+			animacionPincho.animacionDesactivar(self)
+		} else {			//ACTIVA
 			estaActiva = true
-			self.decirEstado(self)
+			animacionPincho.animacionActivar(self)
+			//Este IF comprueba que el jugador este parado sobre la trampa cuando se activa
+			if (player.position() == self.position()) {
+				player.perderVida()
+			}
 		}
 	}
-	
-	//METODO DE PRUEBA
-	method decirEstado(persona) {
-		game.say(persona, "estoy activo?" + estaActiva.toString())
-	}
-	
-	
 }
 
 object animacionPincho inherits Animaciones{
 	
-	var property numeroRepeticion = 0
-	
-	
-	//METHOD DE PRUEBA - BORRAR
-	override method siguienteFotograma() {
-		fotograma = (fotograma + 1) % 7
+	method animacionActivar(cosa) {
+		game.onTick(100, self.identity().toString(), {cosa.fotograma(6.min(cosa.fotograma() + 1))})
+		game.schedule(700, {game.removeTickEvent(self.identity().toString())})
 	}
 	
-	method image() {
-		return "./assets/pincho/pinchos-" + fotograma.toString() + ".png"
+	method animacionDesactivar(cosa) {
+		game.onTick(100, self.identity().toString(), {cosa.fotograma(8.min(cosa.fotograma() + 1))})
+		game.schedule(200, {game.removeTickEvent(self.identity().toString()); cosa.fotograma(0)})
 	}
 	
-	//NO FUNCIONA LA ANIMACION - CORREGIR
-	method animacionActivar() {
-		game.onTick(500, "activarPinchos", {
-			if (numeroRepeticion < 7) {
-				fotograma = (fotograma + 1) % 7
+}
+
+class HitboxPincho inherits Pinchos {
+	
+	override method image() {
+		return "./assets/assetInvisible.png"
+	}
+	
+	override method cambiarEstado() {
+		
+		if (estaActiva) { 	//DESACTIVA
+			estaActiva = false
+		} else {			//ACTIVA
+			estaActiva = true
+			//Este IF comprueba que el jugador este parado sobre la trampa cuando se activa
+			if (player.position() == self.position()) {
+				player.perderVida()
 			}
-			numeroRepeticion += 1
-		})
-		game.removeTickEvent("activarPinchos")
+		}
 	}
 	
 }
@@ -315,10 +319,10 @@ class Serpiente inherits Trap (image = "./assets/traps/serpiente.png"){
 			              }
 			  
 			  
-		const trampas2 = #{new Pinchos(posInicial = game.at(18,25)),
-			              new Pinchos(posInicial = game.at(48,25)) ,
-			              new Pinchos(posInicial = game.at(15,4)), 
-			              new Pinchos(posInicial = game.at(33,4))}
+//		const trampas2 = #{new Pinchos(posInicial = game.at(18,25)),
+//			              new Pinchos(posInicial = game.at(48,25)) ,
+//			              new Pinchos(posInicial = game.at(15,4)), 
+//			              new Pinchos(posInicial = game.at(33,4))}
 			  
 		const trampas3 = #{new Serpiente(posInicial = game.at(0,15)),
 			              new Serpiente(posInicial = game.at(57,10)) ,
