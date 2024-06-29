@@ -138,7 +138,7 @@ object laberinto {
 	method spawnearElementos4() {
 		const n = "nada" 		//Las n serian en donde estan los muros de la imagen, pero en el codigo, los muros estarian alrededor de los de la image
 		
-		self.dibujarLineaDeElementos(29, [])
+		self.dibujarLineaDeElementos(29, [0])
 		self.dibujarLineaDeElementos(28, [])
 		self.dibujarLineaDeElementos(27, [])
 		self.dibujarLineaDeElementos(26, [])
