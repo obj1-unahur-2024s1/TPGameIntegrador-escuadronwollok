@@ -81,6 +81,7 @@ object juego {
 		titulo.removeVisual()
 		iniciado = true
 		self.agregarVisuals()
+
 	}
 	
 	method mostrarImagenesIniciales(){
@@ -102,6 +103,7 @@ object juego {
 		}
 		})
 	}
+	
 	method agregarMonedaEn(x, y, chance) {
 		const valor = 1.randomUpTo(100)
 		//chance igual a 90
