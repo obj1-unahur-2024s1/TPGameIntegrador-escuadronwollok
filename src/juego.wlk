@@ -80,6 +80,7 @@ object juego {
 		titulo.removeVisual()
 		iniciado = true
 		self.agregarVisuals()
+
 	}
 	
 	method mostrarImagenesIniciales(){
@@ -99,6 +100,7 @@ object juego {
 		   	laberinto.decidirTablero()
 	  	})
 	}
+	
 	method agregarMonedaEn(x, y, chance) {
 		const valor = 1.randomUpTo(100)
 		//chance igual a 90
