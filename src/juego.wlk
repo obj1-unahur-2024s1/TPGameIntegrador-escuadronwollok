@@ -23,19 +23,17 @@ object juego {
 		game.height(30) // Triple 42 - Original 14 - Para que me entre en el monitor 34
 		game.cellSize(20) //20 - 50 - Hay que hacer que los assets sean 60x60
 		
+		//laberinto.decidirTablero()
+		self.mostrarImagenesIniciales()
+		//game.addVisual(tablero1)
 		
-		game.addVisual(tablero1)
-		game.addVisualCharacter(player)
 		
 		
 		self.configurarTeclas()
 //		self.spawnearMonedas() esto me parece que está al pedo
-		self.spawnPowerUps()
-		game.onCollideDo(player,{algo => algo.chocarCon(player)})
-		self.mostrarImagenesIniciales()
+		//self.spawnPowerUps()
+		
 	}
-	
-	
 	
 	method spawnMinotauros() {
 		enemigos.forEach({enemigo =>
@@ -61,6 +59,9 @@ object juego {
 		score.addVisual()
 		self.spawnTraps()
 		self.spawnMinotauros()
+		self.spawnPowerUps()
+		game.addVisualCharacter(player)
+		game.onCollideDo(player,{algo => algo.chocarCon(player)})
 	}
 	
 	method finalizar(){
@@ -88,16 +89,18 @@ object juego {
 		keyboard.num1().onPressDo({
 		if(!iniciado){
 			dificultadExtrema = false
-			self.configurarVisuals()}
 			laberinto.decidirTablero()
-		   	})
+			self.configurarVisuals()
+		}
+		})
 	   	
 	   	keyboard.num2().onPressDo({
 		if(!iniciado){
 			dificultadExtrema = true
-			self.configurarVisuals()}
-		   	laberinto.decidirTablero()
-	  	})
+			laberinto.decidirTablero()
+			self.configurarVisuals()
+		}
+		})
 	}
 	method agregarMonedaEn(x, y, chance) {
 		const valor = 1.randomUpTo(100)
@@ -153,26 +156,20 @@ object juego {
 		cofre.spawnear()
 	}
 	
-	method spawnearMonedas(){
-		game.schedule(10000, {self.spawnMoneda(100)})
-	}
+//	method spawnearMonedas(){
+//		game.schedule(10000, {self.spawnMoneda(100)})
+//	}
 	
-	method spawnMoneda(valor){
-			const pos = self.posicionAleatoria()
-			const moneda = new Moneda(position = pos, valor = valor)
-			game.addVisual(moneda)
-	}
+//	method spawnMoneda(valor){
+//			const pos = self.posicionAleatoria()
+//			const moneda = new Moneda(position = pos, valor = valor)
+//			game.addVisual(moneda)
+//	}
 	
 	method posicionAleatoria() = 
 		game.at(
 				0.randomUpTo(game.width()),
 				0.randomUpTo(game.height())
 				)
-}
-
-
-object tablero{
-	method position() = game.center()
-	method image() = "maze/maze_bg.png"
 }
 

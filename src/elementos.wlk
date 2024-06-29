@@ -22,16 +22,15 @@ class Items{
 	method chocarCon(cosa){}
 }
 
-class Moneda inherits Items (image ="./assets/items/moneda.png",
-
+class Moneda inherits Items (	image ="./assets/items/moneda.png",
 								valor = 200, position = game.at(0,0)){
 
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
 			score.aumentarPuntos(valor)
-			game.say(player, "Tengo " + score.puntaje().toString() + " monedas")
 			game.removeVisual(self)
-			juego.spawnMoneda(valor)}
+//			juego.spawnMoneda(valor)}
+		}
 	}
 }
 
@@ -40,10 +39,10 @@ object medusa inherits Items(image ="./assets/items/medusa.png",
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
-		score.aumentarPuntos(valor)
-		game.say(player, "Activo la cabeza de Medusa")
-		game.removeVisual(self)
-		juego.enemigos().forEach({enemigo => enemigo.petrificarse()})
+			score.aumentarPuntos(valor)
+			game.say(player, "Activo la cabeza de Medusa")
+			game.removeVisual(self)
+			juego.enemigos().forEach({enemigo => enemigo.petrificarse()})
 		}
 	}
 
@@ -270,7 +269,7 @@ object animacionPincho inherits Animaciones{
 	
 	method animacionActivar(cosa) {
 		game.onTick(100, self.identity().toString(), {cosa.fotograma(6.min(cosa.fotograma() + 1))})
-		game.schedule(700, {game.removeTickEvent(self.identity().toString())})
+		game.schedule(700, {game.removeTickEvent(self.identity().toString()); cosa.fotograma(6)})
 	}
 	
 	method animacionDesactivar(cosa) {
