@@ -8,7 +8,8 @@ object laberinto {
 		
 	method decidirTablero() {
 		
-		const numeroTablero = (1..3).anyOne() // PONER DE 1 A 5
+		const numeroTablero = (1..5).anyOne()
+		//const numeroTablero = 1
 		
 		if (numeroTablero == 1) {
 			game.addVisual(tablero1Prueba)
@@ -20,8 +21,10 @@ object laberinto {
 			game.addVisual(tablero3)
 			self.spawnearElementos3()
 		} else if (numeroTablero == 4) {
+			game.addVisual(tablero4)
 			self.spawnearElementos4()
 		} else {
+			game.addVisual(tablero5)
 			self.spawnearElementos5()
 		}
 	}
@@ -38,7 +41,7 @@ object laberinto {
 		self.dibujarLineaDeElementos(27, [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1])
 		self.dibujarLineaDeElementos(26, [0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(25, [0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1])
-		self.dibujarLineaDeElementos(24, [3,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,3,1,1,n,n,n,n,n,1,3,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,3,1,1,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(24, [3,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,3,1,1,n,n,n,n,n,1,3,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,3,1,1,n,n,n,n,n,1,4,1,1])
 		self.dibujarLineaDeElementos(23, [0,1,1,n,n,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1])
 		self.dibujarLineaDeElementos(22, [0,1,1,n,n,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1])
 		self.dibujarLineaDeElementos(21, [0,1,1,n,n,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1])
@@ -47,13 +50,13 @@ object laberinto {
 		self.dibujarLineaDeElementos(18, [0,1,1,n,n,1,0,1,1,n,n,1,3,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,1,1,1,1,1,1,1,1,1,n,n,1,3,1,1,n,n,n,n,n,n,n,n,n])
 		self.dibujarLineaDeElementos(17, [0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1])
 		self.dibujarLineaDeElementos(16, [0,1,1,n,n,1,0,1,1,n,n,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,0,0,0,0,0,0,0,0,0,1,1])
-		self.dibujarLineaDeElementos(15, [0,1,1,n,n,1,3,1,1,n,n,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,0,1,1,1,1,1,0,1,1])
+		self.dibujarLineaDeElementos(15, [4,1,1,n,n,1,3,1,1,n,n,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,0,1,1,1,1,1,0,1,1])
 		self.dibujarLineaDeElementos(14, [0,1,1,1,1,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,0,1,1,n,n,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(13, [0,0,0,0,0,0,0,1,1,n,n,1,0,1,1,n,n,1,0,0,0,0,1,1,n,n,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(12, [1,1,1,1,1,1,0,1,1,n,n,1,0,1,1,n,n,1,1,1,1,0,1,1,n,n,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(11, [n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(10, [n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1])
-		self.dibujarLineaDeElementos(09, [n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,3,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,3,1,1,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(09, [n,n,n,n,n,1,4,1,1,n,n,1,4,1,1,n,n,n,n,n,1,3,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,3,1,1,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(08, [1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(07, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(06, [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,n,n,1,3,1,1])
@@ -76,25 +79,25 @@ object laberinto {
 		self.dibujarLineaDeElementos(24, [0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(23, [0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(22, [0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1])
-		self.dibujarLineaDeElementos(21, [0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(21, [0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,3,1,1,n,n,n,n,n,n,n,n,1,3,1,1])
 		self.dibujarLineaDeElementos(20, [0,1,1,n,n,1,0,1,1,n,n,1,1,1,1,0,1,1,1,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1])
 		self.dibujarLineaDeElementos(19, [0,1,1,n,n,1,0,1,1,n,n,1,0,0,0,0,0,0,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1])
-		self.dibujarLineaDeElementos(18, [0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,1,1,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1])
+		self.dibujarLineaDeElementos(18, [3,1,1,n,n,1,3,1,1,n,n,1,0,1,1,1,1,1,0,1,1,n,n,1,3,1,1,n,n,1,3,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1])
 		self.dibujarLineaDeElementos(17, [0,1,1,1,1,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(16, [0,0,0,0,0,0,0,1,1,n,n,1,0,1,1,n,n,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1])
-		self.dibujarLineaDeElementos(15, [1,1,1,1,1,1,0,1,1,n,n,1,0,1,1,n,n,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(15, [1,1,1,1,1,1,0,1,1,n,n,1,0,1,1,n,n,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,n,n,n,n,n,n,n,n,1,3,1,1])
 		self.dibujarLineaDeElementos(14, [n,n,n,n,n,1,0,1,1,1,1,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(13, [n,n,n,n,n,1,0,0,0,0,0,0,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1])
-		self.dibujarLineaDeElementos(12, [n,n,n,n,n,1,0,1,1,1,1,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(12, [n,n,n,n,n,1,3,1,1,1,1,1,0,1,1,n,n,n,n,n,n,n,n,1,3,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,3,1,1,n,n,n,n,n,n,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(11, [1,1,1,1,1,1,0,1,1,n,n,1,0,1,1,1,1,1,1,1,1,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1])
 		self.dibujarLineaDeElementos(10, [0,0,0,0,0,0,0,1,1,n,n,1,0,0,0,0,0,0,0,1,1,n,n,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1])
 		self.dibujarLineaDeElementos(09, [0,1,1,1,1,1,0,1,1,n,n,1,0,1,1,1,1,1,0,1,1,n,n,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1])
 		self.dibujarLineaDeElementos(08, [0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(07, [0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1])
-		self.dibujarLineaDeElementos(06, [0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(06, [0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,3,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,3,1,1])
 		self.dibujarLineaDeElementos(05, [0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(04, [0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1])
-		self.dibujarLineaDeElementos(03, [0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(03, [3,1,1,n,n,1,0,1,1,n,n,1,3,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,3,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1])
 		self.dibujarLineaDeElementos(02, [0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1])
 		self.dibujarLineaDeElementos(01, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1])
 		self.dibujarLineaDeElementos(00, [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
@@ -138,71 +141,71 @@ object laberinto {
 	method spawnearElementos4() {
 		const n = "nada" 		//Las n serian en donde estan los muros de la imagen, pero en el codigo, los muros estarian alrededor de los de la image
 		
-		self.dibujarLineaDeElementos(29, [0])
-		self.dibujarLineaDeElementos(28, [])
-		self.dibujarLineaDeElementos(27, [])
-		self.dibujarLineaDeElementos(26, [])
-		self.dibujarLineaDeElementos(25, [])
-		self.dibujarLineaDeElementos(24, [])
-		self.dibujarLineaDeElementos(23, [])
-		self.dibujarLineaDeElementos(22, [])
-		self.dibujarLineaDeElementos(21, [])
-		self.dibujarLineaDeElementos(20, [])
-		self.dibujarLineaDeElementos(19, [])
-		self.dibujarLineaDeElementos(18, [])
-		self.dibujarLineaDeElementos(17, [])
-		self.dibujarLineaDeElementos(16, [])
-		self.dibujarLineaDeElementos(15, [])
-		self.dibujarLineaDeElementos(14, [])
-		self.dibujarLineaDeElementos(13, [])
-		self.dibujarLineaDeElementos(12, [])
-		self.dibujarLineaDeElementos(11, [])
-		self.dibujarLineaDeElementos(10, [])
-		self.dibujarLineaDeElementos(09, [])
-		self.dibujarLineaDeElementos(08, [])
-		self.dibujarLineaDeElementos(07, [])
-		self.dibujarLineaDeElementos(06, [])
-		self.dibujarLineaDeElementos(05, [])
-		self.dibujarLineaDeElementos(04, [])
-		self.dibujarLineaDeElementos(03, [])
-		self.dibujarLineaDeElementos(02, [])
-		self.dibujarLineaDeElementos(01, [])
-		self.dibujarLineaDeElementos(00, [])
+		self.dibujarLineaDeElementos(29, [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,n,n,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
+		self.dibujarLineaDeElementos(28, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,n,n,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1])
+		self.dibujarLineaDeElementos(27, [0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,n,n,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1])
+		self.dibujarLineaDeElementos(26, [0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,1,1,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(25, [0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,1,0,0,0,0,0,0,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(24, [0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,1,1,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(23, [0,1,1,n,n,1,0,1,1,n,n,1,1,1,1,1,1,1,1,1,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(22, [0,1,1,n,n,1,0,1,1,n,n,1,0,0,0,0,0,0,0,0,0,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(21, [0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(20, [0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,1,1,1,0,1,1,1,1,1,n,n,1,0,1,1,1,1,1,0,1,1,n,n,1,1,1,1,0,1,1])
+		self.dibujarLineaDeElementos(19, [0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,0,0,0,0,0,0,0,0,0,1,1,n,n,1,0,0,0,0,0,0,0,1,1,n,n,1,0,0,0,0,1,1])
+		self.dibujarLineaDeElementos(18, [0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,1,1,1,0,1,1,1,1,1,0,1,1,n,n,1,0,1,1,1,1,1,0,1,1,n,n,1,0,1,1,1,1,1])
+		self.dibujarLineaDeElementos(17, [0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n])
+		self.dibujarLineaDeElementos(16, [0,1,1,n,n,1,0,1,1,n,n,1,0,0,0,0,0,0,0,0,0,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n])
+		self.dibujarLineaDeElementos(15, [0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,1,1,1,1,1,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n])
+		self.dibujarLineaDeElementos(14, [0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,n,n,n,n,n,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,1,1,1,0,1,1,n,n,n])
+		self.dibujarLineaDeElementos(13, [0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,n,n,n,n,n,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,n,n,1,0,1,1,n,n,1,0,0,0,0,0,0,0,1,1,n,n,n])
+		self.dibujarLineaDeElementos(12, [0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,n,n,n,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,n,n,1,0,1,1,n,n,1,0,1,1,1,1,1,0,1,1,n,n,n])
+		self.dibujarLineaDeElementos(11, [0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,1,1,1,1,1,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n])
+		self.dibujarLineaDeElementos(10, [0,1,1,n,n,n,n,n,n,n,n,1,0,0,0,0,0,0,0,0,0,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n])
+		self.dibujarLineaDeElementos(09, [0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,1,1,1,1,1,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n])
+		self.dibujarLineaDeElementos(08, [0,1,1,n,n,n,n,n,1,1,1,1,0,1,1,n,n,n,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,n,n,1,0,1,1,1,1,1])
+		self.dibujarLineaDeElementos(07, [0,1,1,n,n,n,n,n,1,0,0,0,0,1,1,n,n,n,n,n,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,n,n,1,0,0,0,0,1,1])
+		self.dibujarLineaDeElementos(06, [0,1,1,n,n,n,n,n,1,0,1,1,1,1,1,n,n,n,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,n,n,1,1,1,1,0,1,1])
+		self.dibujarLineaDeElementos(05, [0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(04, [0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(03, [0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(02, [0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1])
+		self.dibujarLineaDeElementos(01, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1])
+		self.dibujarLineaDeElementos(00, [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
 	}
 	
 	method spawnearElementos5() {
 		const n = "nada" 		//Las n serian en donde estan los muros de la imagen, pero en el codigo, los muros estarian alrededor de los de la image
 		
-		self.dibujarLineaDeElementos(29, [])
-		self.dibujarLineaDeElementos(28, [])
-		self.dibujarLineaDeElementos(27, [])
-		self.dibujarLineaDeElementos(26, [])
-		self.dibujarLineaDeElementos(25, [])
-		self.dibujarLineaDeElementos(24, [])
-		self.dibujarLineaDeElementos(23, [])
-		self.dibujarLineaDeElementos(22, [])
-		self.dibujarLineaDeElementos(21, [])
-		self.dibujarLineaDeElementos(20, [])
-		self.dibujarLineaDeElementos(19, [])
-		self.dibujarLineaDeElementos(18, [])
-		self.dibujarLineaDeElementos(17, [])
-		self.dibujarLineaDeElementos(16, [])
-		self.dibujarLineaDeElementos(15, [])
-		self.dibujarLineaDeElementos(14, [])
-		self.dibujarLineaDeElementos(13, [])
-		self.dibujarLineaDeElementos(12, [])
-		self.dibujarLineaDeElementos(11, [])
-		self.dibujarLineaDeElementos(10, [])
-		self.dibujarLineaDeElementos(09, [])
-		self.dibujarLineaDeElementos(08, [])
-		self.dibujarLineaDeElementos(07, [])
-		self.dibujarLineaDeElementos(06, [])
-		self.dibujarLineaDeElementos(05, [])
-		self.dibujarLineaDeElementos(04, [])
-		self.dibujarLineaDeElementos(03, [])
-		self.dibujarLineaDeElementos(02, [])
-		self.dibujarLineaDeElementos(01, [])
-		self.dibujarLineaDeElementos(00, [])
+		self.dibujarLineaDeElementos(29, [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
+		self.dibujarLineaDeElementos(28, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1])
+		self.dibujarLineaDeElementos(27, [0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1])
+		self.dibujarLineaDeElementos(26, [0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(25, [0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(24, [0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(23, [0,1,1,1,1,1,n,n,1,0,1,1,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1,n,n,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(22, [0,0,0,0,1,1,n,n,1,0,1,1,n,n,1,0,0,0,0,0,0,0,0,0,0,1,1,n,n,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(21, [1,1,1,0,1,1,n,n,1,0,1,1,n,n,1,1,1,1,0,1,1,1,1,1,0,1,1,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(20, [n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(19, [n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(18, [n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,1,0,1,1,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(17, [1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1])
+		self.dibujarLineaDeElementos(16, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1])
+		self.dibujarLineaDeElementos(15, [0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
+		self.dibujarLineaDeElementos(14, [0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n])
+		self.dibujarLineaDeElementos(13, [0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n])
+		self.dibujarLineaDeElementos(12, [0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,n])
+		self.dibujarLineaDeElementos(11, [0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
+		self.dibujarLineaDeElementos(10, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1])
+		self.dibujarLineaDeElementos(09, [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1])
+		self.dibujarLineaDeElementos(08, [0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(07, [0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(06, [0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(05, [0,1,1,n,n,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(04, [0,1,1,n,n,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(03, [0,1,1,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,n,n,n,n,n,1,0,1,1,n,n,n,n,n,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,n,n,1,0,1,1])
+		self.dibujarLineaDeElementos(02, [0,1,1,1,1,1,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,n,n,n,n,n,n,n,n,1,0,1,1,1,1,1,0,1,1])
+		self.dibujarLineaDeElementos(01, [0,0,0,0,0,0,0,1,1,n,n,n,n,n,n,n,n,n,n,n,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,n,n,n,n,n,n,n,n,1,0,0,0,0,0,0,0,1,1])
+		self.dibujarLineaDeElementos(00, [1,1,1,1,1,1,1,1,1,n,n,n,n,n,n,n,n,n,n,n,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,n,n,n,n,n,n,n,n,n,1,1,1,1,1,1,1,1,1])
 	}
 	
 	method dibujarLineaDeElementos(posicionY, vectorFila) {
@@ -221,6 +224,10 @@ object laberinto {
 			else if(vectorFila.get(x) == 3) {
 				const pinchoChance = if (juego.dificultadExtrema()) 20 else 50
 				juego.agregarPinchoEn(x, posicionY, pinchoChance)
+			}
+			else if(vectorFila.get(x) == 4) {
+				const fuegoChance = if (juego.dificultadExtrema()) 70 else 0
+				juego.agregarFuegoEn(x, posicionY, fuegoChance)
 			}
 		})
 	}
@@ -257,4 +264,22 @@ object tablero3 {
 	method chocarCon(algo) {
 		
 	} 
+}
+
+object tablero4 {
+	method position() = game.origin()
+	method image() = "./assets/maze/tableroJuegoFinal4.png"
+	
+	method chocarCon(algo) {
+		
+	}
+}
+
+object tablero5 {
+	method position() = game.origin()
+	method image() = "./assets/maze/tableroJuegoFinal5.png"
+	
+	method chocarCon(algo) {
+		
+	}
 }

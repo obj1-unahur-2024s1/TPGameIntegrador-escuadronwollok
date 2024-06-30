@@ -18,6 +18,19 @@ object player {
 	//por ahora probamos sin animar para animar tenemos que hacer lo de abajo
 	//	method image() = "player" + numero.toSrting() + ".png"
 	
+	method envenenar() {
+		if (not estaEnvenenado) {
+			estaEnvenenado = true
+			game.onTick(10000, "veneno", {self.perderSalud(1)})
+		}
+	}
+	
+	method curarVeneno() {
+		if (estaEnvenenado) {
+			game.removeTickEvent("veneno")
+			estaEnvenenado = false
+		}
+	}
 	
 	method agregarAlInventario(cosa){
 		inventarioPlayer.add(cosa)
@@ -41,6 +54,7 @@ object player {
 	method perderVida(){
 		if (vida.vidasActuales() > 1){
 			vida.perderVida()
+			self.curarVeneno()
 			//agregar sonido new Sonido(sound = "").reproducir()
 			self.resetPosition()
 		}

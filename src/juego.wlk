@@ -143,6 +143,18 @@ object juego {
 		}
 	}
 	
+	method agregarFuegoEn(x, y, chance) {
+		const valor = 1.randomUpTo(100)
+		//chance igual a 50
+		if (valor > chance) {
+			const fuego = new Fuego(posInicial = game.at(x,y))
+			game.addVisual(fuego)
+			game.onTick(100, "animacionFuego", {animacionFuego.siguienteFotograma()})
+		} else {
+			self.agregarMonedaEn(x, y, chance)
+		}
+	}
+	
 	method configurarTeclas() {
 		keyboard.up().onPressDo({player.subir()})
 		keyboard.down().onPressDo({player.bajar()})

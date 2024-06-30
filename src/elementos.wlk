@@ -228,9 +228,35 @@ class Trap {
 		}
 	}
 }
-class Fuego inherits Trap (image ="./assets/traps/fuego.png"){ 
+class Fuego inherits Trap (image = "./assets/fuego/fuego0.png"){
 	
-								 	
+	override method image() {
+		return animacionFuego.image()
+	}
+	
+	override method chocarCon(cosa) {
+		if (cosa.equals(player)) {
+			game.onTick(700, "quemadura", {
+				if (player.position() == self.position()) {
+					player.perderSalud(1)
+				} else {
+					game.removeTickEvent("quemadura")
+				}
+			})
+		}
+	} 	
+}
+
+object animacionFuego {
+	
+	var property fotograma = 0
+	
+	method image() = "./assets/fuego/fuego" + fotograma.toString() + ".png"
+	
+	method siguienteFotograma() {
+		fotograma = (fotograma + 1) % 18
+	}
+	
 }
 
 class Pinchos inherits Trap (image = "./assets/pincho/pinchos-5.png"){
@@ -305,6 +331,7 @@ class Serpiente inherits Trap (image = "./assets/traps/serpiente.png"){
 	override method chocarCon(cosa) {
 		if (cosa.equals(player)) {
 			player.perderSalud(1)
+			player.envenenar()
 			game.removeVisual(self)
 		}
 	}
