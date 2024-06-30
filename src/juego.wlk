@@ -15,14 +15,18 @@ class Pared {
 object juego {
 	var property dificultadExtrema
 	var iniciado = false
-	const property enemigos = #{new Minotaur(posInicial = game.at(50,22)), new Minotaur(posInicial = game.at(45,7))}	
+	const property enemigos = #{new Minotaur(posInicial = game.at(50,22)), new Minotaur(posInicial = game.at(45,7))}
+	const menu = game.sound("./assets/sonidosYMusica/menuMusic.mp3")
+	const combat = game.sound("./assets/sonidosYMusica/combatMusic.mp3")
+	const victoria = game.sound("./assets/sonidosYMusica/victoria.mp3")
+	const muerte = game.sound("./assets/sonidosYMusica/muerte.mp3")
 	
 	method iniciar() {
 		game.title("Maze of Crete")
 		game.width(66)  // Triple 60 - Original 20
 		game.height(30) // Triple 42 - Original 14 - Para que me entre en el monitor 34
 		game.cellSize(20) //20 - 50 - Hay que hacer que los assets sean 60x60
-		
+		game.schedule(500, {menu.play()})
 		//laberinto.decidirTablero()
 		self.mostrarImagenesIniciales()
 		//game.addVisual(tablero1)
@@ -66,12 +70,16 @@ object juego {
 	
 	method finalizar(){
 		game.clear()
+		combat.stop()
+		muerte.play()
 		game.addVisual(gameOver)
-		game.schedule(3000, {=>game.stop()})
+		game.schedule(6000, {=>game.stop()})
 	}
 	
 	method ganar() {
 		game.clear()
+		combat.stop()
+		victoria.play()
 		game.addVisual(winScreen)
 		game.schedule(3000, {=>game.addVisual(creditos)})
 		game.schedule(8000, {=>game.stop()})
@@ -92,6 +100,8 @@ object juego {
 			dificultadExtrema = false
 			laberinto.decidirTablero()
 			self.configurarVisuals()
+			menu.stop()
+			combat.play()
 		}
 		})
 	   	
@@ -100,6 +110,8 @@ object juego {
 			dificultadExtrema = true
 			laberinto.decidirTablero()
 			self.configurarVisuals()
+			menu.stop()
+			combat.play()
 		}
 		})
 	}
@@ -150,6 +162,8 @@ object juego {
 			const fuego = new Fuego(posInicial = game.at(x,y))
 			game.addVisual(fuego)
 			game.onTick(100, "animacionFuego", {animacionFuego.siguienteFotograma()})
+			const hitBoxFuego = new HitboxFuego(posInicial = game.at(x,y+1))
+			game.addVisual(hitBoxFuego)
 		} else {
 			self.agregarMonedaEn(x, y, chance)
 		}

@@ -56,7 +56,7 @@ object llave inherits Items (image ="./assets/items/llave.png",
 			player.agregarAlInventario(self)
 			score.aumentarPuntos(valor)
 			game.say(player, "Añado la llave del cofre al inventario")
-			position = game.at(60,(game.height() - 11))
+			position = game.at(60,(game.height() - 15))
 			//game.removeVisual(self)
 		 }
 
@@ -256,6 +256,26 @@ object animacionFuego {
 	method siguienteFotograma() {
 		fotograma = (fotograma + 1) % 18
 	}
+	
+}
+
+class HitboxFuego inherits Fuego {
+	
+	override method image() {
+		return "./assets/assetInvisible.png"
+	}
+	
+	override method chocarCon(cosa) {
+		if (cosa.equals(player)) {
+			game.onTick(700, "quemadura", {
+				if (player.position() == self.position()) {
+					player.perderSalud(1)
+				} else {
+					game.removeTickEvent("quemadura")
+				}
+			})
+		}
+	} 	
 	
 }
 
