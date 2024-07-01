@@ -20,7 +20,7 @@ class Items{
 }
 
 class Moneda inherits Items (	image ="./assets/items/moneda.png",
-								valor = 10, position = game.at(0,0)){
+								valor = 100, position = game.at(0,0)){
 
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
