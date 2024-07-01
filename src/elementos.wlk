@@ -20,7 +20,7 @@ class Items{
 }
 
 class Moneda inherits Items (	image ="./assets/items/moneda.png",
-								valor = 200, position = game.at(0,0)){
+								valor = 10, position = game.at(0,0)){
 
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
@@ -31,7 +31,7 @@ class Moneda inherits Items (	image ="./assets/items/moneda.png",
 }
 
 object medusa inherits Items(image ="./assets/items/medusa.png", 
-								valor = 1000, position = ubicacionMedusa.position()){
+								valor = 100, position = ubicacionMedusa.position()){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
@@ -84,7 +84,7 @@ object ubicacionMedusa {
 }
 
 object llave inherits Items (image ="./assets/items/llave.png", 
-								valor = 1000, position = ubicacionLlave.position()){
+								valor = 100, position = ubicacionLlave.position()){
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
 			player.agregarAlInventario(self)
@@ -135,7 +135,7 @@ object ubicacionLlave {
 }
 
 object cofre inherits Items (image ="./assets/items/cofre.png", 
-								valor = 1000, position = ubicacionCofre.position()){
+								valor = 100, position = ubicacionCofre.position()){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player) and player.tieneLlave()) {
@@ -190,7 +190,7 @@ object ubicacionCofre {
 }
 
 object caliz inherits Items (image ="./assets/items/caliz.png", 
-								valor = 1000, position = ubicacionCaliz.position()){
+								valor = 100, position = ubicacionCaliz.position()){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player) and vida.vidasActuales() < 5) {
@@ -245,7 +245,7 @@ object ubicacionCaliz {
 }
 
 object manzana inherits Items (image ="./assets/items/manzana.png", 
-								valor = 2500, position = ubicacionManzana.position()){
+								valor = 250, position = ubicacionManzana.position()){
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
 			score.aumentarPuntos(valor)
@@ -297,7 +297,7 @@ object ubicacionManzana {
 }
 
 object alas inherits Items (image ="./assets/items/alas.png", 
-								valor = 1000, position = cofre.position()){
+								valor = 100, position = cofre.position()){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
