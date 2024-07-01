@@ -114,7 +114,7 @@ object juego {
 		const valor = 1.randomUpTo(100)
 		//chance igual a 90
 		if (valor > chance) {
-			const moneda = new Moneda(position = game.at(x,y), valor = 200, image = "./items/moneda.png")
+			const moneda = new Moneda(position = game.at(x,y), valor = 100, image = "./items/moneda.png")
 			game.addVisual(moneda)
 		}
 	}

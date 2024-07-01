@@ -3,8 +3,8 @@ import elementos.*
 import juego.*
 
 
-describe "Maze of Crete"{
-	
-	
+test"player obtiene la llaver"{
+	llave.chocarCon(player)
+	assert.equals(100,score.puntaje())
 }
-	
+
