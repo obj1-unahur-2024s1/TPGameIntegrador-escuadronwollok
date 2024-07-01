@@ -27,15 +27,24 @@ Tu aventura te espera.
 ## Reglas de Juego / Instrucciones
 
 -La cabeza de medusa petrificara a los minotauros
+
 -Reune monedas para aumentar tu puntuacion
+
 -La mitica manzana dorada te otorgara inmunidad durante un breve tiempo
+
 -El caliz te otorgara una vida extra
+
 -Encuentra la llave para abrir el cofre y escapar del laberinto
+
 -Los brutales minotauros te perseguiran sin cansancio
+
 -Quedarse parado mucho tiempo derretira tu contador de salud rapidamente
+
 -Las serpientes te dejaran envenenado
+
 -Los despiadados pinchos del laberinto te quitaran una vida si eres impalado, busca tu oportunidad perfecta
 para atravesarlos sin ningun rasguño
+
 
 -La dificultad extrema solo te dara una vida y habran mas obstaculos, intentala si te atreves...
 
