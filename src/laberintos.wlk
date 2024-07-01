@@ -5,27 +5,34 @@ import personajes.*
 import elementos.*
 
 object laberinto {
-		
+	
+	var property numero
+	
 	method decidirTablero() {
 		
-		//const numeroTablero = (1..5).anyOne()
-		const numeroTablero = 1
+		const numeroTablero = (1..5).anyOne()
+		//const numeroTablero = 5
 		
 		if (numeroTablero == 1) {
 			game.addVisual(tablero1Prueba)
 			self.spawnearElementos1()
+			numero = 1
 		} else if (numeroTablero == 2){
 			game.addVisual(tablero2)
 			self.spawnearElementos2()
+			numero = 2
 		} else if (numeroTablero == 3){
 			game.addVisual(tablero3)
 			self.spawnearElementos3()
+			numero = 3
 		} else if (numeroTablero == 4) {
 			game.addVisual(tablero4)
 			self.spawnearElementos4()
+			numero = 4
 		} else {
 			game.addVisual(tablero5)
 			self.spawnearElementos5()
+			numero = 5
 		}
 	}
 		
@@ -229,6 +236,10 @@ object laberinto {
 			else if(vectorFila.get(x) == 4) {
 				const fuegoChance = if (juego.dificultadExtrema()) 20 else 50
 				juego.agregarFuegoEn(x, posicionY, fuegoChance)
+			}
+			else if (vectorFila.get(x) == 5) {
+				const llaveChance = 60
+				juego.agregarLlaveEn(x, posicionY, llaveChanche)
 			}
 		})
 	}

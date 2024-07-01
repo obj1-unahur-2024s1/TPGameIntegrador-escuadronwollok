@@ -15,7 +15,10 @@ class Pared {
 object juego {
 	var property dificultadExtrema
 	var iniciado = false
-	const property enemigos = #{new Minotaur(posInicial = game.at(50,22)), new Minotaur(posInicial = game.at(45,7))}
+	const property enemigos = []
+//	const property enemigos = #{new Minotaur(posInicial = game.at(ubicacionMinotauro.decidirUbicacion1X(),22))
+//							, new Minotaur(posInicial = game.at(ubicacionMinotauro.decidirUbicacion2X(),ubicacionMinotauro.decidirUbicacion2Y()))
+//	}
 	const menu = game.sound("./assets/sonidosYMusica/menuMusic.mp3")
 	const combat = game.sound("./assets/sonidosYMusica/combatMusic.mp3")
 	const victoria = game.sound("./assets/sonidosYMusica/victoria.mp3")
@@ -48,11 +51,6 @@ object juego {
 			game.onCollideDo(enemigo,{algo => algo.chocarCon(enemigo)})
 		})
 	}
-	method spawnTraps() {
-		trampas.forEach({trampa => game.addVisual(trampa)})
-//		trampas2.forEach({trampa => game.addVisual(trampa)})
-		trampas3.forEach({trampa => game.addVisual(trampa)})
-	}
 	
 	method agregarVisuals(){
 		game.addVisual(inventario)
@@ -61,7 +59,6 @@ object juego {
 		game.addVisual(score)
 		game.addVisual(contadorSalud)
 		score.addVisual()
-		self.spawnTraps()
 		self.spawnMinotauros()
 		self.spawnPowerUps()
 		game.addVisualCharacter(player)
@@ -99,6 +96,10 @@ object juego {
 		if(!iniciado){
 			dificultadExtrema = false
 			laberinto.decidirTablero()
+			const minotauro1 = new Minotaur(posInicial = game.at(ubicacionMinotauro.decidirUbicacion1X(),ubicacionMinotauro.decidirUbicacion1Y()))
+			const minotauro2 = new Minotaur(posInicial = game.at(ubicacionMinotauro.decidirUbicacion2X(),ubicacionMinotauro.decidirUbicacion2Y()))
+			enemigos.add(minotauro1)
+			enemigos.add(minotauro2)
 			self.configurarVisuals()
 			menu.stop()
 			combat.play()
@@ -109,6 +110,10 @@ object juego {
 		if(!iniciado){
 			dificultadExtrema = true
 			laberinto.decidirTablero()
+			const minotauro1 = new Minotaur(posInicial = game.at(ubicacionMinotauro.decidirUbicacion1X(),ubicacionMinotauro.decidirUbicacion1Y()))
+			const minotauro2 = new Minotaur(posInicial = game.at(ubicacionMinotauro.decidirUbicacion2X(),ubicacionMinotauro.decidirUbicacion2Y()))
+			enemigos.add(minotauro1)
+			enemigos.add(minotauro2)
 			self.configurarVisuals()
 			menu.stop()
 			combat.play()
@@ -162,12 +167,25 @@ object juego {
 			const fuego = new Fuego(posInicial = game.at(x,y))
 			game.addVisual(fuego)
 			game.onTick(100, "animacionFuego", {animacionFuego.siguienteFotograma()})
-			const hitBoxFuego = new HitboxFuego(posInicial = game.at(x,y+1))
-			game.addVisual(hitBoxFuego)
+			const hitBoxFuego1 = new HitboxFuego(posInicial = game.at(x,y+1))
+			const hitBoxFuego2 = new HitboxFuego(posInicial = game.at(x+1,y))
+			const hitBoxFuego3 = new HitboxFuego(posInicial = game.at(x-1,y))
+			game.addVisual(hitBoxFuego1)
+			game.addVisual(hitBoxFuego2)
+			game.addVisual(hitBoxFuego3)
 		} else {
 			self.agregarMonedaEn(x, y, chance)
 		}
 	}
+	
+//	method agregarLlaveEn(x, y, chance) {
+//		const valor = 1.randomUpTo(100)
+//		
+//		if (valor > chance and !game.hasVisual(llave)) {
+//			llave.position(x,y)
+//			game.addVisual(llave)
+//		}
+//	}
 	
 	method configurarTeclas() {
 		keyboard.up().onPressDo({player.subir()})

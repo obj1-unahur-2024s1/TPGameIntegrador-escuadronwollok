@@ -35,7 +35,7 @@ class Moneda inherits Items (	image ="./assets/items/moneda.png",
 }
 
 object medusa inherits Items(image ="./assets/items/medusa.png", 
-								valor = 1000, position = game.at(12,16)){
+								valor = 1000, position = ubicacionMedusa.position()){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
@@ -48,14 +48,51 @@ object medusa inherits Items(image ="./assets/items/medusa.png",
 
 }
 
+object ubicacionMedusa {
+	
+	method position() = game.at(self.decidirUbicacionX(), self.decidirUbicacionY())
+	
+	method decidirUbicacionX() {
+		var x = 0
+		
+		if (laberinto.numero() == 1) {
+			x = 12
+		} else if (laberinto.numero() == 2) {
+			x = 48
+		} else if (laberinto.numero() == 3) {
+			x = 35
+		} else if (laberinto.numero() == 4) {
+			x = 30
+		} else {
+			x = 30
+		}
+		return x
+	}
+	
+	method decidirUbicacionY() {
+		var y = 0
+		
+		if (laberinto.numero() == 1) {
+			y = 16
+		} else if (laberinto.numero() == 2) {
+			y = 19
+		} else if (laberinto.numero() == 3) {
+			y = 16
+		} else if (laberinto.numero() == 4) {
+			y = 16
+		} else {
+			y = 13
+		}
+		return y
+	}
+}
 
 object llave inherits Items (image ="./assets/items/llave.png", 
-								valor = 1000, position = game.at(51,7)){
+								valor = 1000, position = ubicacionLlave.position()){
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
 			player.agregarAlInventario(self)
 			score.aumentarPuntos(valor)
-			game.say(player, "Añado la llave del cofre al inventario")
 			position = game.at(60,(game.height() - 15))
 			//game.removeVisual(self)
 		 }
@@ -63,8 +100,47 @@ object llave inherits Items (image ="./assets/items/llave.png",
 	 }
 }
 
+object ubicacionLlave {
+	
+	method position() = game.at(self.decidirUbicacionX(), self.decidirUbicacionY())
+	
+	method decidirUbicacionX() {
+		var x = 0
+		
+		if (laberinto.numero() == 1) {
+			x = 51
+		} else if (laberinto.numero() == 2) {
+			x = 0
+		} else if (laberinto.numero() == 3) {
+			x = 15
+		} else if (laberinto.numero() == 4) {
+			x = 57
+		} else {
+			x = 52
+		}
+		return x
+	}
+	
+	method decidirUbicacionY() {
+		var y = 0
+		
+		if (laberinto.numero() == 1) {
+			y = 7
+		} else if (laberinto.numero() == 2) {
+			y = 27
+		} else if (laberinto.numero() == 3) {
+			y = 25
+		} else if (laberinto.numero() == 4) {
+			y = 7
+		} else {
+			y = 28
+		}
+		return y
+	}
+}
+
 object cofre inherits Items (image ="./assets/items/cofre.png", 
-								valor = 1000, position = game.at(0,27)){
+								valor = 1000, position = ubicacionCofre.position()){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player) and player.tieneLlave()) {
@@ -75,12 +151,51 @@ object cofre inherits Items (image ="./assets/items/cofre.png",
 		} else {
 			game.say(self, "No posees la llave para abrir la cerradura")
 		}
-		}
+	}
 	
 }
 
+object ubicacionCofre {
+	
+	method position() = game.at(self.decidirUbicacionX(), self.decidirUbicacionY())
+	
+	method decidirUbicacionX() {
+		var x = 0
+		
+		if (laberinto.numero() == 1) {
+			x = 0
+		} else if (laberinto.numero() == 2) {
+			x = 52
+		} else if (laberinto.numero() == 3) {
+			x = 57
+		} else if (laberinto.numero() == 4) {
+			x = 19
+		} else {
+			x = 4
+		}
+		return x
+	}
+	
+	method decidirUbicacionY() {
+		var y = 0
+		
+		if (laberinto.numero() == 1) {
+			y = 27
+		} else if (laberinto.numero() == 2) {
+			y = 28
+		} else if (laberinto.numero() == 3) {
+			y = 7
+		} else if (laberinto.numero() == 4) {
+			y = 22
+		} else {
+			y = 1
+		}
+		return y
+	}
+}
+
 object caliz inherits Items (image ="./assets/items/caliz.png", 
-								valor = 1000, position = game.at(15,27)){
+								valor = 1000, position = ubicacionCaliz.position()){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player) and vida.vidasActuales() < 5) {
@@ -95,8 +210,47 @@ object caliz inherits Items (image ="./assets/items/caliz.png",
 	
 }
 
+object ubicacionCaliz {
+	
+	method position() = game.at(self.decidirUbicacionX(), self.decidirUbicacionY())
+	
+	method decidirUbicacionX() {
+		var x = 0
+		
+		if (laberinto.numero() == 1) {
+			x = 15
+		} else if (laberinto.numero() == 2) {
+			x = 31
+		} else if (laberinto.numero() == 3) {
+			x = 4
+		} else if (laberinto.numero() == 4) {
+			x = 43
+		} else {
+			x = 51
+		}
+		return x
+	}
+	
+	method decidirUbicacionY() {
+		var y = 0
+		
+		if (laberinto.numero() == 1) {
+			y = 27
+		} else if (laberinto.numero() == 2) {
+			y = 10
+		} else if (laberinto.numero() == 3) {
+			y = 25
+		} else if (laberinto.numero() == 4) {
+			y = 19
+		} else {
+			y = 4
+		}
+		return y
+	}
+}
+
 object manzana inherits Items (image ="./assets/items/manzana.png", 
-								valor = 2500, position = game.at(30,27)){
+								valor = 2500, position = ubicacionManzana.position()){
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
 			score.aumentarPuntos(valor)
@@ -107,8 +261,48 @@ object manzana inherits Items (image ="./assets/items/manzana.png",
 		}
 	}
 }
+
+object ubicacionManzana {
+	
+	method position() = game.at(self.decidirUbicacionX(), self.decidirUbicacionY())
+	
+	method decidirUbicacionX() {
+		var x = 0
+		
+		if (laberinto.numero() == 1) {
+			x = 30
+		} else if (laberinto.numero() == 2) {
+			x = 13
+		} else if (laberinto.numero() == 3) {
+			x = 28
+		} else if (laberinto.numero() == 4) {
+			x = 31
+		} else {
+			x = 46
+		}
+		return x
+	}
+	
+	method decidirUbicacionY() {
+		var y = 0
+		
+		if (laberinto.numero() == 1) {
+			y = 27
+		} else if (laberinto.numero() == 2) {
+			y = 19
+		} else if (laberinto.numero() == 3) {
+			y = 28
+		} else if (laberinto.numero() == 4) {
+			y = 13
+		} else {
+			y = 10
+		}
+		return y
+	}
+}
+
 object alas inherits Items (image ="./assets/items/alas.png", 
-								valor = 1000, position = if(juego.dificultadExtrema()) game.at(39,20) else cofre.position()){
+								valor = 1000, position = cofre.position()){
 	
 	override method chocarCon(cosa){
 		if (cosa.equals(player)) {
@@ -358,22 +552,5 @@ class Serpiente inherits Trap (image = "./assets/traps/serpiente.png"){
 	
 }
 
-		const trampas = #{new Fuego(posInicial = game.at(12,20)),
-			              new Fuego(posInicial = game.at(48,20)) ,
-			              new Fuego(posInicial = game.at(4,6)), 
-			              new Fuego(posInicial = game.at(45,4))
-			              }
-			  
-			  
-//		const trampas2 = #{new Pinchos(posInicial = game.at(18,25)),
-//			              new Pinchos(posInicial = game.at(48,25)) ,
-//			              new Pinchos(posInicial = game.at(15,4)), 
-//			              new Pinchos(posInicial = game.at(33,4))}
-			  
-		const trampas3 = #{new Serpiente(posInicial = game.at(0,15)),
-			              new Serpiente(posInicial = game.at(57,10)) ,
-			              new Serpiente(posInicial = game.at(4,27)),
-			              new Serpiente(posInicial = game.at(47,12)), 
-			              new Serpiente(posInicial = game.at(45,27))}
 			  	  
 		
