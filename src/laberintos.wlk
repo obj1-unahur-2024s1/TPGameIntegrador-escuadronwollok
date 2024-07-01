@@ -11,7 +11,6 @@ object laberinto {
 	method decidirTablero() {
 		
 		const numeroTablero = (1..5).anyOne()
-		//const numeroTablero = 5
 		
 		if (numeroTablero == 1) {
 			game.addVisual(tablero1Prueba)
@@ -36,9 +35,6 @@ object laberinto {
 		}
 	}
 		
-//	method spawnearMinotaur() {
-//		
-//	}
 	
 	method spawnearElementos1() {
 		const n = "nada" 		//Las n serian en donde estan los muros de la imagen, pero en el codigo, los muros estarian alrededor de los de la image
@@ -236,10 +232,6 @@ object laberinto {
 			else if(vectorFila.get(x) == 4) {
 				const fuegoChance = if (juego.dificultadExtrema()) 20 else 50
 				juego.agregarFuegoEn(x, posicionY, fuegoChance)
-			}
-			else if (vectorFila.get(x) == 5) {
-				const llaveChance = 60
-				juego.agregarLlaveEn(x, posicionY, llaveChanche)
 			}
 		})
 	}

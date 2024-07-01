@@ -11,9 +11,6 @@ class Items{
 
 	var property position
 	
-	// Ver si hace falta borrar
-	method chocarCon(){}
-	
 	method spawnear() {
 		if(!game.hasVisual(self)) {
 			game.addVisual(self)} 
@@ -29,7 +26,6 @@ class Moneda inherits Items (	image ="./assets/items/moneda.png",
 		if (cosa.equals(player)) {
 			score.aumentarPuntos(valor)
 			game.removeVisual(self)
-//			juego.spawnMoneda(valor)}
 		}
 	}
 }
@@ -94,7 +90,6 @@ object llave inherits Items (image ="./assets/items/llave.png",
 			player.agregarAlInventario(self)
 			score.aumentarPuntos(valor)
 			position = game.at(60,(game.height() - 15))
-			//game.removeVisual(self)
 		 }
 
 	 }

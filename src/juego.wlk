@@ -16,9 +16,6 @@ object juego {
 	var property dificultadExtrema
 	var iniciado = false
 	const property enemigos = []
-//	const property enemigos = #{new Minotaur(posInicial = game.at(ubicacionMinotauro.decidirUbicacion1X(),22))
-//							, new Minotaur(posInicial = game.at(ubicacionMinotauro.decidirUbicacion2X(),ubicacionMinotauro.decidirUbicacion2Y()))
-//	}
 	const menu = game.sound("./assets/sonidosYMusica/menuMusic.mp3")
 	const combat = game.sound("./assets/sonidosYMusica/combatMusic.mp3")
 	const victoria = game.sound("./assets/sonidosYMusica/victoria.mp3")
@@ -26,20 +23,12 @@ object juego {
 	
 	method iniciar() {
 		game.title("Maze of Crete")
-		game.width(66)  // Triple 60 - Original 20
-		game.height(30) // Triple 42 - Original 14 - Para que me entre en el monitor 34
-		game.cellSize(20) //20 - 50 - Hay que hacer que los assets sean 60x60
+		game.width(66)
+		game.height(30)
+		game.cellSize(20) 
 		game.schedule(500, {menu.play()})
-		//laberinto.decidirTablero()
 		self.mostrarImagenesIniciales()
-		//game.addVisual(tablero1)
-		
-		
-		
-		self.configurarTeclas()
-//		self.spawnearMonedas() esto me parece que está al pedo
-		//self.spawnPowerUps()
-		
+		self.configurarTeclas()		
 	}
 	
 	method spawnMinotauros() {
@@ -178,15 +167,6 @@ object juego {
 		}
 	}
 	
-//	method agregarLlaveEn(x, y, chance) {
-//		const valor = 1.randomUpTo(100)
-//		
-//		if (valor > chance and !game.hasVisual(llave)) {
-//			llave.position(x,y)
-//			game.addVisual(llave)
-//		}
-//	}
-	
 	method configurarTeclas() {
 		keyboard.up().onPressDo({player.subir()})
 		keyboard.down().onPressDo({player.bajar()})
@@ -201,16 +181,6 @@ object juego {
 		llave.spawnear()
 		cofre.spawnear()
 	}
-	
-//	method spawnearMonedas(){
-//		game.schedule(10000, {self.spawnMoneda(100)})
-//	}
-	
-//	method spawnMoneda(valor){
-//			const pos = self.posicionAleatoria()
-//			const moneda = new Moneda(position = pos, valor = valor)
-//			game.addVisual(moneda)
-//	}
 	
 	method posicionAleatoria() = 
 		game.at(
