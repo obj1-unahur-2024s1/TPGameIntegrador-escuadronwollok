@@ -240,7 +240,8 @@ object laberinto {
 		const pared = new Pared(position = game.at(x,y))
 		game.addVisual(pared)
 	}
-	}
+}
+	
 	
 object tablero1Prueba {
 	method position() = game.origin()
