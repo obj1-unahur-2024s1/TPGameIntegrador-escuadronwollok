@@ -144,7 +144,7 @@ object cofre inherits Items (image ="./assets/items/cofre.png",
 			game.removeVisual(self)
 			alas.spawnear()
 		} else {
-			game.say(self, "No posees la llave para abrir la cerradura")
+			game.say(self, "Está cerrado con llave")
 		}
 	}
 	
