@@ -310,14 +310,7 @@ object alas inherits Items (image ="./assets/items/alas.png",
 	}
 }
 
-object contadorSalud {
-	
-	method position() = game.at(60, game.height()-6)
-	method image() = "./assets/salud/" + player.salud().toString() + ".png"
-	
-//	method text() = "Salud: " + player.salud().toString()
-	
-}
+
 
 object vida inherits Items (image= "./assets/items/vidas.png" , position = game.at(60,game.height()-3)) { 
 	
@@ -353,6 +346,12 @@ class NroVidas inherits Items {
 	} 
 }
 
+object contadorSalud {
+	
+	method position() = game.at(60, game.height()-6)
+	
+	method image() = "./assets/salud/" + player.salud().toString() + ".png"
+}
 
 object score inherits Items (image= "./assets/items/score.png" , position = game.at(60,game.height()-9)) {
 	
@@ -403,6 +402,16 @@ class Digito inherits Items {
 	override method image() = "./assets/score/" + numero + ".png" 
 }
 
+class Indicador {
+	var property position
+	var property image
+}
+						
+const indicadorControles = new Indicador (position = game.at(60, game.height()-28),
+						image = "./assets/items/controles.png")
+						
+const indicadorReglas = new Indicador (position = game.at(60, game.height()-30),
+						image = "./assets/items/reglas.png")
 
 class Trap {
 	var property posInicial

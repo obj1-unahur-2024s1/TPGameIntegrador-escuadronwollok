@@ -53,7 +53,7 @@ object player {
 	}
 	
 	method perderVida(){
-		if (vida.vidasActuales() >= 1 and !estaMuriendo){
+		if (vida.vidasActuales() >= 1 and !estaMuriendo and !invencible){
 			vida.perderVida()
 			self.curarVeneno()
 			estaMuriendo = true
@@ -64,7 +64,7 @@ object player {
 			})
 		}
 		
-		if (vida.vidasActuales() <= 0) {
+		if (vida.vidasActuales() <= 0 and !invencible) {
 			 game.addVisual(gameOver)
 			 juego.finalizar()
 		}

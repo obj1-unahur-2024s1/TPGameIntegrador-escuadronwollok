@@ -15,6 +15,8 @@ class Pared {
 object juego {
 	var property dificultadExtrema
 	var iniciado = false
+	var reglasVisibles = false
+	var controlesVisibles = false
 	const property enemigos = []
 	const menu = game.sound("./assets/sonidosYMusica/menuMusic.mp3")
 	const combat = game.sound("./assets/sonidosYMusica/combatMusic.mp3")
@@ -47,6 +49,8 @@ object juego {
 		vida.addVisual()
 		game.addVisual(score)
 		game.addVisual(contadorSalud)
+		game.addVisual(indicadorReglas)
+		game.addVisual(indicadorControles)
 		score.addVisual()
 		self.spawnMinotauros()
 		self.spawnPowerUps()
@@ -110,6 +114,29 @@ object juego {
 		})
 	}
 	
+	method mostrarReglas(){
+		if(!reglasVisibles){
+			reglasVisibles = true
+			game.addVisual(reglas)
+		}
+		else {
+			reglasVisibles = false
+			game.removeVisual(reglas)
+		}
+	}
+	
+	method mostrarControles(){
+		if(!controlesVisibles){
+			controlesVisibles = true
+			game.addVisual(controles)
+		}
+		else {
+			controlesVisibles = false
+			game.removeVisual(controles)
+		}
+	}
+
+	
 	method agregarMonedaEn(x, y, chance) {
 		const valor = 1.randomUpTo(100)
 		//chance igual a 90
@@ -172,6 +199,8 @@ object juego {
 		keyboard.down().onPressDo({player.bajar()})
 		keyboard.left().onPressDo({player.izquierda()})
 		keyboard.right().onPressDo({player.derecha()})
+		keyboard.r().onPressDo({self.mostrarReglas()})
+		keyboard.c().onPressDo({self.mostrarControles()})
 	}
 	
 	method spawnPowerUps(){
