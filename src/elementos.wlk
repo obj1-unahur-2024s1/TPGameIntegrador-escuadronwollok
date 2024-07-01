@@ -313,9 +313,9 @@ object alas inherits Items (image ="./assets/items/alas.png",
 object contadorSalud {
 	
 	method position() = game.at(60, game.height()-6)
-	method image() = "./assets/salud/8.png"
+	method image() = "./assets/salud/" + player.salud().toString() + ".png"
 	
-	method text() = "Salud: " + player.salud().toString()
+//	method text() = "Salud: " + player.salud().toString()
 	
 }
 
