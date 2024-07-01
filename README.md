@@ -3,7 +3,7 @@
 ## Equipo de desarrollo
 
 - Matías Torres
-- Erika Campos
+- Erika Campos Vera
 - Juan Camargo
 - Pablo Facelli
 - Marcos Espinosa

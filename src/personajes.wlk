@@ -1,3 +1,4 @@
+
 import wollok.game.*
 import juego.*
 import pantalla.*
@@ -69,7 +70,7 @@ object player {
 		}
 	}
 	method comprarVida() {
-		const vidaCosto = if (juego.dificultadExtrema()) 10000 else 5000
+		const vidaCosto = if (juego.dificultadExtrema()) 1000 else 500
 		if (score.puntaje() >= vidaCosto) {
 			vida.ganarVida()
 			score.perderPuntos(vidaCosto) 
