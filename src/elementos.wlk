@@ -313,7 +313,7 @@ object alas inherits Items (image ="./assets/items/alas.png",
 object contadorSalud {
 	
 	method position() = game.at(60, game.height()-6)
-	method image() = "./assets/items/moneda.png"
+	method image() = "./assets/salud/8.png"
 	
 	method text() = "Salud: " + player.salud().toString()
 	
