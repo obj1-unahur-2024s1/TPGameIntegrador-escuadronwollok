@@ -8,10 +8,6 @@
 - Pablo Facelli
 - Marcos Espinosa
 
-## Capturas
-
-(agregar)
-
 
 Bienvenido al laberinto de crete, heroe.
 
