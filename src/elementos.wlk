@@ -334,11 +334,15 @@ class NroVidas inherits Items {
 	
   
 	override method image(){
-		if (vida.vidasActuales() == 3){
+		if (vida.vidasActuales() == 5){
+			return "./assets/score/5.png"
+		}else if (vida.vidasActuales() == 4 ){
+			return "./assets/score/4.png"
+		}else if (vida.vidasActuales() == 3 ){
 			return "./assets/score/3.png"
-		}else if (vida.vidasActuales() ==2 ){
+		}else if (vida.vidasActuales() == 2 ){
 			return "./assets/score/2.png"
-		}else if (vida.vidasActuales() ==1){
+		}else if (vida.vidasActuales() == 1){
 			return "./assets/score/1.png"
 		}else{
 			return "./assets/score/0.png"
