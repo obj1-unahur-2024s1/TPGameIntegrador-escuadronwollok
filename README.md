@@ -10,6 +10,7 @@
 
 ![titulo](https://github.com/obj1-unahur-2024s1/TPGameIntegrador-escuadronwollok/assets/132846673/2727bd1d-ae91-4f67-92b9-5ee2f58b05d5)
 
+![2024-07-03 08_43_05-Maze of Crete](https://github.com/obj1-unahur-2024s1/TPGameIntegrador-escuadronwollok/assets/132846673/0aa65765-78d7-4df7-aba9-ba956b52c821)
 
 Bienvenido al laberinto de crete, heroe.
 
