@@ -8,11 +8,7 @@
 - Pablo Facelli
 - Marcos Espinosa
 
-![titulo](https://github.com/obj1-unahur-2024s1/TPGameIntegrador-escuadronwollok/assets/132846673/2727bd1d-ae91-4f67-92b9-5ee2f58b05d5)
-
-![2024-07-03 08_43_05-Maze of Crete](https://github.com/obj1-unahur-2024s1/TPGameIntegrador-escuadronwollok/assets/132846673/0aa65765-78d7-4df7-aba9-ba956b52c821)
-
-Bienvenido al laberinto de crete, heroe.
+# Bienvenido al laberinto de crete, heroe.
 
 Las leyendas que cuentan los guerreros que tuvieron la suerte de escapar con vida de este brutal laberinto, narran historias de grandes tesoros y aventuras.
 
@@ -21,7 +17,11 @@ Las leyendas que cuentan los guerreros que tuvieron la suerte de escapar con vid
 ¿Seras capaz de abrir el cofre del tesoro del minotauro
 y escapar con vida?
 
-Tu aventura te espera.
+# Tu aventura te espera.
+
+![titulo](https://github.com/obj1-unahur-2024s1/TPGameIntegrador-escuadronwollok/assets/132846673/2727bd1d-ae91-4f67-92b9-5ee2f58b05d5)
+
+![2024-07-03 08_43_05-Maze of Crete](https://github.com/obj1-unahur-2024s1/TPGameIntegrador-escuadronwollok/assets/132846673/0aa65765-78d7-4df7-aba9-ba956b52c821)
 
 ## Reglas de Juego / Instrucciones
 
@@ -45,7 +45,7 @@ Tu aventura te espera.
 para atravesarlos sin ningun rasguño
 
 
--La dificultad extrema solo te dara una vida y habran mas obstaculos, intentala si te atreves...
+# -La dificultad extrema solo te dara una vida y habran mas obstaculos, intentala si te atreves...
 
 ## Otros
 
