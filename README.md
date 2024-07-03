@@ -8,6 +8,8 @@
 - Pablo Facelli
 - Marcos Espinosa
 
+![titulo](https://github.com/obj1-unahur-2024s1/TPGameIntegrador-escuadronwollok/assets/132846673/2727bd1d-ae91-4f67-92b9-5ee2f58b05d5)
+
 
 Bienvenido al laberinto de crete, heroe.
 
