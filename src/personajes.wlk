@@ -7,10 +7,10 @@ import laberintos.*
 
 
 object player {
-	const inventarioPlayer = []
+	const property inventarioPlayer = []
 	var property position = game.at(0,1)
 	var property salud = 0.max(8)
-	var property ultimoMovimiento = "este"
+	var property ultimoMovimiento = izquierda
 	var property invencible = false
 	var property estaEnvenenado = false
 	var property estaMuriendo = false
@@ -54,26 +54,27 @@ object player {
 	
 	method perderVida(){
 		if (vida.vidasActuales() >= 1 and !estaMuriendo and !invencible){
+			self.comprarVida()
 			vida.perderVida()
 			self.curarVeneno()
 			estaMuriendo = true
 			animacionPlayer.animacionMuerte()
-			game.schedule(5000, {self.resetPosition(); 	animacionPlayer.direccion("este");
+			game.schedule(5000, {self.resetPosition(); 	animacionPlayer.direccion(izquierda);
 								 animacionPlayer.fotograma(0); estaMuriendo = false;
 								 salud = 8
 			})
 		}
 		
 		if (vida.vidasActuales() <= 0 and !invencible) {
-			 game.addVisual(gameOver)
+			 game.addVisual(pantallas.gameOver())
 			 juego.finalizar()
 		}
 	}
 	method comprarVida() {
 		const vidaCosto = if (juego.dificultadExtrema()) 1000 else 500
-		if (score.puntaje() >= vidaCosto) {
+		if (score.puntaje() >= vidaCosto and vida.vidasActuales() < 5) {
 			vida.ganarVida()
-			score.perderPuntos(vidaCosto) 
+			score.perderPuntos(vidaCosto)
 		}
 	}
 	
@@ -83,22 +84,14 @@ object player {
 	
 	method chocarCon(cosa){}
 	
-	method checkVidas() {
-		if (score.puntaje() == 0) {
-	      self.perderVida()
-	    }
-	}
+//	method checkVidas() {
+//		if (score.puntaje() == 0) {
+//	      self.perderVida()
+//	    }
+//	}
 	
 	method regresar() {
-		if (ultimoMovimiento == "arriba") {
-			position = position.down(1)
-		} else if (ultimoMovimiento == "abajo") {
-			position = position.up(1)
-		} else if (ultimoMovimiento == "izquierda") {
-			position = position.right(1)
-		} else {
-			position = position.left(1)
-		}
+		ultimoMovimiento.regresar(self)
 	}
 	
 	// A continuacion, los movimientos solo pueden ser ejecutados cuando el personaje
@@ -106,8 +99,8 @@ object player {
 	
 	method bajar() {
 		if (!self.estaMuriendo()) {
-			ultimoMovimiento = "abajo"
-			animacionPlayer.direccion("sur")
+			ultimoMovimiento = abajo
+			animacionPlayer.direccion(abajo)
 			animacionPlayer.siguienteFotograma()
 		} else {
 			position = position.up(1)
@@ -116,9 +109,9 @@ object player {
 	
 	method subir() {
 		if (!self.estaMuriendo()) {
-			ultimoMovimiento = "arriba"
-			animacionPlayer.direccion("norte")
-			animacionPlayer.siguienteFotograma()			
+			ultimoMovimiento = arriba
+			animacionPlayer.direccion(arriba)
+			animacionPlayer.siguienteFotograma()
 		} else {
 			position = position.down(1)
 		}
@@ -126,8 +119,8 @@ object player {
 	
 	method izquierda() {
 		if (!self.estaMuriendo()) {
-			ultimoMovimiento = "izquierda"
-			animacionPlayer.direccion("oeste")
+			ultimoMovimiento = izquierda
+			animacionPlayer.direccion(izquierda)
 			animacionPlayer.siguienteFotograma()
 		} else {
 			position = position.right(1)
@@ -136,14 +129,13 @@ object player {
 	
 	method derecha() {
 		if (!self.estaMuriendo()) {
-			ultimoMovimiento = "derecha"
-			animacionPlayer.direccion("este")
+			ultimoMovimiento = derecha
+			animacionPlayer.direccion(derecha)
 			animacionPlayer.siguienteFotograma()
 		} else {
 			position = position.left(1)
 		}
 	}
-	
 }
 
 class Animaciones {
@@ -153,19 +145,18 @@ class Animaciones {
 	method siguienteFotograma() {
 		fotograma = (fotograma + 1) % 3
 	}
-	
 }
 
 object animacionPlayer inherits Animaciones{
 	
-	var property direccion = "este"
+	var property direccion = izquierda
 	
 	method image() {
-		return "./assets/jugador/" + direccion + "-" + fotograma.toString() + ".png"
+		return "./assets/jugador/" + direccion.puntoCardenal() + "-" + fotograma.toString() + ".png"
 	}
 	
 	method animacionMuerte() {
-		direccion = "muerte"
+		direccion = muerte
 		fotograma = 0
 		game.onTick(300, "animacionMuerte", {self.siguienteFotogramaMuerte()})
 		game.schedule(1200, {game.removeTickEvent("animacionMuerte")})
@@ -180,11 +171,11 @@ class Minotaur {
 	var property posInicial
 	var property position = posInicial
 	var property posicionAnterior = position
-	var property direccion = "Derecha"
+	var property direccion = derecha
 	var property fotograma = 0
 	
 	method image() {
-		return "./assets/minotauro/minotauro" + direccion + fotograma.toString() + ".png"
+		return "./assets/minotauro/minotauro" + direccion.direccion() + fotograma.toString() + ".png"
 	}
 	method regresar(){
 		position = posicionAnterior
@@ -200,9 +191,9 @@ class Minotaur {
 		const otraPosicion = player.position()
 		const  newX = position.x() + if (otraPosicion.x() > position.x()) 1 else -1
 		if (otraPosicion.x() > position.x()) {
-			direccion = "Derecha"
+			direccion = derecha
 		} else {
-			direccion = "Izquierda"
+			direccion = izquierda
 		}
 		self.siguienteFotograma()
 		posicionAnterior = position
@@ -303,3 +294,37 @@ object ubicacionMinotauro {
 	}
 	
 }
+
+object arriba {
+	method regresar(algo) = algo.position(algo.position().down(1))
+	method direccion() = "Arriba"
+	method puntoCardenal() = "norte"
+}
+object abajo {
+	method regresar(algo) = algo.position(algo.position().up(1))
+	method direccion() = "Abajo"
+	method puntoCardenal() = "sur"
+}
+object derecha {
+	method regresar(algo) = algo.position(algo.position().left(1))
+	method direccion() = "Derecha"
+	method puntoCardenal() = "este"
+}
+object izquierda {
+	method regresar(algo) = algo.position(algo.position().right(1))
+	method direccion() = "Izquierda"
+	method puntoCardenal() = "oeste"
+}
+object muerte {
+	method direccion() = "Muerte"
+	method puntoCardenal() = "muerte"
+}
+
+
+
+
+
+
+
+
+

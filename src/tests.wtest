@@ -5,13 +5,11 @@ import laberintos.*
 import pantalla.*
 
 
-<<<<<<< HEAD
 test"player obtiene la llaver"{
 	llave.chocarCon(player)
 	assert.equals(100,score.puntaje())
 }
 
-=======
 test "el juego comienza y spartan tiene 8 salud"{
 	
 	assert.equals(8, player.salud())
@@ -19,7 +17,7 @@ test "el juego comienza y spartan tiene 8 salud"{
 }
 
 test "spartan perder salud"{
-	player.salud() = 8
+	player.salud(8)
 	player.perderSalud(1)
 	assert.equals(7, player.salud())
 	
@@ -44,4 +42,3 @@ test "player esta invencible y no pierde vidas"{
 	
 }
 */
->>>>>>> bae744248d1cb4fd505832c09ff83d20f084f8bf

@@ -18,17 +18,17 @@ object juego {
 	var reglasVisibles = false
 	var controlesVisibles = false
 	const property enemigos = []
-	const menu = game.sound("./assets/sonidosYMusica/menuMusic.mp3")
-	const combat = game.sound("./assets/sonidosYMusica/combatMusic.mp3")
-	const victoria = game.sound("./assets/sonidosYMusica/victoria.mp3")
-	const muerte = game.sound("./assets/sonidosYMusica/muerte.mp3")
+	const menuSfx = game.sound("./assets/sonidosYMusica/menuMusic.mp3")
+	const combatSfx = game.sound("./assets/sonidosYMusica/combatMusic.mp3")
+	const victoriaSfx = game.sound("./assets/sonidosYMusica/victoria.mp3")
+	const muerteSfx = game.sound("./assets/sonidosYMusica/muerte.mp3")
 	
 	method iniciar() {
 		game.title("Maze of Crete")
 		game.width(66)
 		game.height(30)
 		game.cellSize(20) 
-		game.schedule(500, {menu.play()})
+		game.schedule(500, {menuSfx.play()})
 		self.mostrarImagenesIniciales()
 		self.configurarTeclas()		
 	}
@@ -44,13 +44,13 @@ object juego {
 	}
 	
 	method agregarVisuals(){
-		game.addVisual(inventario)
+		game.addVisual(pantallas.inventario())
 		game.addVisual(vida)
 		vida.addVisual()
 		game.addVisual(score)
 		game.addVisual(contadorSalud)
-		game.addVisual(indicadorReglas)
-		game.addVisual(indicadorControles)
+		game.addVisual(indicadores.indicadorReglas())
+		game.addVisual(indicadores.indicadorControles())
 		score.addVisual()
 		self.spawnMinotauros()
 		self.spawnPowerUps()
@@ -60,30 +60,30 @@ object juego {
 	
 	method finalizar(){
 		game.clear()
-		combat.stop()
-		muerte.play()
-		game.addVisual(gameOver)
+		combatSfx.stop()
+		muerteSfx.play()
+		game.addVisual(pantallas.gameOver())
 		game.schedule(6000, {=>game.stop()})
 	}
 	
 	method ganar() {
 		game.clear()
-		combat.stop()
-		victoria.play()
-		game.addVisual(winScreen)
-		game.schedule(3000, {=>game.addVisual(creditos)})
+		combatSfx.stop()
+		victoriaSfx.play()
+		game.addVisual(pantallas.winScreen())
+		game.schedule(3000, {=>game.addVisual(pantallas.creditos())})
 		game.schedule(8000, {=>game.stop()})
 	}
 	
 	method configurarVisuals() {
-		titulo.removeVisual()
+		pantallas.titulo().removeVisual()
 		iniciado = true
 		self.agregarVisuals()
 
 	}
 	
 	method mostrarImagenesIniciales(){
-		game.addVisual(titulo)
+		game.addVisual(pantallas.titulo())
 
 		keyboard.num1().onPressDo({
 		if(!iniciado){
@@ -94,8 +94,8 @@ object juego {
 			enemigos.add(minotauro1)
 			enemigos.add(minotauro2)
 			self.configurarVisuals()
-			menu.stop()
-			combat.play()
+			menuSfx.stop()
+			combatSfx.play()
 		}
 		})
 	   	
@@ -108,8 +108,8 @@ object juego {
 			enemigos.add(minotauro1)
 			enemigos.add(minotauro2)
 			self.configurarVisuals()
-			menu.stop()
-			combat.play()
+			menuSfx.stop()
+			combatSfx.play()
 		}
 		})
 	}
@@ -117,22 +117,22 @@ object juego {
 	method mostrarReglas(){
 		if(!reglasVisibles){
 			reglasVisibles = true
-			game.addVisual(reglas)
+			game.addVisual(pantallas.reglas())
 		}
 		else {
 			reglasVisibles = false
-			game.removeVisual(reglas)
+			game.removeVisual(pantallas.reglas())
 		}
 	}
 	
 	method mostrarControles(){
 		if(!controlesVisibles){
 			controlesVisibles = true
-			game.addVisual(controles)
+			game.addVisual(pantallas.controles())
 		}
 		else {
 			controlesVisibles = false
-			game.removeVisual(controles)
+			game.removeVisual(pantallas.controles())
 		}
 	}
 

@@ -5,35 +5,41 @@ import personajes.*
 import elementos.*
 
 object laberinto {
-	
+	const property ubicacionesMedusa = [game.at(12,16), game.at(45,19), game.at(38,16), game.at(30,16), game.at(30,13)]
+	const property ubicacionesLlave = [game.at(51,7), game.at(0,27), game.at(15,25), game.at(57,7), game.at(52,28)]
+	const property ubicacionesCofre = [game.at(0,27), game.at(52,28), game.at(57,7), game.at(19,22), game.at(4,1)]
+	const property ubicacionesCaliz = [game.at(15,27), game.at(31,10), game.at(4,25), game.at(43,19), game.at(51,4)]
+	const property ubicacionesManzana = [game.at(30,27), game.at(13,19), game.at(28,28), game.at(31,13), game.at(46,10)]
 	var property numero
 	
 	method decidirTablero() {
 		
 		const numeroTablero = (1..5).anyOne()
 		
-		if (numeroTablero == 1) {
-			game.addVisual(tablero1Prueba)
+		game.addVisual( new Pantalla(image = "./assets/maze/tableroJuegoFinal"+ numeroTablero.toString() + ".png") )
+		numero = numeroTablero
+		self.spawnearElementos()
+	}
+	
+	method spawnearElementos() {
+		if(numero == 1) {
 			self.spawnearElementos1()
-			numero = 1
-		} else if (numeroTablero == 2){
-			game.addVisual(tablero2)
+		}
+		if(numero == 2) {
 			self.spawnearElementos2()
-			numero = 2
-		} else if (numeroTablero == 3){
-			game.addVisual(tablero3)
+		}
+		if(numero == 3) {
 			self.spawnearElementos3()
-			numero = 3
-		} else if (numeroTablero == 4) {
-			game.addVisual(tablero4)
+		}
+		if(numero == 4) {
 			self.spawnearElementos4()
-			numero = 4
-		} else {
-			game.addVisual(tablero5)
+		}
+		if(numero == 5) {
 			self.spawnearElementos5()
-			numero = 5
 		}
 	}
+	
+	
 		
 	
 	method spawnearElementos1() {
@@ -241,50 +247,8 @@ object laberinto {
 		game.addVisual(pared)
 	}
 }
-	
-	
-object tablero1Prueba {
-	method position() = game.origin()
-	method image() = "./assets/maze/tableroJuegoFinal1.png"
-	
-	method chocarCon(algo) {
-		
-	}
-	
-}
 
-object tablero2 {
-	method position() = game.origin()
-	method image() = "./assets/maze/tableroJuegoFinal2.png"
-	
-	method chocarCon(algo) {
-		
-	}
-}
 
-object tablero3 {
-	method position() = game.origin()
-	method image() = "./assets/maze/tableroJuegoFinal3.png"
-	
-	method chocarCon(algo) {
-		
-	} 
-}
 
-object tablero4 {
-	method position() = game.origin()
-	method image() = "./assets/maze/tableroJuegoFinal4.png"
-	
-	method chocarCon(algo) {
-		
-	}
-}
 
-object tablero5 {
-	method position() = game.origin()
-	method image() = "./assets/maze/tableroJuegoFinal5.png"
-	
-	method chocarCon(algo) {
-		
-	}
-}
+

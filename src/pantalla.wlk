@@ -2,7 +2,7 @@ import wollok.game.*
 import juego.*
 import elementos.*
 
-class Pantalla inherits Items{
+class Pantalla inherits Items (position = game.origin()){
 	
 	
  	override method image() = image
@@ -35,27 +35,30 @@ class Pantalla inherits Items{
  	}
 }
 
-const titulo = new Pantalla(image = "./assets/pantallas/titulo.png",
-						position = game.at(0, 0))
+object pantallas inherits Pantalla (image = ""){
+	
+	const property titulo = new Pantalla(image = "./assets/pantallas/titulo.png")
+
+	const property controles = new Pantalla(image = "./assets/pantallas/controles.png")
+
+	const property reglas = new Pantalla(image = "./assets/pantallas/reglas.png")
+
+	const property gameOver = new Pantalla(image ="./assets/pantallas/gameOver.png")
+
+	const property winScreen = new Pantalla(image = "./assets/pantallas/winScreen.png")
+
+	const property creditos = new Pantalla(image = "./assets/pantallas/creditos.png")
+
+	const property inventario = new Pantalla(image = "./assets/pantallas/inventarioFinal.png",
+										position = game.at(game.width()-6,0))
+}
+
+
 						
-						
-const controles = new Pantalla(image = "./assets/pantallas/controles.png",
-						position = game.at(0, 0))
-						
-						
-const reglas = new Pantalla(image = "./assets/pantallas/reglas.png",
-						position = game.at(0, 0))
 						
 
-const gameOver = new Pantalla(image ="./assets/pantallas/gameOver.png", 
-									position = game.at(0, 0))
-									
 
-const winScreen = new Pantalla(image = "./assets/pantallas/winScreen.png", 
-									position = game.at(0, 0))
 
-									
-const creditos = new Pantalla(image = "./assets/pantallas/creditos.png",
-									position = game.at(0,0))
-									
-const inventario = new Pantalla(image = "./assets/pantallas/inventarioFinal.png", position = game.at(game.width()-6,0))
+
+
+
