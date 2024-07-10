@@ -1,3 +1,4 @@
+import wollok.game.*
 import personajes.*
 import elementos.*
 import juego.*
@@ -6,6 +7,8 @@ import pantalla.*
 
 
 test"player obtiene la llaver"{
+	juego.dificultadExtrema(true)
+	laberinto.numero(2)
 	llave.chocarCon(player)
 	assert.equals(100,score.puntaje())
 }
